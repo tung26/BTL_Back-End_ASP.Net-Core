@@ -1,0 +1,189 @@
+﻿@model YourHouse.Models.ModelAddArticle;
+@using System.Text.Json
+@{
+	ViewData["Title"] = "Add article";
+	var cityList = ViewData["City"] as List<YourHouse.Models.Entities.City>;
+	var districtList = ViewData["District"] as List<YourHouse.Models.Entities.District>;
+	var id = ViewData["id"];
+}
+
+<div class="container">
+	<form action="/MyArticle/Edit" enctype="multipart/form-data" method="post">
+		<input name="id" value="@id" type="hidden" />
+		<div class="row">
+			<div class="col-4">
+				<input class="form-control" asp-for="Images" type="file" multiple accept="image/*" />
+				<span asp-validation-for="Images" class="text-danger small"></span>
+			</div>
+			<div class="col-8">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="content">
+							<h4>Danh mục đăng tin</h4>
+							<select class="form-select" asp-for="Type" class="form-select select_type" aria-label="Default select example">
+								@if(Model.Type == "ChungCu")
+								{
+									<option selected value="ChungCu">Căn hộ/Chung cư</option>
+								}
+								else if (Model.Type == "Tro")
+								{
+									<option selected value="Tro">Phòng trọ</option>
+								}
+								else if (Model.Type == "House")
+								{
+									<option selected value="House">Nhà ở</option>
+								}
+								else if (Model.Type == "Office")
+								{
+									<option selected value="Office">Văn phòng</option>
+								}
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="container-fluid">
+							<hr />
+							<div class="row">
+								<div class="col-6">
+									<label asp-for="City">Thành phố</label>
+									<select asp-for="City" class="form-select select_type mt-1 select_city">
+										@foreach (var city in cityList)
+										{
+											<option value="@city.CityId">@city.CityName</option>
+										}
+									</select>
+								</div>
+								<div class="col-6">
+									<label asp-for="District">Quận - Huyện</label>
+									<select asp-for="District" class="form-select select_type mt-1 select_district">
+										@foreach (var district in districtList)
+										{
+											<option value="@district.DistrictId">@district.DistrictName</option>
+										}
+									</select>
+								</div>
+								<div class="col-12 mt-3">
+									<label asp-for="Address">Chi tiết địa chỉ</label>
+									<input asp-for="Address" class="form-control mt-1" placeholder="Nhập địa chỉ" />
+									<span asp-validation-for="Address" class="text-danger small"></span>
+								</div>
+							</div>
+
+							<div class="partial-view">
+								@if (Model.Type == "ChungCu")
+								{
+									<partial name="_PartialAddChungCu" model="@Model" />
+								}
+								else if (Model.Type == "Tro")
+								{
+									<partial name="_PartialAddTro" model="@Model" />
+								}
+								else if (Model.Type == "House")
+								{
+									<partial name="_PartialAddHouse" model="@Model" />
+								}
+								else if (Model.Type == "Office")
+								{
+									<partial name="_PartialAddOffice" model="@Model" />
+								}
+							</div>
+
+							<hr class="mt-4" />
+							<div class="row">
+								<div class="col-12 mb-3">
+									<label asp-for="S">Diện tích</label>
+									<input class="form-control mt-1" type="number" asp-for="S" step="0.01" min="0" placeholder="Nhập diện tích" />
+									<span asp-validation-for="S" class="text-danger small"></span>
+								</div>
+								<div class="col-12 mt-3">
+									<label asp-for="Price">Tiền/Tháng</label>
+									<input class="form-control mt-1" type="number" step="0.01" asp-for="Price" min="0" placeholder="Nhập tiền trọ" />
+									<span asp-validation-for="Price" class="text-danger small"></span>
+								</div>
+								<div class="col-12 mt-3">
+									<label asp-for="TienCoc">Tiền cọc</label>
+									<input class="form-control mt-1" type="number" step="0.01" asp-for="TienCoc" min="0" placeholder="Nhập tiền cọc" />
+									<span asp-validation-for="TienCoc" class="text-danger small"></span>
+								</div>
+							</div>
+							<hr class="mt-4" />
+							<div class="row">
+								<label asp-for="Title">Tiêu đề bài viết</label>
+								<textarea asp-for="Title" class="mt-1" rows="5" cols="12" wrap="hard" style="resize: none;"></textarea>
+								<span asp-validation-for="Title" class="text-danger small"></span>
+							</div>
+							<div class="row mt-3">
+								<label asp-for="Desc">Chi tiết bài viết</label>
+								<textarea asp-for="Desc" class="mt-1" rows="5" cols="12" wrap="hard" style="resize: none;"></textarea>
+								<span asp-validation-for="Desc" class="text-danger small"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-4">
+			<div class="col-2 ms-auto">
+				<button type="submit" class="btn btn-outline-primary me-2" style="width: 100%;">Sửa</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script>
+	// document.addEventListener('DOMContentLoaded', function() {
+	// 	const optionTypeElement = document.querySelector('.select_type');
+	// 	const renderPartial = document.querySelector('.partial-view');
+	// 	const selectCityElement = document.querySelector('.select_city');
+	// 	let districts = @Html.Raw(JsonSerializer.Serialize(districtList));
+
+	// 	function selectCity() {
+	// 		const value = selectCityElement.value;
+	// 		let html = "";
+	// 		districts.forEach(district => {
+	// 			if(district.CityId == value) {
+	// 				html += `<option value="${district.DistrictId}">${district.DistrictName}</option>`;
+	// 			}
+	// 		});
+	// 		document.querySelector('.select_district').innerHTML = html;
+	// 	}
+
+	// 	function loadPartialView(type) {
+	// 		var apiUrl = `@Url.Content("~/")MyArticle/Type?t=${encodeURIComponent(type)}`;
+
+	// 		fetch(apiUrl)
+	// 			.then(response => response.text())
+	// 			.then(partial => {
+	// 				renderPartial.innerHTML = partial;
+	// 				initValidation();
+	// 			});
+	// 	}
+
+	// 	function initValidation() {
+
+	// 		$.validator.setDefaults({
+	// 			onkeyup: false,
+	// 			onfocusout: false,
+	// 			onchange: false
+	// 		});
+
+	// 		var form = $('form');
+	// 		form.removeData('validator');
+	// 		form.removeData('unobtrusiveValidation');
+	// 		$.validator.unobtrusive.parse(form);
+	// 	}
+
+	// 	selectCity();
+	// 	loadPartialView(optionTypeElement.value);
+
+	// 	optionTypeElement.addEventListener('change', function() {
+	// 		loadPartialView(this.value);
+	// 	});
+
+	// 	selectCityElement.addEventListener('change', selectCity);
+	// });
+</script>
+
+@section Scripts {
+	<script src="~/js/articleadd.js"></script>
+}

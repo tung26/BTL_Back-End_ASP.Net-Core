@@ -1,0 +1,40 @@
+﻿@model YourHouse.Models.RegisterAccount
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>Đăng ký</h3>
+            <form class="form-control" action="/Account/Register" method="post">
+                <div class="mt-3">
+                    <label class="form-label" asp-for="FullName">Nhập họ tên</label>
+                    <input class="form-control" asp-for="FullName" placeholder="Nguyễn Văn A, ..." />
+                    <span class="text-danger small" asp-validation-for="FullName"></span>
+                </div>
+                <div class="mt-3">
+                    <label class="form-label" asp-for="Email">Nhập email</label>
+                    <input class="form-control" type="email" asp-for="Email" placeholder="Abc@gmail.com, ..." />
+                    <span class="text-danger small" asp-validation-for="Email"></span>
+                </div>
+                <div class="mt-3">
+                    <label class="form-label" asp-for="Phone">Nhập số điện thoại</label>
+                    <input class="form-control" asp-for="Phone" placeholder="" />
+                    <span class="text-danger small" asp-validation-for="Phone"></span>
+                </div>
+                <div class="mt-3">
+                    <label class="form-label" asp-for="PasswordHash">Nhập mật khẩu</label>
+                    <input type="password" class="form-control" asp-for="PasswordHash" placeholder="" />
+                    <span class="text-danger small" asp-validation-for="PasswordHash"></span>
+                </div>
+                <div class="mt-3">
+                    <label class="form-label" asp-for="ConfirmPassword">Nhập lại mật khẩu</label>
+                    <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="" />
+                    <span class="text-danger small" asp-validation-for="ConfirmPassword"></span>
+                </div>
+                <button class="btn btn-outline-primary mt-3">Đăng ký</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+﻿@model YourHouse.Models.ModelAddArticle;
+
+	<hr class="mt-4" />
+	<div class="row">
+		<div class="col-6">
+			<label asp-for="Floor">Tầng bao nhiêu</label>
+			<input asp-for="Floor" class="form-control mt-1" placeholder="Nhập tầng" min="0" />
+			<span asp-validation-for="Floor" class="text-danger small"></span>
+		</div>
+		<div class="col-6">
+			<label asp-for="DoorDrt">Hướng cửa</label>
+			<select class="form-select mt-1" asp-for="DoorDrt">
+				<option selected value="1">Đông</option>
+				<option value="2">Tây</option>
+				<option value="3">Nam</option>
+				<option value="4">Bắc</option>
+				<option value="5">Đông bắc</option>
+				<option value="6">Đông nam</option>
+				<option value="7">Tây bắc</option>
+				<option value="8">Tây nam</option>
+			</select>
+		</div>
+	</div>
+

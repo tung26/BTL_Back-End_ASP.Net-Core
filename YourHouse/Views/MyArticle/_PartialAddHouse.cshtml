@@ -1,0 +1,21 @@
+﻿@model YourHouse.Models.ModelAddArticle;
+
+	<hr class="mt-4" />
+	<div class="row">
+		<div class="col-6 mt-3">
+			<label asp-for="Floors">Bao nhiêu tầng</label>
+			<input asp-for="Floors" class="form-control mt-1" placeholder="Nhập số tầng" min="0" />
+			<span asp-validation-for="Floors" class="text-danger small"></span>
+		</div>
+		<div class="col-6 mt-3">
+			<label asp-for="BedRoom">Số phòng ngủ</label>
+			<input asp-for="BedRoom" class="form-control mt-1" placeholder="Nhập số phòng ngủ" min="0" />
+			<span asp-validation-for="BedRoom" class="text-danger small"></span>
+		</div>
+		<div class="col-6 mt-3">
+			<label asp-for="BathRoom">Số nhà vệ sinh</label>
+			<input asp-for="BathRoom" class="form-control mt-1" placeholder="Nhập số nhà vệ sinh" min="0" />
+			<span asp-validation-for="BathRoom" class="text-danger small"></span>
+		</div>
+	</div>
+
