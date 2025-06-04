@@ -37,7 +37,7 @@ public partial class Article
 
     public virtual City CityArNavigation { get; set; } = null!;
 
-    public virtual ICollection<Contact> Contacts { get; set; } = new List<Contact>();
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
     public virtual District DistrictArNavigation { get; set; } = null!;
 

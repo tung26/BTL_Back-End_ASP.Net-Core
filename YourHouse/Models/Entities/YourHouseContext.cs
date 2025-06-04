@@ -23,7 +23,7 @@ public partial class YourHouseContext : DbContext
 
     public virtual DbSet<City> Cities { get; set; }
 
-    public virtual DbSet<Contact> Contacts { get; set; }
+    public virtual DbSet<Comment> Comments { get; set; }
 
     public virtual DbSet<District> Districts { get; set; }
 
@@ -39,7 +39,7 @@ public partial class YourHouseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-95FPLGH\\SQLEXPRESS;Database=YourHouse;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-95FPLGH\\SQLEXPRESS;Database=YourHouse;Integrated security=true;Trusted_Connection=True;TrustServerCertificate=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -122,25 +122,27 @@ public partial class YourHouseContext : DbContext
             entity.Property(e => e.CityName).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<Contact>(entity =>
+        modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.ContactId).HasName("PK_LienHe");
+            entity.HasKey(e => e.CommentId).HasName("PK_Comment");
 
-            entity.ToTable("Contact");
-
-            entity.HasIndex(e => e.ContactId, "UQ__Contact__5C66259AA7964BD9").IsUnique();
+            entity.HasIndex(e => e.CommentId, "UQ__Comments__C3B4DFCB1A8B707B").IsUnique();
 
             entity.Property(e => e.CreateAt).HasDefaultValueSql("(CONVERT([date],getdate()))");
 
-            entity.HasOne(d => d.Account).WithMany(p => p.Contacts)
+            entity.HasOne(d => d.Account).WithMany(p => p.Comments)
                 .HasForeignKey(d => d.AccountId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_LienHe_Users");
+                .HasConstraintName("FK_Comment_Account");
 
-            entity.HasOne(d => d.Article).WithMany(p => p.Contacts)
+            entity.HasOne(d => d.Article).WithMany(p => p.Comments)
                 .HasForeignKey(d => d.ArticleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_LienHe_Article");
+                .HasConstraintName("FK_Comment_Article");
+
+            entity.HasOne(d => d.ParentComment).WithMany(p => p.InverseParentComment)
+                .HasForeignKey(d => d.ParentCommentId)
+                .HasConstraintName("FK_ParentComment_Comment");
         });
 
         modelBuilder.Entity<District>(entity =>

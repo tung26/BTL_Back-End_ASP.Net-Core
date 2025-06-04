@@ -7,7 +7,7 @@ public partial class ChungCu
 {
     public int ArticleId { get; set; }
 
-    public int Floor { get; set; }
+    public int? Floor { get; set; }
 
     public int BedRoom { get; set; }
 
