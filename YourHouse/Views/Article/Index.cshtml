@@ -1,5 +1,4 @@
-﻿@model List<YourHouse.Models.Entities.Article>;
-@using System.Text.Json
+﻿@using System.Text.Json
 
 @{
     ViewData["Title"] = "Bài đăng";
@@ -21,7 +20,7 @@
                     </div>
                 </div>
                 <div class="form-check d-flex align-items-center">
-                    <input class="form-check-input" type="radio" name="TypeArticle" id="All">
+                    <input class="form-check-input" type="radio" name="TypeArticle" id="All" checked>
                     <label class="form-check-label d-block flex-grow-1 pt-2 pb-2 ms-2" for="All">
                         Tất cả
                     </label>
@@ -35,21 +34,21 @@
                 </div>
                 <hr class="mt-0 mb-0" />
                 <div class="form-check d-flex align-items-center">
-                    <input class="form-check-input" type="radio" name="TypeArticle" id="House" checked>
+                    <input class="form-check-input" type="radio" name="TypeArticle" id="House">
                     <label class="form-check-label d-block flex-grow-1 pt-2 pb-2 ms-2" for="House">
                         Nhà
                     </label>
                 </div>
                 <hr class="mt-0 mb-0" />
                 <div class="form-check d-flex align-items-center">
-                    <input class="form-check-input" type="radio" name="TypeArticle" id="ChungCu" checked>
+                    <input class="form-check-input" type="radio" name="TypeArticle" id="ChungCu">
                     <label class="form-check-label d-block flex-grow-1 pt-2 pb-2 ms-2" for="ChungCu">
                         Căn hộ/Chung Cư
                     </label>
                 </div>
                 <hr class="mt-0 mb-0" />
                 <div class="form-check d-flex align-items-center">
-                    <input class="form-check-input" type="radio" name="TypeArticle" id="Office" checked>
+                    <input class="form-check-input" type="radio" name="TypeArticle" id="Office">
                     <label class="form-check-label d-block flex-grow-1 pt-2 pb-2 ms-2" for="Office">
                         Văn Phòng
                     </label>
@@ -88,39 +87,40 @@
                         </h2>
                     </div>
                 </div>
-                <div class="input-group mt-3">
-                    <input type="number" min="0.0" step="0.01" class="form-control" placeholder="Min" aria-label="Username" />
-                    <span class="input-group-text">-></span>
-                    <input type="number" min="0.0" step="0.01" class="form-control" placeholder="Max" aria-label="Server" />
+                <div class="mt-3">
+                    <input type="number" min="0.0" step="0.01" class="form-control" placeholder="Min" id="min" />
+                    @* <span class="input-group-text">-></span> *@
+                    <input type="number" min="0.0" step="0.01" class="form-control mt-2" placeholder="Max" id="max"  />
                 </div>
-                <div class="input-group mt-2">
-                    <button class="ms-auto btn btn-outline-primary">Lọc</button>
+                <div class="btn-group mt-2">
+                    <button id="unfilter_price" class="ms-auto btn btn-outline-primary">Bỏ lọc</button>
+                    <button id="filter_price" class="ms-auto btn btn-outline-primary">Lọc</button>
                 </div>
             </div>
         </div>
 
-        <div class="col-10">
-            @{
-                var articleLength = Model.Count();
-            }
-            @for (int i = articleLength - 1; i >= 0; i--)
-            {
-                <a href="#" class="text-dark nav-link">
-                    <div class="card mb-3 d-flex" style="min-width: 863px;">
-                        <div class="row">
-                            <div class="col d-flex">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq8aVvwt226C1Kx4QqQzL5IibUHcRbb1XCtw&s" class="img-fluid rounded-start" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">@Model[i].Title</h5>
-                                    <p class="card-text">@Model[i].DescAr</p>
-                                    <p class="card-text"><small class="text-body-secondary">@Model[i].Price</small></p>
-                                    <p class="card-text"><small class="text-body-secondary">@Model[i].CreateAt vnđ</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            }
+        <div class="col-10 list-article">
+            @* @{ *@
+            @*     var articleLength = Model.Count(); *@
+            @* } *@
+            @* @for (int i = articleLength - 1; i >= 0; i--) *@
+            @* { *@
+            @*     <a asp-controller="Article" asp-action="Details" asp-route-id="@Model[i].ArticleId" class="text-dark nav-link"> *@
+            @*         <div class="card mb-3 d-flex" style="min-width: 863px;"> *@
+            @*             <div class="row"> *@
+            @*                 <div class="col d-flex"> *@
+            @*                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq8aVvwt226C1Kx4QqQzL5IibUHcRbb1XCtw&s" class="img-fluid rounded-start" alt="..."> *@
+            @*                     <div class="card-body"> *@
+            @*                         <h5 class="card-title">@Model[i].Title</h5> *@
+            @*                         <p class="card-text">@Model[i].DescAr</p> *@
+            @*                         <p class="card-text"><small class="text-body-secondary">@Model[i].Price</small></p> *@
+            @*                         <p class="card-text"><small class="text-body-secondary">@Model[i].CreateAt vnđ</small></p> *@
+            @*                     </div> *@
+            @*                 </div> *@
+            @*             </div> *@
+            @*         </div> *@
+            @*     </a> *@
+            @* } *@
         </div>
     </div>
 </div>
@@ -131,7 +131,7 @@
 
     function selectCity() {
             const value = selectCityElement.value;
-            let html = `<option value="-1">Tất cả</option>`;;
+            let html = `<option value="-1" selected>Tất cả</option>`;;
             districts.forEach(district => {
                 if(district.CityId == value) {
                     html += `<option value="${district.DistrictId}">${district.DistrictName}</option>`;
@@ -142,7 +142,108 @@
 
     selectCity();
 
-    selectCityElement.onchange = () => {
-        selectCity();
+    // handler filters;
+    const inputTypeArticles = document.querySelectorAll("input[name='TypeArticle']");
+    const selectDistrict = document.querySelector(".select_district");
+    const minPrice = document.querySelector('#min');
+    const maxPrice = document.querySelector('#max');
+    const btnFilterPrice = document.querySelector('#filter_price');
+    const btnUnFilterPrice = document.querySelector('#unfilter_price');
+
+    let typeFilter;
+    let districtFilter;
+    let cityFiler;
+    let min = null;
+    let max = null;
+
+    cityFiler = selectCityElement.value;
+    districtFilter = selectDistrict.value;
+
+    function handerFilter(filters) {
+        var apiUrl = `@Url.Content("~/")Article/Filters?`;
+
+        for (const key in filters) {
+            if (filters[key]) {
+                apiUrl += `${key}=${encodeURIComponent(filters[key])}&`;
+            }
+        }
+        apiUrl = apiUrl.replace(/&$/, "");
+
+        fetch(apiUrl)
+            .then((response) => {
+                return response.json();
+            })
+            .then(articles => {
+                const listArticle = document.querySelector('.list-article');
+                let html = '';
+                articles = articles.reverse();
+                articles.forEach(article => {
+                    html += `
+                        <a href="/Article/Details/${article.articleId}" class="text-dark nav-link">
+                            <div class="card mb-3 d-flex" style="min-width: 863px;">
+                                <div class="row">
+                                    <div class="col d-flex">
+                                        <img src="${article.imagesArticles[0].imageArticle}" class="img-fluid rounded-start" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${article.title}</h5>
+                                            <p class="card-text">${article.descAr}</p>
+                                            <p class="card-text"><small class="text-body-secondary">${article.price} vnđ</small></p>
+                                            <p class="card-text"><small class="text-body-secondary">${article.createAt}</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    `
+                })
+
+                listArticle.innerHTML = html;
+            });
     }
+
+    selectCityElement.onchange = () => {
+        cityFiler = selectCityElement.value;
+        selectCity();
+        handerFilter({ type: typeFilter, city: cityFiler, district: districtFilter, min: min, max: max });
+    }
+
+    selectDistrict.onchange = () => {
+        districtFilter = selectDistrict.value;
+        handerFilter({ type: typeFilter, city: cityFiler, district: districtFilter, min: min, max: max });
+    }
+
+    minPrice.onchange = () => {
+        min = minPrice.value;
+    }
+
+    maxPrice.onchange = () => {
+        max =  maxPrice.value;
+    }
+
+    btnFilterPrice.onclick = () => {
+        handerFilter({ type: typeFilter, city: cityFiler, district: districtFilter, min: min, max: max });
+    }
+
+    btnUnFilterPrice.onclick = () => {
+        min = null;
+        max = null;
+        handerFilter({ type: typeFilter, city: cityFiler, district: districtFilter, min: min, max: max });
+    }
+
+    inputTypeArticles.forEach(item => {
+
+        if(item.checked) {
+            typeFilter = item.id;
+        }
+
+        item.onchange = () => {
+            if(item.checked) {
+                typeFilter = item.id;
+                handerFilter({ type: typeFilter, city: cityFiler, district: districtFilter, min: min, max: max });
+            }
+        }
+    });
+
+    handerFilter({ type: typeFilter, city: cityFiler, district: districtFilter, min: min, max: max });
+
 </script>

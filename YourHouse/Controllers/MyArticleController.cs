@@ -88,6 +88,11 @@ namespace YourHouse.Controllers
             //}
             if (ModelState.IsValid)
             {
+                ImagesArticle imagesArticle = new ImagesArticle()
+                {
+                    ImageArticle = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq8aVvwt226C1Kx4QqQzL5IibUHcRbb1XCtw&s",
+                };
+
                 Article article = new Article()
                 {
                     AccountId = 1,
@@ -100,6 +105,7 @@ namespace YourHouse.Controllers
                     Price = (decimal)art.Price,
                     TienCoc = (decimal)art.TienCoc,
                     TypeAr = art.Type,
+                    ImagesArticles = new List<ImagesArticle>() { imagesArticle }
                 };
 
                 if (art.Type == "ChungCu")
@@ -151,6 +157,7 @@ namespace YourHouse.Controllers
                         BedRoom = (int)art.BedRoom,
                         Article = article,
                     };
+                    
                     _context.Houses.Add(house);
                     _context.SaveChanges();
                 }

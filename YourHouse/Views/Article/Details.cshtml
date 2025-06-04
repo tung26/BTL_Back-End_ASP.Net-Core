@@ -1,14 +1,115 @@
-﻿
+﻿@model YourHouse.Models.Entities.Article;
 
 @{
 	ViewData["Title"] = "Details";
+	var accAuthor = Model.Account;
 }
 
 <div class="row">
-	<div class="col-5">
+	<div class="col-8">
+		<div class="container-fluid info_article">
+			<div class="col">
+				<img style="width: 100%;" src="@Model.ImagesArticles.ToList()[0].ImageArticle" />
+			</div>
+			<div class="col">
 
+			</div>
+			<div class="col">
+				<p>@Model.TypeAr</p>
+				<p>@Model.CreateAt</p>
+				<p>@Model.Title</p>
+				<p>@Model.DescAr</p>
+				<p>@Model.CityArNavigation.CityName - @Model.DistrictArNavigation.DistrictName</p>
+				<p>Địa chỉ chi tiết: @Model.Addr</p>
+				<p>Diện tích: @Model.S</p>
+				<p>Giá thuê: @Model.Price</p>
+				<p>Tiền cọc: @Model.TienCoc</p>
+
+				@{
+					if (Model.Tro != null)
+					{
+						var tro = Model.Tro;
+						<p>Tầng: @tro.Floor</p>
+						<p>Người tối đa: @tro.MaxPerson</p>
+						<p>Giá nước: @tro.WaterPrice</p>
+						<p>Giá điện: @tro.ElectricPrice</p>
+					}
+					else if (Model.House != null)
+					{
+						var house = Model.House;
+						<p>@house.BedRoom</p>
+						<p>@house.BathRoom</p>
+						<p>@house.Floors</p>
+					}
+					else if (Model.ChungCu != null)
+					{
+						var chungCu = Model.ChungCu;
+						<p>@chungCu.Floor</p>
+						<p>@chungCu.BedRoom</p>
+						<p>@chungCu.BathRoom</p>
+						<p>@chungCu.MaxPerson</p>
+						<p>@chungCu.WaterPrice</p>
+						<p>@chungCu.ElectricPrice</p>
+					}
+					else if (Model.Office != null)
+					{
+						var off = Model.Office;
+						<p>Tầng: @off.Floor</p>
+						@if (off.Floor == 1)
+						{
+							<p>Hướng cửa chính: Đông</p>
+						}
+						else if (off.Floor == 2)
+						{
+							<p>Hướng cửa chính: Tây</p>
+						}
+						else if (off.Floor == 3)
+						{
+							<p>Hướng cửa chính: Nam</p>
+						}
+						else if (off.Floor == 4)
+						{
+							<p>Hướng cửa chính: Bắc</p>
+						}
+						else if (off.Floor == 5)
+						{
+							<p>Hướng cửa chính: Đông bắc</p>
+						}
+						else if (off.Floor == 6)
+						{
+							<p>Hướng cửa chính: Đông nam</p>
+						}
+						else if (off.Floor == 7)
+						{
+							<p>Hướng cửa chính: Tây bắc</p>
+						}
+						else if (off.Floor == 8)
+						{
+							<p>Hướng cửa chính: Tây nam</p>
+						}
+					}
+				}
+			</div>
+		</div>
 	</div>
-	<div class="col-5">
+	<div class="col-4">
+		<div class="container-fluid acc_author">
+			<div class="row">
+				<p>@accAuthor.FullName</p>
+				<button class="btn btn-primary" style="height: 50px; cursor: default;">@accAuthor.Phone</button>
+				<p>@accAuthor.Email</p>
+			</div>
+			<div class="row">
+				<div class="comments" style="height: 200px; border: 1px solid #ccc; border-radius: 20px;">
 
+				</div>
+				<form class="mt-2">
+					<div class="input-group">
+						<input class="form-control" />
+						<button class="btn btn-success">send</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>

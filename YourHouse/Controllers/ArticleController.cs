@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using YourHouse.Models;
 using YourHouse.Models.Entities;
 
 namespace YourHouse.Controllers
@@ -20,9 +22,58 @@ namespace YourHouse.Controllers
             return View(articleList);
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
-            return View();
+            //var article = _context.Articles.FirstOrDefault(a => a.ArticleId == id);
+
+            var article = _context.Articles
+                .Include(a => a.Tro)
+                .Include(a => a.ChungCu)
+                .Include(a => a.House)
+                .Include(a => a.Office)
+                .Include(a => a.ImagesArticles)
+                .Include(a => a.Account)
+                .Include(a => a.CityArNavigation)
+                .Include(a => a.DistrictArNavigation)
+                .FirstOrDefault(a => a.ArticleId == id);
+
+            if (article == null)
+            {
+                return NotFound();
+            }
+
+            //var tro = _context.Tros.FirstOrDefault(a => a.ArticleId == id);
+            //var chungCu = _context.ChungCus.FirstOrDefault(a => a.ArticleId == id);
+            //var house = _context.Houses.FirstOrDefault(a => a.ArticleId == id);
+            //var office = _context.Offices.FirstOrDefault(a => a.ArticleId == id);
+            //var Images = _context.ImagesArticles.Where(i => i.ArticleId == id).Select(i => i).ToList();
+
+            return View(article);
+        }
+
+        public IActionResult Filters(string type, int city, int district, decimal? min, decimal? max)
+        {
+            var result = _context.Articles
+                .Include(a => a.ImagesArticles).AsQueryable();
+
+            if (type != "All")
+            {
+                result = result.Where(a => a.TypeAr == type).Select(a => a);
+            }
+            if(city != -1)
+            {
+                result = result.Where(a => a.CityAr == city).Select(a => a);
+            }
+            if(district != -1)
+            {
+                result = result.Where(a => a.DistrictAr == district).Select(a => a);
+            }
+            if(min != null && max != null)
+            {
+                result = result.Where(a => a.Price >= min && a.Price <= max).Select(a => a);
+            }
+
+            return Ok(result.ToList());
         }
     }
 }

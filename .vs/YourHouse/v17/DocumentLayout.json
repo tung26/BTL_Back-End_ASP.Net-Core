@@ -7,10 +7,6 @@
       "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\views\\article\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\views\\article\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\views\\article\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\controllers\\articlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\controllers\\articlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -22,12 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -36,34 +28,27 @@
               "RelativeDocumentMoniker": "YourHouse\\Views\\Article\\Details.cshtml",
               "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Article\\Details.cshtml",
               "RelativeToolTip": "YourHouse\\Views\\Article\\Details.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAuwCIAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-02T00:52:17.141Z",
+              "WhenOpened": "2025-06-04T08:38:15.519Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Article\\Index.cshtml",
-              "RelativeDocumentMoniker": "YourHouse\\Views\\Article\\Index.cshtml",
-              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Article\\Index.cshtml",
-              "RelativeToolTip": "YourHouse\\Views\\Article\\Index.cshtml",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAAAHQAAAByAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-30T15:20:47.646Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "ArticleController.cs",
               "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Controllers\\ArticleController.cs",
               "RelativeDocumentMoniker": "YourHouse\\Controllers\\ArticleController.cs",
               "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Controllers\\ArticleController.cs",
               "RelativeToolTip": "YourHouse\\Controllers\\ArticleController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAADIAAAAAAAAAAAAgwDgAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T15:20:36.97Z"
+              "WhenOpened": "2025-06-04T08:37:43.26Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             }
           ]
         }
