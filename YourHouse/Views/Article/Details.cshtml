@@ -16,9 +16,9 @@
 			</div>
 			<div class="col">
 				<p>@Model.TypeAr</p>
-				<p>@Model.CreateAt</p>
-				<p>@Model.Title</p>
-				<p>@Model.DescAr</p>
+				<p>Thời gian: @Model.CreateAt</p>
+				<p>Tiêu đề: @Model.Title</p>
+				<p>Chi tiết: @Model.DescAr</p>
 				<p>@Model.CityArNavigation.CityName - @Model.DistrictArNavigation.DistrictName</p>
 				<p>Địa chỉ chi tiết: @Model.Addr</p>
 				<p>Diện tích: @Model.S</p>
@@ -37,19 +37,19 @@
 					else if (Model.House != null)
 					{
 						var house = Model.House;
-						<p>@house.BedRoom</p>
-						<p>@house.BathRoom</p>
-						<p>@house.Floors</p>
+						<p>Phòng ngủ: @house.BedRoom</p>
+						<p>Phòng vệ sinh: @house.BathRoom</p>
+						<p>Số tầng: @house.Floors</p>
 					}
 					else if (Model.ChungCu != null)
 					{
 						var chungCu = Model.ChungCu;
-						<p>@chungCu.Floor</p>
-						<p>@chungCu.BedRoom</p>
-						<p>@chungCu.BathRoom</p>
-						<p>@chungCu.MaxPerson</p>
-						<p>@chungCu.WaterPrice</p>
-						<p>@chungCu.ElectricPrice</p>
+						<p>Tầng: @chungCu.Floor</p>
+						<p>Phòng ngủ: @chungCu.BedRoom</p>
+						<p>Phòng vệ sinh: @chungCu.BathRoom</p>
+						<p>Số người tối đa: @chungCu.MaxPerson</p>
+						<p>Giá nước: @chungCu.WaterPrice</p>
+						<p>Giá điện: @chungCu.ElectricPrice</p>
 					}
 					else if (Model.Office != null)
 					{
@@ -103,13 +103,22 @@
 				<div class="comments" style="height: 200px; border: 1px solid #ccc; border-radius: 20px;">
 
 				</div>
-				<form class="mt-2">
+				<div class="mt-2">
 					<div class="input-group">
-						<input class="form-control" />
-						<button class="btn btn-success">send</button>
+						<input class="form-control" id="input_comment" />
+						<button class="btn btn-success" id="btn-send-comment">send</button>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+	const btnSendComment = document.querySelector("#btn-send-comment");
+	const inputSendComment = document.querySelector("#input_comment");
+
+	btnSendComment.onclick = () => {
+
+	};
+</script>

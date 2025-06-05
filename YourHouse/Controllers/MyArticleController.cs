@@ -215,9 +215,9 @@ namespace YourHouse.Controllers
             modelArticle.Address = art.Addr;
             modelArticle.City = art.CityAr;
             modelArticle.District = art.DistrictAr;
-            modelArticle.S = (int)art.S;
-            modelArticle.Price = (int)art.Price;
-            modelArticle.TienCoc = (int)art.TienCoc;
+            modelArticle.S = (double)art.S;
+            modelArticle.Price = (double)art.Price;
+            modelArticle.TienCoc = (double)art.TienCoc;
             modelArticle.Type = art.TypeAr;
 
             return View(modelArticle);

@@ -212,15 +212,9 @@
         handerFilter({ type: typeFilter, city: cityFiler, district: districtFilter, min: min, max: max });
     }
 
-    minPrice.onchange = () => {
-        min = minPrice.value;
-    }
-
-    maxPrice.onchange = () => {
-        max =  maxPrice.value;
-    }
-
     btnFilterPrice.onclick = () => {
+        min = minPrice.value;
+        max = maxPrice.value;
         handerFilter({ type: typeFilter, city: cityFiler, district: districtFilter, min: min, max: max });
     }
 

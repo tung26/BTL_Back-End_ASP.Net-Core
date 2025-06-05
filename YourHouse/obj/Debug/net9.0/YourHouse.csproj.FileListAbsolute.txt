@@ -232,3 +232,5 @@ D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debu
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\ref\YourHouse.dll
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\dsrmsmv9we-3r8b2a0bt1.gz
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\YourHouse.sourcelink.json
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\bin\Debug\net9.0\CloudinaryDotNet.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\bin\Debug\net9.0\Newtonsoft.Json.dll

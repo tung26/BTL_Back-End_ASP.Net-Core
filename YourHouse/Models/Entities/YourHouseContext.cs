@@ -58,6 +58,7 @@ public partial class YourHouseContext : DbContext
             entity.Property(e => e.CreateAt).HasDefaultValueSql("(CONVERT([date],getdate()))");
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.FullName).HasMaxLength(100);
+            entity.Property(e => e.ImageUser).HasDefaultValue("https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png");
             entity.Property(e => e.PasswordHash).HasMaxLength(128);
             entity.Property(e => e.Phone).HasMaxLength(20);
 

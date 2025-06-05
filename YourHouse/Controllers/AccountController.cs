@@ -22,6 +22,8 @@ namespace YourHouse.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            var i = _context.Accounts.Select(a => a).ToArray();
+            Console.WriteLine(i[0].ImageUser + " 1");
             return View();
         }
 
@@ -54,6 +56,8 @@ namespace YourHouse.Controllers
         public IActionResult Register([FromForm] RegisterAccount nAcc)
         {
             nAcc.RoleId = 3;
+            ModelState.Remove("Role");
+            ModelState.Remove("ImageUser");
             foreach (var error in ModelState)
             {
                 foreach (var subError in error.Value.Errors)
