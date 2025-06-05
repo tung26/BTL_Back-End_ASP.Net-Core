@@ -22,8 +22,6 @@ namespace YourHouse.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            var i = _context.Accounts.Select(a => a).ToArray();
-            Console.WriteLine(i[0].ImageUser + " 1");
             return View();
         }
 
