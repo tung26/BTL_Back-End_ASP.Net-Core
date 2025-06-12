@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using YourHouse.Models;
 using YourHouse.Models.Entities;
 
@@ -8,20 +9,52 @@ namespace YourHouse.Controllers
     public class AccountController : Controller
     {
         private readonly YourHouseContext _context;
+        private int IdUser { get; set; }
+        private int role { get; set; }
+
 
         public AccountController(YourHouseContext context)
         {
             _context = context;
         }
-        public IActionResult Index()
+
+        public bool isLogin()
         {
-            return View();
+            var id = HttpContext.Session.GetInt32("id");
+
+            if (!id.HasValue)
+            {
+                return false;
+            }
+
+            var user = _context.Accounts.FirstOrDefault(u => id.Value == u.AccountId);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            this.IdUser = user.AccountId;
+            this.role = user.RoleId;
+            return true;
         }
 
+        public IActionResult Index()
+        {
+            if (!isLogin())
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
 
         [HttpGet]
         public IActionResult Login()
         {
+            if (isLogin())
+            {
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
@@ -33,6 +66,8 @@ namespace YourHouse.Controllers
                 bool IsAvbacc = _context.Accounts.Any(b => b.Email == acc.Email && b.PasswordHash == acc.Password);
                 if(IsAvbacc)
                 {
+                    var user = _context.Accounts.Where(b => b.Email == acc.Email && b.PasswordHash == acc.Password).FirstOrDefault();
+                    HttpContext.Session.SetInt32("id", user.AccountId);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -101,6 +136,7 @@ namespace YourHouse.Controllers
 
         public IActionResult Logout()
         {
+            HttpContext.Session.Remove("id");
             return RedirectToAction("Index", "Home");
         }
     }

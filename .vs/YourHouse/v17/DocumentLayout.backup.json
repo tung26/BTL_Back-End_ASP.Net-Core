@@ -3,36 +3,16 @@
   "WorkspaceRootPath": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\models\\entities\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\models\\entities\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\models\\entities\\imagesarticle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\models\\entities\\imagesarticle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\models\\entities\\yourhousecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\models\\entities\\yourhousecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\views\\account\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\views\\account\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\views\\article\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\views\\article\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\views\\article\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\views\\article\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.csproj|solutionrelative:yourhouse\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,113 +22,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Program.cs",
-              "RelativeDocumentMoniker": "YourHouse\\Program.cs",
-              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Program.cs",
-              "RelativeToolTip": "YourHouse\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T10:22:46.743Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Account.cs",
-              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Models\\Entities\\Account.cs",
-              "RelativeDocumentMoniker": "YourHouse\\Models\\Entities\\Account.cs",
-              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Models\\Entities\\Account.cs",
-              "RelativeToolTip": "YourHouse\\Models\\Entities\\Account.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAYwBoAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T16:50:58.081Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ImagesArticle.cs",
-              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Models\\Entities\\ImagesArticle.cs",
-              "RelativeDocumentMoniker": "YourHouse\\Models\\Entities\\ImagesArticle.cs",
-              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Models\\Entities\\ImagesArticle.cs",
-              "RelativeToolTip": "YourHouse\\Models\\Entities\\ImagesArticle.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T01:09:16.258Z",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Account\\Index.cshtml",
+              "RelativeDocumentMoniker": "YourHouse\\Views\\Account\\Index.cshtml",
+              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Account\\Index.cshtml",
+              "RelativeToolTip": "YourHouse\\Views\\Account\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-12T02:48:51.329Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "YourHouseContext.cs",
-              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Models\\Entities\\YourHouseContext.cs",
-              "RelativeDocumentMoniker": "YourHouse\\Models\\Entities\\YourHouseContext.cs",
-              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Models\\Entities\\YourHouseContext.cs",
-              "RelativeToolTip": "YourHouse\\Models\\Entities\\YourHouseContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T01:14:14.203Z",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "YourHouse\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "YourHouse\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAAC4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-12T01:03:01.77Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Account\\Login.cshtml",
-              "RelativeDocumentMoniker": "YourHouse\\Views\\Account\\Login.cshtml",
-              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Account\\Login.cshtml",
-              "RelativeToolTip": "YourHouse\\Views\\Account\\Login.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-05T01:01:20.768Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "AccountController.cs",
               "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "YourHouse\\Controllers\\AccountController.cs",
               "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Controllers\\AccountController.cs",
               "RelativeToolTip": "YourHouse\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAkwDsAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAIAwwCkAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T00:49:08.193Z",
+              "WhenOpened": "2025-06-12T00:26:40.249Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Article\\Details.cshtml",
-              "RelativeDocumentMoniker": "YourHouse\\Views\\Article\\Details.cshtml",
-              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Article\\Details.cshtml",
-              "RelativeToolTip": "YourHouse\\Views\\Article\\Details.cshtml",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAAAHkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-04T14:17:01.014Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Article\\Index.cshtml",
-              "RelativeDocumentMoniker": "YourHouse\\Views\\Article\\Index.cshtml",
-              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Article\\Index.cshtml",
-              "RelativeToolTip": "YourHouse\\Views\\Article\\Index.cshtml",
-              "ViewState": "AgIAANoAAAAAAAAAAAASwOIAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-04T10:54:03.586Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             }
           ]
         }

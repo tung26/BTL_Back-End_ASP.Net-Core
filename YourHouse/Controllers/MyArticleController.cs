@@ -10,15 +10,43 @@ namespace YourHouse.Controllers
     public class MyArticleController : Controller
     {
         private readonly YourHouseContext _context;
+        private int IdUser { get; set; }
+        private int role { get; set; }
 
         public MyArticleController(YourHouseContext context)
         {
             _context = context;
         }
 
+        public bool isLogin()
+        {
+            var id = HttpContext.Session.GetInt32("id");
+
+            if (!id.HasValue)
+            {
+                return false;
+            }
+
+            var user = _context.Accounts.FirstOrDefault(u => id.Value == u.AccountId);
+            
+            if (user == null)
+            {
+                return false;
+            }
+            
+            this.IdUser = user.AccountId;
+            this.role = user.RoleId;
+            return true;
+        }
+
         public IActionResult Index()
         {
-            var articleList = _context.Articles.Select(a => new
+            if (!isLogin())
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            
+            var articleList = _context.Articles.Where(a => a.AccountId == this.IdUser).Select(a => new
             {
                 a.ArticleId,
                 a.Title,
@@ -37,6 +65,11 @@ namespace YourHouse.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+            if (!isLogin())
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             ViewData["City"] = _context.Cities.ToList();
             ViewData["District"] = _context.Districts.Select(d => new District { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
             return View();
@@ -45,6 +78,11 @@ namespace YourHouse.Controllers
         [HttpPost]
         public IActionResult Add([FromForm] ModelAddArticle art)
         {
+            if (!isLogin())
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             ViewData["City"] = _context.Cities.ToList();
             ViewData["District"] = _context.Districts.Select(d => new District { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
             art.Status = 1;
@@ -95,7 +133,7 @@ namespace YourHouse.Controllers
 
                 Article article = new Article()
                 {
-                    AccountId = 1,
+                    AccountId = this.IdUser,
                     Title = art.Title,
                     DescAr = art.Desc,
                     Addr = art.Address,
@@ -170,13 +208,24 @@ namespace YourHouse.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            if (!isLogin())
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             ViewData["id"] = id;
             ViewData["City"] = _context.Cities.ToList();
             ViewData["District"] = _context.Districts.Select(d => new District { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
 
             ModelAddArticle modelArticle = new ModelAddArticle();
 
-            var art = _context.Articles.Where(a => a.ArticleId == id).FirstOrDefault();
+            var art = _context.Articles.Where(a => a.ArticleId == id && a.AccountId == this.IdUser).FirstOrDefault();
+
+            if (art == null)
+            {
+                return RedirectToAction("Index");
+            }
+
             var tro = _context.Tros.Where(a => a.ArticleId == id).FirstOrDefault();
             var chungCu = _context.ChungCus.Where(a => a.ArticleId == id).FirstOrDefault();
             var house = _context.Houses.Where(a => a.ArticleId == id).FirstOrDefault();
@@ -321,14 +370,24 @@ namespace YourHouse.Controllers
 
         public IActionResult Delete(int id)
         {
+            if (!isLogin())
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             var art = _context.Articles
                 .Include(a => a.Tro)
                 .Include(a => a.ChungCu)
                 .Include(a => a.Office)
                 .Include(a => a.House)
                 .Include(a => a.ImagesArticles)
-                .Where(a => a.ArticleId == id).FirstOrDefault();
-            Console.WriteLine(art);
+                .Where(a => a.ArticleId == id && a.AccountId == this.IdUser).FirstOrDefault();
+
+            if (art == null)
+            {
+                return RedirectToAction("Index");
+            }
+
             if (art.Tro != null)
             {
                 _context.Tros.Remove(art.Tro);

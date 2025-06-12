@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -30,6 +32,7 @@
                     </ul>
                     <ul class="navbar-nav">
                         @{
+                            // string role = HttpContext.Session.GetInt32("id");
                             @if (true)
                             {
                                 <li class="nav-item me-2">
@@ -41,7 +44,7 @@
                                 </li>
                                 <li class="nav-item dropdown">
                                     <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                                        Quang Tùng MasterD
+                                        Tùng
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" asp-controller="MyArticle" asp-action="Index">Quản lý tin</a></li>
