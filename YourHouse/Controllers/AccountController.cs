@@ -6,42 +6,45 @@ using YourHouse.Models.Entities;
 namespace YourHouse.Controllers
 {
 
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
-        private readonly YourHouseContext _context;
-        private int IdUser { get; set; }
-        private int role { get; set; }
+        //private readonly YourHouseContext _context;
+        //private int IdUser { get; set; }
+        //private int Role { get; set; }
 
 
-        public AccountController(YourHouseContext context)
-        {
-            _context = context;
-        }
+        public AccountController(YourHouseContext context) : base(context) { }
 
-        public bool isLogin()
-        {
-            var id = HttpContext.Session.GetInt32("id");
+        //public bool IsLogin
+        //{
+        //    var id = HttpContext.Session.GetInt32("id");
 
-            if (!id.HasValue)
-            {
-                return false;
-            }
+        //    if (!id.HasValue)
+        //    {
+        //        ViewBag.IsLogin = false;
+        //        return false;
+        //    }
 
-            var user = _context.Accounts.FirstOrDefault(u => id.Value == u.AccountId);
+        //    var user = _context.Accounts.FirstOrDefault(u => id.Value == u.AccountId);
 
-            if (user == null)
-            {
-                return false;
-            }
+        //    if (user == null)
+        //    {
+        //        ViewBag.IsLogin = false;
+        //        return false;
+        //    }
 
-            this.IdUser = user.AccountId;
-            this.role = user.RoleId;
-            return true;
-        }
+        //    this.IdUser = user.AccountId;
+        //    this.Role = user.RoleId;
+
+        //    ViewBag.IsLogin = true;
+        //    ViewBag.UserName = user.FullName;
+
+        //    return true;
+        //}
 
         public IActionResult Index()
         {
-            if (!isLogin())
+            if (!IsLogin)
             {
                 return RedirectToAction("Login");
             }
@@ -51,7 +54,7 @@ namespace YourHouse.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            if (isLogin())
+            if (IsLogin)
             {
                 return RedirectToAction("Index");
             }

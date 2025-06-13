@@ -5,14 +5,11 @@ using YourHouse.Models.Entities;
 
 namespace YourHouse.Controllers
 {
-    public class ArticleController : Controller
+    public class ArticleController : BaseController
     {
-        private readonly YourHouseContext _context;
+        //private readonly YourHouseContext _context;
 
-        public ArticleController(YourHouseContext context)
-        {
-            _context = context;
-        }
+        public ArticleController(YourHouseContext context) : base(context) { }
 
         public IActionResult Index()
         {

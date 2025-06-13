@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace YourHouse.Models.Entities;
 
@@ -31,6 +32,7 @@ public partial class Article
 
     public DateOnly CreateAt { get; set; }
 
+    [JsonIgnore]
     public virtual Account Account { get; set; } = null!;
 
     public virtual ChungCu? ChungCu { get; set; }

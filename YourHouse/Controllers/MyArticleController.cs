@@ -7,41 +7,47 @@ using YourHouse.Models.Entities;
 
 namespace YourHouse.Controllers
 {
-    public class MyArticleController : Controller
+    public class MyArticleController : BaseController
     {
-        private readonly YourHouseContext _context;
-        private int IdUser { get; set; }
-        private int role { get; set; }
+        //private readonly YourHouseContext _context;
+        //private int IdUser { get; set; }
+        //private int Role { get; set; }
 
-        public MyArticleController(YourHouseContext context)
+        public MyArticleController(YourHouseContext context) : base(context)
         {
-            _context = context;
+            
         }
 
-        public bool isLogin()
-        {
-            var id = HttpContext.Session.GetInt32("id");
+        //public bool IsLogin
+        //{
+        //    var id = HttpContext.Session.GetInt32("id");
 
-            if (!id.HasValue)
-            {
-                return false;
-            }
+        //    if (!id.HasValue)
+        //    {
+        //        ViewBag.IsLogin = false;
+        //        return false;
+        //    }
 
-            var user = _context.Accounts.FirstOrDefault(u => id.Value == u.AccountId);
-            
-            if (user == null)
-            {
-                return false;
-            }
-            
-            this.IdUser = user.AccountId;
-            this.role = user.RoleId;
-            return true;
-        }
+        //    var user = _context.Accounts.FirstOrDefault(u => id.Value == u.AccountId);
+
+        //    if (user == null)
+        //    {
+        //        ViewBag.IsLogin = false;
+        //        return false;
+        //    }
+
+        //    this.IdUser = user.AccountId;
+        //    this.Role = user.RoleId;
+
+        //    ViewBag.IsLogin = true;
+        //    ViewBag.UserName = user.FullName;
+
+        //    return true;
+        //}
 
         public IActionResult Index()
         {
-            if (!isLogin())
+            if (!IsLogin)
             {
                 return RedirectToAction("Login", "Account");
             }
@@ -65,7 +71,7 @@ namespace YourHouse.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            if (!isLogin())
+            if (!IsLogin)
             {
                 return RedirectToAction("Login", "Account");
             }
@@ -78,7 +84,7 @@ namespace YourHouse.Controllers
         [HttpPost]
         public IActionResult Add([FromForm] ModelAddArticle art)
         {
-            if (!isLogin())
+            if (!IsLogin)
             {
                 return RedirectToAction("Login", "Account");
             }
@@ -208,7 +214,7 @@ namespace YourHouse.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            if (!isLogin())
+            if (!IsLogin)
             {
                 return RedirectToAction("Login", "Account");
             }
@@ -370,7 +376,7 @@ namespace YourHouse.Controllers
 
         public IActionResult Delete(int id)
         {
-            if (!isLogin())
+            if (!IsLogin)
             {
                 return RedirectToAction("Login", "Account");
             }
