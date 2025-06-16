@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net9.0": {}
+    "net9.0": {
+      "YourHouse.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/YourHouse.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/YourHouse.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "YourHouse.Domain/1.0.0": {
+      "type": "project",
+      "path": "../YourHouse.Domain/YourHouse.Domain.csproj",
+      "msbuildProject": "../YourHouse.Domain/YourHouse.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net9.0": []
+    "net9.0": [
+      "YourHouse.Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\tranq\\.nuget\\packages\\": {},
@@ -39,7 +58,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse.Domain\\YourHouse.Domain.csproj": {
+              "projectPath": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse.Domain\\YourHouse.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

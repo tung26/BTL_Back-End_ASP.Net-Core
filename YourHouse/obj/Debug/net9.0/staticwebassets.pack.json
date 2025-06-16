@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\YourHouse.bundle.scp.css",
-      "PackagePath": "staticwebassets\\YourHouse.8n6xrbrlh6.bundle.scp.css"
+      "Id": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\YourHouse.Web.bundle.scp.css",
+      "PackagePath": "staticwebassets\\YourHouse.Web.4pqf9idpag.bundle.scp.css"
     },
     {
       "Id": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\wwwroot\\css\\site.css",
@@ -261,24 +261,24 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.YourHouse.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.YourHouse.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.YourHouse.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.YourHouse.Web.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.YourHouse.props",
-      "PackagePath": "build\\YourHouse.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.YourHouse.Web.props",
+      "PackagePath": "build\\YourHouse.Web.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.YourHouse.props",
-      "PackagePath": "buildMultiTargeting\\YourHouse.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.YourHouse.Web.props",
+      "PackagePath": "buildMultiTargeting\\YourHouse.Web.props"
     },
     {
-      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.YourHouse.props",
-      "PackagePath": "buildTransitive\\YourHouse.props"
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.YourHouse.Web.props",
+      "PackagePath": "buildTransitive\\YourHouse.Web.props"
     }
   ],
   "ElementsToRemove": []

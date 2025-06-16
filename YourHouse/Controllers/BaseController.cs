@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using YourHouse.Models.Entities;
+using YourHouse.Web.Models.Entities;
 
-namespace YourHouse.Controllers
+namespace YourHouse.Web.Controllers
 {
     public class BaseController : Controller
     {

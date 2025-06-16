@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using YourHouse.Infrastructure;
+using YourHouse.Web.Infrastructure;
 
-namespace YourHouse.Infrastructure.Data;
+namespace YourHouse.Web.Infrastructure.Data;
 
-public partial class YourHouseDbContext : DbContext
+public partial class YourHouse.WebDbContext : DbContext
 {
-    public YourHouseDbContext(DbContextOptions<YourHouseDbContext> options)
+    public YourHouse.WebDbContext(DbContextOptions<YourHouse.WebDbContext> options)
         : base(options)
     {
     }

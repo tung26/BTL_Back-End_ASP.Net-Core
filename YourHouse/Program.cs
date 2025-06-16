@@ -1,4 +1,4 @@
-using YourHouse.Models.Entities;
+using YourHouse.Web.Models.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 

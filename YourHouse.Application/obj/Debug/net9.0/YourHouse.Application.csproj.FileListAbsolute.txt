@@ -10,3 +10,7 @@ D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Applicat
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Application\obj\Debug\net9.0\refint\YourHouse.Application.dll
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Application\obj\Debug\net9.0\YourHouse.Application.pdb
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Application\obj\Debug\net9.0\ref\YourHouse.Application.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Application\bin\Debug\net9.0\YourHouse.Domain.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Application\bin\Debug\net9.0\YourHouse.Domain.pdb
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Application\obj\Debug\net9.0\YourHouse.Application.csproj.AssemblyReference.cache
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Application\obj\Debug\net9.0\YourHous.2C0E5B6B.Up2Date

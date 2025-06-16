@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace YourHouse.Models.Entities;
+namespace YourHouse.Web.Models.Entities;
 
 public partial class YourHouseContext : DbContext
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace YourHouse.Infrastructure;
+namespace YourHouse.Web.Infrastructure;
 
 public partial class ChungCu
 {

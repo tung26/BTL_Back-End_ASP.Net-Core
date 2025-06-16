@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace YourHouse.Models.Entities;
+namespace YourHouse.Web.Models.Entities;
 
 public partial class Article
 {

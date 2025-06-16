@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace YourHouse.Models.Entities;
+namespace YourHouse.Web.Models.Entities;
 
 public partial class House
 {

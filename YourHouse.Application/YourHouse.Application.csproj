@@ -12,4 +12,8 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\YourHouse.Domain\YourHouse.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

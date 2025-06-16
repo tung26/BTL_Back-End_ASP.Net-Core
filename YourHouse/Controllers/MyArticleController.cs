@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
-using YourHouse.Models;
-using YourHouse.Models.Entities;
+using YourHouse.Web.Models;
+using YourHouse.Web.Models.Entities;
 
-namespace YourHouse.Controllers
+namespace YourHouse.Web.Controllers
 {
     public class MyArticleController : BaseController
     {

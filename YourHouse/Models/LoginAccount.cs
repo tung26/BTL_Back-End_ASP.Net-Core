@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace YourHouse.Models
+namespace YourHouse.Web.Models
 {
     public class LoginAccount
     {

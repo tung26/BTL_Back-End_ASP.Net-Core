@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YourHouse.Models;
-using YourHouse.Models.Entities;
+using YourHouse.Web.Models;
+using YourHouse.Web.Models.Entities;
 
-namespace YourHouse.Controllers
+namespace YourHouse.Web.Controllers
 {
     public class ArticleController : BaseController
     {

@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using YourHouse.Models;
-using YourHouse.Models.Entities;
+using YourHouse.Web.Models;
+using YourHouse.Web.Models.Entities;
 
-namespace YourHouse.Controllers
+namespace YourHouse.Web.Controllers
 {
     public class HomeController : BaseController
     {

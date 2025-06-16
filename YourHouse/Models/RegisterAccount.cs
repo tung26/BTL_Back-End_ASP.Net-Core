@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using YourHouse.Models.Entities;
+using YourHouse.Web.Models.Entities;
 
-namespace YourHouse.Models
+namespace YourHouse.Web.Models
 {
     public class RegisterAccount : Account
     {

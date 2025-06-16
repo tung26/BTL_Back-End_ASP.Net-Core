@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace YourHouse.Models.Entities;
+namespace YourHouse.Web.Models.Entities;
 
 public partial class Account
 {
