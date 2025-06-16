@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "KoyLyCTgpvQ=",
-  "success": true,
+  "dgSpecHash": "UUUK0+Pr7tk=",
+  "success": false,
   "projectFilePath": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\YourHouse.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tranq\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
@@ -130,5 +130,15 @@
     "C:\\Users\\tranq\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\tranq\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Warning As Error: Detected package downgrade: Microsoft.EntityFrameworkCore.SqlServer from 9.0.6 to 9.0.5. Reference the package directly from the project to select a different version. \r\n YourHouse -> YourHouse.Infrastructure -> Microsoft.EntityFrameworkCore.SqlServer (>= 9.0.6) \r\n YourHouse -> Microsoft.EntityFrameworkCore.SqlServer (>= 9.0.5)",
+      "libraryId": "Microsoft.EntityFrameworkCore.SqlServer",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }

@@ -36,6 +36,8 @@ namespace YourHouse.Controllers
 
                     ViewBag.IsLogin = IsLogin;
                     ViewBag.UserName = user.FullName;
+                    ViewBag.IdUser = IdUser;
+                    ViewBag.RoleId = Role;
                 }
             }
             else

@@ -9,41 +9,11 @@ namespace YourHouse.Controllers
 {
     public class MyArticleController : BaseController
     {
-        //private readonly YourHouseContext _context;
-        //private int IdUser { get; set; }
-        //private int Role { get; set; }
 
         public MyArticleController(YourHouseContext context) : base(context)
         {
             
         }
-
-        //public bool IsLogin
-        //{
-        //    var id = HttpContext.Session.GetInt32("id");
-
-        //    if (!id.HasValue)
-        //    {
-        //        ViewBag.IsLogin = false;
-        //        return false;
-        //    }
-
-        //    var user = _context.Accounts.FirstOrDefault(u => id.Value == u.AccountId);
-
-        //    if (user == null)
-        //    {
-        //        ViewBag.IsLogin = false;
-        //        return false;
-        //    }
-
-        //    this.IdUser = user.AccountId;
-        //    this.Role = user.RoleId;
-
-        //    ViewBag.IsLogin = true;
-        //    ViewBag.UserName = user.FullName;
-
-        //    return true;
-        //}
 
         public IActionResult Index()
         {

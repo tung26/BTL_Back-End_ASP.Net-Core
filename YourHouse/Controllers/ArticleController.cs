@@ -21,8 +21,6 @@ namespace YourHouse.Controllers
 
         public IActionResult Details(int id)
         {
-            //var article = _context.Articles.FirstOrDefault(a => a.ArticleId == id);
-
             var article = _context.Articles
                 .Include(a => a.Tro)
                 .Include(a => a.ChungCu)
@@ -32,18 +30,13 @@ namespace YourHouse.Controllers
                 .Include(a => a.Account)
                 .Include(a => a.CityArNavigation)
                 .Include(a => a.DistrictArNavigation)
+                .Include(a => a.Comments)
                 .FirstOrDefault(a => a.ArticleId == id);
 
             if (article == null)
             {
                 return NotFound();
             }
-
-            //var tro = _context.Tros.FirstOrDefault(a => a.ArticleId == id);
-            //var chungCu = _context.ChungCus.FirstOrDefault(a => a.ArticleId == id);
-            //var house = _context.Houses.FirstOrDefault(a => a.ArticleId == id);
-            //var office = _context.Offices.FirstOrDefault(a => a.ArticleId == id);
-            //var Images = _context.ImagesArticles.Where(i => i.ArticleId == id).Select(i => i).ToList();
 
             return View(article);
         }

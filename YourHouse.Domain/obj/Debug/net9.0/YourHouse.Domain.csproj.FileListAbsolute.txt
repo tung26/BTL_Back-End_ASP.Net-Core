@@ -1,0 +1,12 @@
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\bin\Debug\net9.0\YourHouse.Domain.deps.json
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\bin\Debug\net9.0\YourHouse.Domain.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\bin\Debug\net9.0\YourHouse.Domain.pdb
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\obj\Debug\net9.0\YourHouse.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\obj\Debug\net9.0\YourHouse.Domain.AssemblyInfoInputs.cache
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\obj\Debug\net9.0\YourHouse.Domain.AssemblyInfo.cs
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\obj\Debug\net9.0\YourHouse.Domain.csproj.CoreCompileInputs.cache
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\obj\Debug\net9.0\YourHouse.Domain.sourcelink.json
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\obj\Debug\net9.0\YourHouse.Domain.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\obj\Debug\net9.0\refint\YourHouse.Domain.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\obj\Debug\net9.0\YourHouse.Domain.pdb
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Domain\obj\Debug\net9.0\ref\YourHouse.Domain.dll

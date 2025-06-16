@@ -1,0 +1,12 @@
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\bin\Debug\net9.0\YourHouse.Infrastructure.deps.json
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\bin\Debug\net9.0\YourHouse.Infrastructure.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\bin\Debug\net9.0\YourHouse.Infrastructure.pdb
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\obj\Debug\net9.0\YourHouse.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\obj\Debug\net9.0\YourHouse.Infrastructure.AssemblyInfoInputs.cache
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\obj\Debug\net9.0\YourHouse.Infrastructure.AssemblyInfo.cs
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\obj\Debug\net9.0\YourHouse.Infrastructure.csproj.CoreCompileInputs.cache
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\obj\Debug\net9.0\YourHouse.Infrastructure.sourcelink.json
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\obj\Debug\net9.0\YourHouse.Infrastructure.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\obj\Debug\net9.0\refint\YourHouse.Infrastructure.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\obj\Debug\net9.0\YourHouse.Infrastructure.pdb
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse.Infrastructure\obj\Debug\net9.0\ref\YourHouse.Infrastructure.dll

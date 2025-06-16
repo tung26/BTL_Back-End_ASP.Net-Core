@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YourHouse.Models;
 using YourHouse.Models.Entities;
@@ -41,14 +42,112 @@ namespace YourHouse.Controllers
 
         //    return true;
         //}
-
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            if (!IsLogin)
+            var user = _context.Accounts.FirstOrDefault(u => u.AccountId == id);
+
+            if (user == null)
+            {
+                if(this.IdUser != 0)
+                {
+                    user = _context.Accounts.FirstOrDefault(u => u.AccountId == this.IdUser);
+                }
+                else
+                {
+                    return RedirectToAction("Login");
+                }
+            }
+
+            return View(user);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            if (id != this.IdUser || this.IdUser == 0)
+            {
+                if(this.IdUser != 0)
+                {
+                    return RedirectToAction("Index");
+                }
+                return RedirectToAction("Login");
+            }
+
+            var user = _context.Accounts.FirstOrDefault(u => u.AccountId == id);
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult Edit([FromForm] Account acc)
+        {
+            var accChange = _context.Accounts.FirstOrDefault(a => a.AccountId == acc.AccountId);
+            //acc.Phone = accChange.Phone;
+            ModelState.Remove("Role");
+            ModelState.Remove("Phone");
+            ModelState.Remove("PasswordHash");
+            //foreach (var error in ModelState)
+            //{
+            //    foreach (var subError in error.Value.Errors)
+            //    {
+            //        Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
+            //    }
+            //}
+            if (ModelState.IsValid)
+            {
+                accChange.FullName = acc.FullName;
+                accChange.Email = acc.Email;
+                accChange.ImageUser = acc.ImageUser;
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            
+            return View(acc);
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword(int? id)
+        {
+            //foreach (var error in ModelState)
+            //{
+            //    foreach (var subError in error.Value.Errors)
+            //    {
+            //        Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
+            //    }
+            //}
+            if (this.IdUser == 0 || this.IdUser != id)
             {
                 return RedirectToAction("Login");
             }
+            
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult ChangePassword([FromForm] ChangePassword cp)
+        {
+            if (this.IdUser == 0)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var acc = _context.Accounts.FirstOrDefault(a => a.AccountId == cp.Id);
+            if (ModelState.IsValid && acc != null)
+            {
+                if (cp.PastPass == cp.NewPass)
+                {
+                    ModelState.AddModelError("NewPass", "Yêu cầu nhập mật khẩu khác");
+                }
+                else if (cp.PastPass == acc.PasswordHash)
+                {
+                    acc.PasswordHash = cp.NewPass;
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                ModelState.AddModelError("PastPass", "Nhập sai mật khẩu cũ");
+            }
+            return View(cp);
         }
 
         [HttpGet]
@@ -85,6 +184,10 @@ namespace YourHouse.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            if (IsLogin && Role != 1)
+            {
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
@@ -94,13 +197,13 @@ namespace YourHouse.Controllers
             nAcc.RoleId = 3;
             ModelState.Remove("Role");
             ModelState.Remove("ImageUser");
-            foreach (var error in ModelState)
-            {
-                foreach (var subError in error.Value.Errors)
-                {
-                    Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
-                }
-            }
+            //foreach (var error in ModelState)
+            //{
+            //    foreach (var subError in error.Value.Errors)
+            //    {
+            //        Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
+            //    }
+            //}
             if (ModelState.IsValid)
             {
                 bool emailExists = _context.Accounts.Any(a => a.Email == nAcc.Email);

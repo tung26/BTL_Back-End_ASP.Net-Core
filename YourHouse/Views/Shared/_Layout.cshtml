@@ -50,7 +50,7 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" asp-controller="MyArticle" asp-action="Index">Quản lý tin</a></li>
-                                        <li><a class="dropdown-item" href="#scrollspyHeading4">Tài khoản</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Account" asp-action="Index" asp-route-id="@ViewBag.IdUser">Tài khoản</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item text-danger" asp-controller="Account" asp-action="Logout">Logout</a></li>
                                     </ul>
@@ -90,9 +90,26 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+    @* <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script> *@
+    @* <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script> *@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    // <script>
+    //     $(document).ready(function() {
+    //         $.validator.setDefaults({
+    //             onkeyup: false,
+    //             onfocusout: false,
+    //             onchange: false
+    //         });
+
+    //         Reset lại validator cho tất cả form
+    //         $('form').each(function() {
+    //             var form = $(this);
+    //             form.removeData('validator');
+    //             form.removeData('unobtrusiveValidation');
+    //             $.validator.unobtrusive.parse(form);
+    //         });
+    //     });
+    // </script>
 </body>
 </html>

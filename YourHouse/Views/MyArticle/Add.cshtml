@@ -120,23 +120,23 @@
 				.then(response => response.text())
 				.then(partial => {
 					renderPartial.innerHTML = partial;
-					initValidation();
+					// initValidation();
 				});
 		}
 
-		function initValidation() {
+		// function initValidation() {
 
-			$.validator.setDefaults({
-				onkeyup: false,
-				onfocusout: false,
-				onchange: false
-			});
+		// 	$.validator.setDefaults({
+		// 		onkeyup: false,
+		// 		onfocusout: false,
+		// 		onchange: false
+		// 	});
 
-			var form = $('form');
-			form.removeData('validator');
-			form.removeData('unobtrusiveValidation');
-			$.validator.unobtrusive.parse(form);
-		}
+		// 	var form = $('form');
+		// 	form.removeData('validator');
+		// 	form.removeData('unobtrusiveValidation');
+		// 	$.validator.unobtrusive.parse(form);
+		// }
 
 		selectCity();
 		loadPartialView(optionTypeElement.value);

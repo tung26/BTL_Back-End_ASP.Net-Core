@@ -2357,6 +2357,30 @@
             "rid": "win"
           }
         }
+      },
+      "YourHouse.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/YourHouse.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/YourHouse.Domain.dll": {}
+        }
+      },
+      "YourHouse.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "9.0.6",
+          "YourHouse.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/YourHouse.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/YourHouse.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -7413,6 +7437,16 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "YourHouse.Domain/1.0.0": {
+      "type": "project",
+      "path": "../YourHouse.Domain/YourHouse.Domain.csproj",
+      "msbuildProject": "../YourHouse.Domain/YourHouse.Domain.csproj"
+    },
+    "YourHouse.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../YourHouse.Infrastructure/YourHouse.Infrastructure.csproj",
+      "msbuildProject": "../YourHouse.Infrastructure/YourHouse.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7420,7 +7454,8 @@
       "CloudinaryDotNet >= 1.27.5",
       "Microsoft.EntityFrameworkCore >= 9.0.5",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.5",
-      "Microsoft.EntityFrameworkCore.Tools >= 9.0.5"
+      "Microsoft.EntityFrameworkCore.Tools >= 9.0.5",
+      "YourHouse.Infrastructure >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -7455,7 +7490,11 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse.Infrastructure\\YourHouse.Infrastructure.csproj": {
+              "projectPath": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse.Infrastructure\\YourHouse.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -7515,5 +7554,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Warning As Error: Detected package downgrade: Microsoft.EntityFrameworkCore.SqlServer from 9.0.6 to 9.0.5. Reference the package directly from the project to select a different version. \r\n YourHouse -> YourHouse.Infrastructure -> Microsoft.EntityFrameworkCore.SqlServer (>= 9.0.6) \r\n YourHouse -> Microsoft.EntityFrameworkCore.SqlServer (>= 9.0.5)",
+      "libraryId": "Microsoft.EntityFrameworkCore.SqlServer",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }
