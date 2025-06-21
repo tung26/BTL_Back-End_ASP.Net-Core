@@ -1,16 +1,16 @@
-﻿@model YourHouse.Web.Models.Entities.Article;
+﻿@model YourHouse.Application.DTOs.ArticleDto;
 
 @{
 	ViewData["Title"] = "Details";
-	var accAuthor = Model.Account;
-	var comments = Model.Comments.ToList();
+	var accAuthor = ViewBag.Acc;
+	// var comments = Model.Comments.ToList();
 }
 
 <div class="row">
 	<div class="col-8">
 		<div class="container-fluid info_article">
 			<div class="col">
-				<img style="width: 100%;" src="@Model.ImagesArticles.ToList()[0].ImageArticle" />
+				@* <img style="width: 100%;" src="@Model.ImagesArticles.ToList()[0].ImageArticle" /> *@
 			</div>
 			<div class="col">
 
@@ -20,7 +20,7 @@
 				<p>Thời gian: @Model.CreateAt</p>
 				<p>Tiêu đề: @Model.Title</p>
 				<p>Chi tiết: @Model.DescAr</p>
-				<p>@Model.CityArNavigation.CityName - @Model.DistrictArNavigation.DistrictName</p>
+				<p>@ViewBag.City - @ViewBag.District</p>
 				<p>Địa chỉ chi tiết: @Model.Addr</p>
 				<p>Diện tích: @Model.S</p>
 				<p>Giá thuê: @Model.Price</p>

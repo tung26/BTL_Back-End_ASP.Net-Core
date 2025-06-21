@@ -5,9 +5,9 @@ using YourHouse.Web.Infrastructure;
 
 namespace YourHouse.Web.Infrastructure.Data;
 
-public partial class YourHouse.WebDbContext : DbContext
+public partial class YourHousebContext : DbContext
 {
-    public YourHouse.WebDbContext(DbContextOptions<YourHouse.WebDbContext> options)
+    public YourHousebContext(DbContextOptions<YourHousebContext> options)
         : base(options)
     {
     }

@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Repository\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\YourHouse.Domain\YourHouse.Domain.csproj" />
-    <ProjectReference Include="..\YourHouse.Web.Domain\YourHouse.Web.Domain.csproj" />
   </ItemGroup>
 
 </Project>

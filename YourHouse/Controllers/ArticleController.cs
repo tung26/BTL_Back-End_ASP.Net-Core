@@ -1,50 +1,66 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using YourHouse.Application.DTOs;
+using YourHouse.Application.Interfaces;
+using YourHouse.Application.Services;
+using YourHouse.Web.Infrastructure;
+using YourHouse.Web.Infrastructure.Data;
 using YourHouse.Web.Models;
-using YourHouse.Web.Models.Entities;
+
 
 namespace YourHouse.Web.Controllers
 {
     public class ArticleController : BaseController
     {
         //private readonly YourHouseContext _context;
+        private readonly IArticleService _articleService;
+        private readonly ICityService _cityService;
+        private readonly IDistrictService _districtService;
+        private readonly IAccountService _accountService;
 
-        public ArticleController(YourHouseContext context) : base(context) { }
-
-        public IActionResult Index()
+        public ArticleController(IArticleService articleService, IDistrictService districtService, ICityService cityService, IAccountService accountService)
         {
-            ViewData["City"] = _context.Cities.ToList();
-            ViewData["District"] = _context.Districts.Select(d => new District { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
-            var articleList = _context.Articles.Select(e => e).ToList();
-            return View(articleList);
+            _articleService = articleService;
+            _cityService = cityService;
+            _districtService = districtService;
+            _accountService = accountService;
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Index()
         {
-            var article = _context.Articles
-                .Include(a => a.Tro)
-                .Include(a => a.ChungCu)
-                .Include(a => a.House)
-                .Include(a => a.Office)
-                .Include(a => a.ImagesArticles)
-                .Include(a => a.Account)
-                .Include(a => a.CityArNavigation)
-                .Include(a => a.DistrictArNavigation)
-                .Include(a => a.Comments)
-                .FirstOrDefault(a => a.ArticleId == id);
+            ViewData["City"] = (await _cityService.GetAllCityAsync()).ToList();
+            ViewData["District"] = (await _districtService.GetAllDistrictAsync()).Select(d => new DistrictDto { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
+            //var articleList = _articleService.GetAllArticleAsync();
 
-            if (article == null)
-            {
-                return NotFound();
-            }
+            return View();
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var article = await _articleService.GetArticleByIdAsync(id);
+
+            //if (article == null)
+            //{
+            //    return NotFound();
+            //}
+
+            var acc = await _accountService.GetAccountByIdAsync(article.AccountId);
+            var city = (await _cityService.GetCityByIdAsync(article.CityAr)).CityName;
+            var district = (await _districtService.GetDistrictByIdAsync(article.DistrictAr)).DistrictName;
+
+            ViewBag.Acc = acc;
+            ViewBag.City = city;
+            ViewBag.District = district;
+
+            //return View();
 
             return View(article);
         }
 
-        public IActionResult Filters(string type, int city, int district, decimal? min, decimal? max)
+        public async Task<IActionResult> Filters(string type, int city, int district, decimal? min, decimal? max)
         {
-            var result = _context.Articles
-                .Include(a => a.ImagesArticles).AsQueryable();
+            var result = await _articleService.GetAllArticleAsync();
 
             if (type != "All")
             {

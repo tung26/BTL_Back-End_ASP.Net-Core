@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using YourHouse.Web.Models.Entities;
+using YourHouse.Application.DTOs;
+
 
 namespace YourHouse.Web.Models
 {
-    public class RegisterAccount : Account
+    public class RegisterAccount : AccountDto
     {
         [Required(ErrorMessage = "yêu cầu nhập lại password")]
         [Compare("PasswordHash", ErrorMessage = "Nhập lại không đúng")]

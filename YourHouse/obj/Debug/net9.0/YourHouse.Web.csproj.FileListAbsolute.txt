@@ -234,3 +234,9 @@ D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debu
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\YourHouse.Web.pdb
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\YourHouse.Web.genruntimeconfig.cache
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\ref\YourHouse.Web.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\bin\Debug\net9.0\YourHouse.Application.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\bin\Debug\net9.0\YourHouse.Domain.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\bin\Debug\net9.0\YourHouse.Infrastructure.dll
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\bin\Debug\net9.0\YourHouse.Application.pdb
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\bin\Debug\net9.0\YourHouse.Infrastructure.pdb
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\bin\Debug\net9.0\YourHouse.Domain.pdb

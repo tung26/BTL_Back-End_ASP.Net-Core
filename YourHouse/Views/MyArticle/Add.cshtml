@@ -2,8 +2,8 @@
 @using System.Text.Json
 @{
 	ViewData["Title"] = "Add article";
-	var cityList = ViewData["City"] as List<YourHouse.Web.Models.Entities.City>;
-	var districtList = ViewData["District"] as List<YourHouse.Web.Models.Entities.District>;
+	var cityList = ViewData["City"] as List<YourHouse.Application.DTOs.CityDto>;
+	var districtList = ViewData["District"] as List<YourHouse.Application.DTOs.DistrictDto>;
 }
 
 <div class="container">

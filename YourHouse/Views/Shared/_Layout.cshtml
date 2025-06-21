@@ -77,6 +77,7 @@
             </div>
         </nav>
     </header>
+    
     <div class="container" style="margin-top: 64px;">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -94,7 +95,7 @@
     @* <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script> *@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-    // <script>
+    <script>
     //     $(document).ready(function() {
     //         $.validator.setDefaults({
     //             onkeyup: false,
@@ -110,6 +111,6 @@
     //             $.validator.unobtrusive.parse(form);
     //         });
     //     });
-    // </script>
+    </script>
 </body>
 </html>

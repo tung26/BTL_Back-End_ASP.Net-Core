@@ -1,44 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using YourHouse.Web.Models.Entities;
+using YourHouse.Web.Infrastructure.Data;
+
 
 namespace YourHouse.Web.Controllers
 {
     public class BaseController : Controller
     {
-        protected readonly YourHouseContext _context;
         protected int IdUser { get; set; }
         protected bool IsLogin { get; set; } = false;
         protected int Role { get; set; }
-
-        public BaseController(YourHouseContext context)
-        {
-            _context = context;
-        }
+        protected string FullName { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var id = HttpContext.Session.GetInt32("id");
+            var role = HttpContext.Session.GetInt32("role");
+            var fullName = HttpContext.Session.GetString("fullName");
 
             if (id.HasValue)
             {
-                var user = _context.Accounts.FirstOrDefault(u => id.Value == u.AccountId);
+                this.IdUser = (int)id;
+                this.Role = (int)role;
+                this.IsLogin = true;
+                this.FullName = fullName;
 
-                if (user == null)
-                {
-                    ViewBag.IsLogin = false;
-                }
-                else
-                {
-                    this.IdUser = user.AccountId;
-                    this.Role = user.RoleId;
-                    this.IsLogin = true;
-
-                    ViewBag.IsLogin = IsLogin;
-                    ViewBag.UserName = user.FullName;
-                    ViewBag.IdUser = IdUser;
-                    ViewBag.RoleId = Role;
-                }
+                ViewBag.IsLogin = this.IsLogin;
+                ViewBag.UserName = this.FullName;
+                ViewBag.IdUser = this.IdUser;
+                ViewBag.RoleId = this.Role;
             }
             else
             {

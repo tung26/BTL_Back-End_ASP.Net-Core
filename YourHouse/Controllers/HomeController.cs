@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using YourHouse.Web.Models;
-using YourHouse.Web.Models.Entities;
+
 
 namespace YourHouse.Web.Controllers
 {
@@ -9,7 +9,7 @@ namespace YourHouse.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, YourHouseContext context) : base(context)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }

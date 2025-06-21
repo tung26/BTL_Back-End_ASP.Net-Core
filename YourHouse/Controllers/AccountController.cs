@@ -1,87 +1,70 @@
 ﻿using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using YourHouse.Web.Infrastructure.Data;
 using YourHouse.Web.Models;
-using YourHouse.Web.Models.Entities;
+using YourHouse.Application.Interfaces;
+using System.Threading.Tasks;
+using YourHouse.Application.DTOs;
+using YourHouse.Web.Infrastructure;
 
 namespace YourHouse.Web.Controllers
 {
 
     public class AccountController : BaseController
     {
-        //private readonly YourHouseContext _context;
-        //private int IdUser { get; set; }
-        //private int Role { get; set; }
+        private readonly IAccountService _accountService;
 
-
-        public AccountController(YourHouseContext context) : base(context) { }
-
-        //public bool IsLogin
-        //{
-        //    var id = HttpContext.Session.GetInt32("id");
-
-        //    if (!id.HasValue)
-        //    {
-        //        ViewBag.IsLogin = false;
-        //        return false;
-        //    }
-
-        //    var user = _context.Accounts.FirstOrDefault(u => id.Value == u.AccountId);
-
-        //    if (user == null)
-        //    {
-        //        ViewBag.IsLogin = false;
-        //        return false;
-        //    }
-
-        //    this.IdUser = user.AccountId;
-        //    this.Role = user.RoleId;
-
-        //    ViewBag.IsLogin = true;
-        //    ViewBag.UserName = user.FullName;
-
-        //    return true;
-        //}
-        public IActionResult Index(int id)
+        public AccountController(IAccountService accountService)
         {
-            var user = _context.Accounts.FirstOrDefault(u => u.AccountId == id);
+            _accountService = accountService;
+        }
+
+        public async Task<IActionResult> Index(int id)
+        {
+            var user = await _accountService.GetAccountByIdAsync(id);
 
             if (user == null)
             {
-                if(this.IdUser != 0)
-                {
-                    user = _context.Accounts.FirstOrDefault(u => u.AccountId == this.IdUser);
-                }
-                else
-                {
+                //if (this.IdUser != 0)
+                //{
+                //    user = _accountService.GetAccountByIdAsync(u => u.AccountId == this.IdUser);
+                //}
+                //else
+                //{
                     return RedirectToAction("Login");
-                }
+                //}
             }
 
             return View(user);
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id != this.IdUser || this.IdUser == 0)
+            //if (id != this.IdUser || this.IdUser == 0)
+            //{
+            //    if(this.IdUser != 0)
+            //    {
+            //        return RedirectToAction("Index");
+            //    }
+            //    return RedirectToAction("Login");
+            //}
+
+            var user = await _accountService.GetAccountByIdAsync(id);
+
+            if (user == null)
             {
-                if(this.IdUser != 0)
-                {
-                    return RedirectToAction("Index");
-                }
                 return RedirectToAction("Login");
             }
-
-            var user = _context.Accounts.FirstOrDefault(u => u.AccountId == id);
 
             return View(user);
         }
 
         [HttpPost]
-        public IActionResult Edit([FromForm] Account acc)
+        public async Task<IActionResult> Edit([FromForm] AccountDto acc)
         {
-            var accChange = _context.Accounts.FirstOrDefault(a => a.AccountId == acc.AccountId);
+            var accChange = await _accountService.GetAccountByIdAsync(acc.AccountId);
             //acc.Phone = accChange.Phone;
             ModelState.Remove("Role");
             ModelState.Remove("Phone");
@@ -98,7 +81,7 @@ namespace YourHouse.Web.Controllers
                 accChange.FullName = acc.FullName;
                 accChange.Email = acc.Email;
                 accChange.ImageUser = acc.ImageUser;
-                _context.SaveChanges();
+                _accountService.UpdateAccount(accChange);
                 return RedirectToAction("Index");
             }
             
@@ -106,7 +89,7 @@ namespace YourHouse.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ChangePassword(int? id)
+        public async Task<IActionResult> ChangePassword(int id)
         {
             //foreach (var error in ModelState)
             //{
@@ -115,23 +98,25 @@ namespace YourHouse.Web.Controllers
             //        Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
             //    }
             //}
-            if (this.IdUser == 0 || this.IdUser != id)
+            var user = await _accountService.GetAccountByIdAsync(id);
+
+            if (user == null)
             {
                 return RedirectToAction("Login");
             }
-            
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult ChangePassword([FromForm] ChangePassword cp)
+        public async Task<IActionResult> ChangePassword([FromForm] ChangePassword cp)
         {
             if (this.IdUser == 0)
             {
                 return RedirectToAction("Login");
             }
 
-            var acc = _context.Accounts.FirstOrDefault(a => a.AccountId == cp.Id);
+            var acc = await _accountService.GetAccountByIdAsync(cp.Id);
             if (ModelState.IsValid && acc != null)
             {
                 if (cp.PastPass == cp.NewPass)
@@ -141,7 +126,7 @@ namespace YourHouse.Web.Controllers
                 else if (cp.PastPass == acc.PasswordHash)
                 {
                     acc.PasswordHash = cp.NewPass;
-                    _context.SaveChanges();
+                    _accountService.UpdateAccount(acc);
                     return RedirectToAction("Index");
                 }
 
@@ -161,15 +146,17 @@ namespace YourHouse.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromForm] LoginAccount acc)
+        public async Task<IActionResult> Login([FromForm] LoginAccount acc)
         {
             if (ModelState.IsValid)
             {
-                bool IsAvbacc = _context.Accounts.Any(b => b.Email == acc.Email && b.PasswordHash == acc.Password);
-                if(IsAvbacc)
+                bool IsAvbacc = await _accountService.IsValidAccount(email: acc.Email, password: acc.Password);
+                if (IsAvbacc)
                 {
-                    var user = _context.Accounts.Where(b => b.Email == acc.Email && b.PasswordHash == acc.Password).FirstOrDefault();
+                    var user = await _accountService.GetAccountByEmailAsync(acc.Email);
                     HttpContext.Session.SetInt32("id", user.AccountId);
+                    HttpContext.Session.SetInt32("role", user.RoleId);
+                    HttpContext.Session.SetString("fullName", user.FullName);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -192,7 +179,7 @@ namespace YourHouse.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register([FromForm] RegisterAccount nAcc)
+        public async Task<IActionResult> Register([FromForm] RegisterAccount nAcc)
         {
             nAcc.RoleId = 3;
             ModelState.Remove("Role");
@@ -206,8 +193,9 @@ namespace YourHouse.Web.Controllers
             //}
             if (ModelState.IsValid)
             {
-                bool emailExists = _context.Accounts.Any(a => a.Email == nAcc.Email);
-                bool phoneExists = _context.Accounts.Any(a => a.Phone == nAcc.Phone);
+                var accounts = await _accountService.GetAllAccountAsync();
+                bool emailExists = accounts.Any(accounts => accounts.Email == nAcc.Email);
+                bool phoneExists = accounts.Any(accounts=> accounts.Phone == nAcc.Phone);
                 bool success = true;
                 if (emailExists)
                 {
@@ -224,7 +212,7 @@ namespace YourHouse.Web.Controllers
                 {
                     return View(nAcc);
                 }
-                Account account = new Account()
+                AccountDto account = new AccountDto()
                 {
                     FullName = nAcc.FullName,
                     Email = nAcc.Email,
@@ -232,8 +220,8 @@ namespace YourHouse.Web.Controllers
                     PasswordHash = nAcc.PasswordHash,
                     RoleId = nAcc.RoleId,
                 };
-                _context.Accounts.Add(account);
-                _context.SaveChanges();
+
+                await _accountService.AddAccountAsync(account);
                 return RedirectToAction("Login");
             }
 

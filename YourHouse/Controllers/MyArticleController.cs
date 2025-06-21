@@ -1,66 +1,78 @@
 ﻿using System.Reflection.PortableExecutable;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using YourHouse.Application.DTOs;
+using YourHouse.Application.Interfaces;
+using YourHouse.Web.Infrastructure.Data;
 using YourHouse.Web.Models;
-using YourHouse.Web.Models.Entities;
+
 
 namespace YourHouse.Web.Controllers
 {
     public class MyArticleController : BaseController
     {
-
-        public MyArticleController(YourHouseContext context) : base(context)
+        private readonly IArticleService _articleService;
+        private readonly ICityService _cityService;
+        private readonly IDistrictService _districtService;
+        public MyArticleController(IArticleService articleService, IDistrictService districtService, ICityService cityService)
         {
-            
+            _articleService = articleService;
+            _cityService = cityService;
+            _districtService = districtService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (!IsLogin)
             {
                 return RedirectToAction("Login", "Account");
             }
-            
-            var articleList = _context.Articles.Where(a => a.AccountId == this.IdUser).Select(a => new
+
+            var articleList = await _articleService.GetAllArticleAsync();
+            var cities = await _cityService.GetAllCityAsync();
+            var districtes = await _districtService.GetAllDistrictAsync();
+
+            var articleListUser = articleList.Where(a => a.AccountId == this.IdUser).Select(a => new
             {
                 a.ArticleId,
                 a.Title,
-                city = _context.Cities.FirstOrDefault(c => c.CityId == a.CityAr).CityName,
-                district = _context.Districts.FirstOrDefault(c => c.DistrictId == a.DistrictAr).DistrictName,
+                city = cities.Where(e => e.CityId == a.CityAr).FirstOrDefault().CityName,
+                district = districtes.Where(e => e.DistrictId == a.DistrictAr).FirstOrDefault().DistrictName,
                 a.S,
                 a.Price,
                 a.CreateAt
-            }).OrderByDescending(a => a.CreateAt).ToList();
+            });
 
-            ViewData["articleList"] = articleList;
+            ViewData["articleList"] = articleListUser.OrderByDescending(a => a.CreateAt).ToList();
 
             return View();
         }
 
         [HttpGet]
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
             if (!IsLogin)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            ViewData["City"] = _context.Cities.ToList();
-            ViewData["District"] = _context.Districts.Select(d => new District { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
+            ViewData["City"] = (await _cityService.GetAllCityAsync()).ToList();
+            ViewData["District"] = (await _districtService.GetAllDistrictAsync()).Select(d => new DistrictDto { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add([FromForm] ModelAddArticle art)
+        public async Task<IActionResult> Add([FromForm] ModelAddArticle art)
         {
             if (!IsLogin)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            ViewData["City"] = _context.Cities.ToList();
-            ViewData["District"] = _context.Districts.Select(d => new District { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
+            ViewData["City"] = (await _cityService.GetAllCityAsync()).ToList();
+            ViewData["District"] = (await _districtService.GetAllDistrictAsync()).Select(d => new DistrictDto { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
             art.Status = 1;
             ModelState.Remove("Status");
             if (art.Type == "ChungCu")
@@ -102,12 +114,13 @@ namespace YourHouse.Web.Controllers
             //}
             if (ModelState.IsValid)
             {
-                ImagesArticle imagesArticle = new ImagesArticle()
+                ImagesArticleDto imagesArticle = new ImagesArticleDto()
                 {
                     ImageArticle = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq8aVvwt226C1Kx4QqQzL5IibUHcRbb1XCtw&s",
                 };
 
-                Article article = new Article()
+                List<ImagesArticleDto> imagesArticleDtos = new() { imagesArticle };
+                ArticleDto article = new ArticleDto()
                 {
                     AccountId = this.IdUser,
                     Title = art.Title,
@@ -119,12 +132,12 @@ namespace YourHouse.Web.Controllers
                     Price = (decimal)art.Price,
                     TienCoc = (decimal)art.TienCoc,
                     TypeAr = art.Type,
-                    ImagesArticles = new List<ImagesArticle>() { imagesArticle }
+                    ImagesArticles = imagesArticleDtos
                 };
 
                 if (art.Type == "ChungCu")
                 {
-                    ChungCu chungCu = new ChungCu()
+                    ChungCuDto chungCu = new ChungCuDto()
                     {
                         Floor = (int)art.Floor,
                         BedRoom = (int)art.BedRoom,
@@ -132,49 +145,43 @@ namespace YourHouse.Web.Controllers
                         MaxPerson = (int)art.MaxPerson,
                         WaterPrice = (int)art.WaterPrice,
                         ElectricPrice = (int)art.ElectricPrice,
-                        Article = article,
                     };
-                    _context.ChungCus.Add(chungCu);
-                    _context.SaveChanges();
+                    article.ChungCu = chungCu;
+
 
                 }
                 else if (art.Type == "Office")
                 {
-                    Office office = new Office()
+                    OfficeDto office = new OfficeDto()
                     {
                         Floor = (int)art.Floor,
                         DoorDrt = (int)art.DoorDrt,
-                        Article = article,
                     };
-                    _context.Offices.Add(office);
-                    _context.SaveChanges();
+                    article.Office = office;
                 }
                 else if (art.Type == "Tro")
                 {
-                    Tro tro = new Tro()
+                    TroDto tro = new TroDto()
                     {
                         Floor = (int)art.Floor,
                         MaxPerson = (int)art.MaxPerson,
                         WaterPrice= (int)art.WaterPrice,
                         ElectricPrice= (int)art.ElectricPrice,
-                        Article = article,
                     };
-                    _context.Tros.Add(tro);
-                    _context.SaveChanges();
+                    article.Tro = tro;
                 }
                 else if (art.Type == "House")
                 {
-                    House house = new House()
+                    HouseDto house = new HouseDto()
                     {
                         Floors = (int)art.Floors,
                         BathRoom = (int)art.BathRoom,
                         BedRoom = (int)art.BedRoom,
-                        Article = article,
                     };
-                    
-                    _context.Houses.Add(house);
-                    _context.SaveChanges();
+                    article.House = house;
                 }
+
+                _articleService.AddArticleAsync(article);
 
                 return RedirectToAction("Index", "Home");
             }
@@ -182,7 +189,7 @@ namespace YourHouse.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (!IsLogin)
             {
@@ -190,32 +197,29 @@ namespace YourHouse.Web.Controllers
             }
 
             ViewData["id"] = id;
-            ViewData["City"] = _context.Cities.ToList();
-            ViewData["District"] = _context.Districts.Select(d => new District { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
+            ViewData["City"] = (await _cityService.GetAllCityAsync()).ToList();
+            ViewData["District"] = (await _districtService.GetAllDistrictAsync()).Select(d => new DistrictDto { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
 
             ModelAddArticle modelArticle = new ModelAddArticle();
 
-            var art = _context.Articles.Where(a => a.ArticleId == id && a.AccountId == this.IdUser).FirstOrDefault();
+            var art = (await _articleService.GetArticleByIdAsync(id));
 
-            if (art == null)
+            if (art == null || art.AccountId != this.IdUser)
             {
                 return RedirectToAction("Index");
             }
 
-            var tro = _context.Tros.Where(a => a.ArticleId == id).FirstOrDefault();
-            var chungCu = _context.ChungCus.Where(a => a.ArticleId == id).FirstOrDefault();
-            var house = _context.Houses.Where(a => a.ArticleId == id).FirstOrDefault();
-            var office = _context.Offices.Where(a => a.ArticleId == id).FirstOrDefault();
-
-            if(tro != null)
+            if(art.TypeAr == "Tro")
             {
+                var tro = art.Tro;
                 modelArticle.Floor = tro.Floor;
                 modelArticle.MaxPerson = tro.MaxPerson;
-                modelArticle.WaterPrice = (double)tro.WaterPrice;
+                modelArticle.WaterPrice = (double)tro.WaterPrice; 
                 modelArticle.ElectricPrice = (double)tro.ElectricPrice;
             }
-            else if(chungCu != null)
+            else if(art.TypeAr == "ChungCu")
             {
+                var chungCu = art.ChungCu;
                 modelArticle.BedRoom = chungCu.BedRoom; 
                 modelArticle.BathRoom = chungCu.BathRoom;
                 modelArticle.Floor = chungCu.Floor;
@@ -223,14 +227,17 @@ namespace YourHouse.Web.Controllers
                 modelArticle.WaterPrice = (double)chungCu.WaterPrice;
                 modelArticle.ElectricPrice = (double)chungCu.ElectricPrice;
             }
-            else if (house != null)
+            else if (art.TypeAr == "House")
             {
+                
+                var house = art.House;
                 modelArticle.BedRoom = house.BedRoom;
                 modelArticle.BathRoom = house.BathRoom;
                 modelArticle.Floors = house.Floors;
             }
-            else if(office != null)
+            else if(art.TypeAr == "Office")
             {
+                var office = art.Office;
                 modelArticle.Floor = office.Floor;
                 modelArticle.DoorDrt = office.DoorDrt;
             }
@@ -249,11 +256,11 @@ namespace YourHouse.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit([FromForm]int id, [FromForm] ModelAddArticle art)
+        public async Task<IActionResult> Edit([FromForm]int id, [FromForm] ModelAddArticle art)
         {
-            ViewData["City"] = _context.Cities.ToList();
-            ViewData["District"] = _context.Districts.Select(d => new District { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
-            
+            ViewData["City"] = (await _cityService.GetAllCityAsync()).ToList();
+            ViewData["District"] = (await _districtService.GetAllDistrictAsync()).Select(d => new DistrictDto { DistrictId = d.DistrictId, DistrictName = d.DistrictName, CityId = d.CityId }).ToList();
+
             ModelState.Remove("Status");
             if (art.Type == "ChungCu")
             {
@@ -286,7 +293,8 @@ namespace YourHouse.Web.Controllers
                 ModelState.Remove("ElectricPrice");
             }
 
-            var article = _context.Articles.FirstOrDefault(a => a.ArticleId == id);
+            var article = await _articleService.GetArticleByIdAsync(id);
+
             article.Title = art.Title;
             article.DescAr = art.Desc;
             article.Addr = art.Address;
@@ -300,7 +308,7 @@ namespace YourHouse.Web.Controllers
             switch (art.Type)
             {
                 case "Tro":
-                    var tro = _context.Tros.FirstOrDefault(t => t.ArticleId == id);
+                    var tro = article.Tro;
                     if (tro != null)
                     {
                         tro.Floor = (int)art.Floor;
@@ -310,7 +318,7 @@ namespace YourHouse.Web.Controllers
                     }
                     break;
                 case "ChungCu":
-                    var cc = _context.ChungCus.FirstOrDefault(t => t.ArticleId == id);
+                    var cc = article.ChungCu;
                     if (cc != null)
                     {
                         cc.Floor = (int)art.Floor;
@@ -322,7 +330,7 @@ namespace YourHouse.Web.Controllers
                     }
                     break;
                 case "House":
-                    var house = _context.Houses.FirstOrDefault(h => h.ArticleId == id);
+                    var house = article.House;
                     if (house != null)
                     {
                         house.Floors = (int)art.Floors;
@@ -331,7 +339,7 @@ namespace YourHouse.Web.Controllers
                     }
                     break;
                 case "Office":
-                    var office = _context.Offices.FirstOrDefault(o => o.ArticleId == id);
+                    var office = article.Office;
                     if (office != null)
                     {
                         office.Floor = art.Floor ?? 0;
@@ -339,55 +347,29 @@ namespace YourHouse.Web.Controllers
                     }
                     break;
             }
-            _context.SaveChanges();
+
+            _articleService.UpdateArticle(article);
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (!IsLogin)
             {
                 return RedirectToAction("Login", "Account");
             }
 
-            var art = _context.Articles
-                .Include(a => a.Tro)
-                .Include(a => a.ChungCu)
-                .Include(a => a.Office)
-                .Include(a => a.House)
-                .Include(a => a.ImagesArticles)
-                .Where(a => a.ArticleId == id && a.AccountId == this.IdUser).FirstOrDefault();
+            var art = await _articleService.GetArticleByIdAsync(id);
 
             if (art == null)
             {
                 return RedirectToAction("Index");
             }
 
-            if (art.Tro != null)
-            {
-                _context.Tros.Remove(art.Tro);
-            }
-            if (art.ChungCu != null)
-            {
-                _context.ChungCus.Remove(art.ChungCu);
-            }
-            if (art.Office != null)
-            {
-                _context.Offices.Remove(art.Office);
-            }
-            if (art.House != null)
-            {
-                _context.Houses.Remove(art.House);
-            }
-            if (art.ImagesArticles != null && art.ImagesArticles.Any())
-            {
-                _context.ImagesArticles.RemoveRange(art.ImagesArticles);
-            }
             if (art != null)
             {
-                _context.Articles.Remove(art);
-                _context.SaveChanges();
+                _articleService.DeleteArticleAsync(id);
             }
             else
             {
