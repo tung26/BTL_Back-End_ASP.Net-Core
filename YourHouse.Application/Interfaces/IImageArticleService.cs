@@ -13,7 +13,7 @@ namespace YourHouse.Application.Interfaces
         Task<ImagesArticle?> GetImageArticleByIdAsync(int id);
         Task<IEnumerable<ImagesArticleDto>> GetAllImageArticleAsync();
         Task AddImageArticleAsync(ImagesArticleDto ImageArticleDto);
-        void UpdateImageArticle(ImagesArticle ImageArticle);
-        void DeleteImageArticleAsync(int id);
+        Task UpdateImageArticle(ImagesArticle ImageArticle);
+        Task DeleteImageArticleAsync(int id);
     }
 }

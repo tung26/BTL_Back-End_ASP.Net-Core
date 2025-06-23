@@ -181,6 +181,8 @@
                 let html = '';
                 articles = articles.reverse();
                 articles.forEach(article => {
+                    // <img src="${article.imagesArticles[0].imageArticle}" class="img-fluid rounded-start" alt="...">
+                    // console.log(article)
                     html += `
                         <a href="/Article/Details/${article.articleId}" class="text-dark nav-link">
                             <div class="card mb-3 d-flex" style="min-width: 863px;">

@@ -7,7 +7,7 @@ namespace YourHouse.Web.Controllers
 {
     public class BaseController : Controller
     {
-        protected int IdUser { get; set; }
+        protected int? IdUser { get; set; }
         protected bool IsLogin { get; set; } = false;
         protected int Role { get; set; }
         protected string FullName { get; set; }

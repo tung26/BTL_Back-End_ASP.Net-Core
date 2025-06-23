@@ -26,14 +26,15 @@ namespace YourHouse.Web.Controllers
 
             if (user == null)
             {
-                //if (this.IdUser != 0)
-                //{
-                //    user = _accountService.GetAccountByIdAsync(u => u.AccountId == this.IdUser);
-                //}
-                //else
-                //{
+                if (this.IdUser != null)
+                {
+                    user = await _accountService.GetAccountByIdAsync((int)this.IdUser);
                     return RedirectToAction("Login");
-                //}
+                }
+                else
+                {
+                    return RedirectToAction("Login");
+                }
             }
 
             return View(user);
@@ -65,6 +66,21 @@ namespace YourHouse.Web.Controllers
         public async Task<IActionResult> Edit([FromForm] AccountDto acc)
         {
             var accChange = await _accountService.GetAccountByIdAsync(acc.AccountId);
+            var accounts = await _accountService.GetAllAccountAsync();
+
+            foreach(var account in accounts)
+            {
+                if (account.AccountId == accChange.AccountId) continue;
+                if(account.Email == acc.Email)
+                {
+                    ModelState.AddModelError("Email", "Email đã được đăng kí ở tài khoản khác.");
+                }
+                if(account.Phone == acc.Phone)
+                {
+                    ModelState.AddModelError("Phone", "Số điện thoại đã được đăng kí ở tài khoản khác.");
+                }
+            }
+
             //acc.Phone = accChange.Phone;
             ModelState.Remove("Role");
             ModelState.Remove("Phone");
@@ -78,11 +94,13 @@ namespace YourHouse.Web.Controllers
             //}
             if (ModelState.IsValid)
             {
+                accChange.AccountId = acc.AccountId;
                 accChange.FullName = acc.FullName;
                 accChange.Email = acc.Email;
                 accChange.ImageUser = acc.ImageUser;
-                _accountService.UpdateAccount(accChange);
-                return RedirectToAction("Index");
+                await _accountService.UpdateAccount(accChange);
+
+                return RedirectToAction("Index", new {id = this.IdUser});
             }
             
             return View(acc);
@@ -104,6 +122,10 @@ namespace YourHouse.Web.Controllers
             {
                 return RedirectToAction("Login");
             }
+            else if (id != this.IdUser)
+            {
+                return RedirectToAction("Index", new { id = this.IdUser });
+            }
 
             return View();
         }
@@ -111,7 +133,7 @@ namespace YourHouse.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangePassword([FromForm] ChangePassword cp)
         {
-            if (this.IdUser == 0)
+            if (this.IdUser == null)
             {
                 return RedirectToAction("Login");
             }
@@ -126,8 +148,8 @@ namespace YourHouse.Web.Controllers
                 else if (cp.PastPass == acc.PasswordHash)
                 {
                     acc.PasswordHash = cp.NewPass;
-                    _accountService.UpdateAccount(acc);
-                    return RedirectToAction("Index");
+                    await _accountService.UpdateAccount(acc);
+                    return RedirectToAction("Index", new {id = this.IdUser});
                 }
 
                 ModelState.AddModelError("PastPass", "Nhập sai mật khẩu cũ");

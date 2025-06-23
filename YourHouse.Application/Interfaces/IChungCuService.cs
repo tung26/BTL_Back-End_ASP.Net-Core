@@ -12,8 +12,8 @@ namespace YourHouse.Application.Interfaces
     {
         Task<ChungCuDto?> GetChungCuByIdAsync(int id);
         Task<IEnumerable<ChungCuDto>> GetAllChungCuAsync();
-        //Task AddChungCuAsync(ChungCuDto ChungCuDto);
-        Task UpdateChungCu(ChungCu chungCu);
+        Task AddChungCuAsync(ChungCuDto ChungCuDto);
+        Task UpdateChungCu(ChungCuDto chungCuDto);
         Task DeleteChungCuAsync(int id);
     }
 }

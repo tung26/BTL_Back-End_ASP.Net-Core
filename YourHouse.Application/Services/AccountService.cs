@@ -58,7 +58,8 @@ namespace YourHouse.Application.Services
                     PasswordHash = account.PasswordHash,
                     Email = account.Email,
                     Phone = account.Phone,
-                    RoleId = account.RoleId
+                    RoleId = account.RoleId,
+                    ImageUser = account.ImageUser
                 };
             //}
         }
@@ -77,7 +78,7 @@ namespace YourHouse.Application.Services
             });
         }
 
-        public async void UpdateAccount(AccountDto accountDto)
+        public async Task UpdateAccount(AccountDto accountDto)
         {
             var account = await _repository.GetByIdAsync(accountDto.AccountId);
 
@@ -86,8 +87,7 @@ namespace YourHouse.Application.Services
             account.Email = accountDto.Email;
             account.Phone = accountDto.Phone;
             account.RoleId = accountDto.RoleId;
-
-            Console.WriteLine(account.FullName);
+            account.ImageUser = accountDto.ImageUser;
 
             _repository.UpdateAsync(account);
             await _repository.SaveChangeAsync();

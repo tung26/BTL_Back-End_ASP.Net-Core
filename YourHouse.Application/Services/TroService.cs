@@ -19,13 +19,16 @@ namespace YourHouse.Application.Services
             _repository = repository;
         }
 
-        //public Task AddTroAsync(TroDto TroDto)
-        //{
-        //    var tro = new Tro()
-        //    {
+        public async Task AddTroAsync(TroDto TroDto)
+        {
+            var tro = new Tro()
+            {
 
-        //    };
-        //}
+            };
+
+            await _repository.AddAsync(tro);
+            await _repository.SaveChangeAsync();
+        }
 
         public async Task DeleteTroAsync(int id)
         {
@@ -66,8 +69,18 @@ namespace YourHouse.Application.Services
             };
         }
 
-        public async Task UpdateTro(Tro tro)
+        public async Task UpdateTro(TroDto troDto)
         {
+            var tro = await _repository.GetByIdAsync(troDto.ArticleId);
+
+            if (tro != null)
+            {
+                tro.Floor = troDto.Floor;
+                tro.MaxPerson = troDto.MaxPerson;
+                tro.WaterPrice = troDto.WaterPrice;
+                tro.ElectricPrice = troDto.ElectricPrice;
+            }
+
             _repository.UpdateAsync(tro);
             await _repository.SaveChangeAsync();
         }

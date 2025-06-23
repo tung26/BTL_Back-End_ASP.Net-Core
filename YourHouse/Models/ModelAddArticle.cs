@@ -13,11 +13,11 @@ namespace YourHouse.Web.Models
         public string Address { get; set; }
         public int? District { get; set; }
         [Required(ErrorMessage = "Yêu cầu nhập điện tích.")]
-        [Range(10.00, double.MaxValue, ErrorMessage = "Giá trị phải lớn hơn 10")]
+        [Range(10.00, 9999999999999999, ErrorMessage = "Giá trị phải lớn hơn 10")]
         public double? S { get; set; }
 
         [Required(ErrorMessage = "Yêu cầu nhập giá.")]
-        [Range(500000, double.MaxValue, ErrorMessage = "Giá trị phải lớn hơn 500000")]
+        [Range(500000, 9999999999999999, ErrorMessage = "Giá trị phải lớn hơn 500000")]
         public double? Price { get; set; }
         [Required(ErrorMessage = "Yêu cầu nhập tiền cọc.")]
         public double? TienCoc { get; set; }

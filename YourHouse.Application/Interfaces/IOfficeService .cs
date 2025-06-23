@@ -12,8 +12,8 @@ namespace YourHouse.Application.Interfaces
     {
         Task<OfficeDto?> GetOfficeByIdAsync(int id);
         Task<IEnumerable<OfficeDto>> GetAllOfficeAsync();
-        //Task AddOfficeAsync(OfficeDto OfficeDto);
-        Task UpdateOffice(Office office);
+        Task AddOfficeAsync(OfficeDto OfficeDto);
+        Task UpdateOffice(OfficeDto officeDto);
         Task DeleteOfficeAsync(int id);
     }
 }

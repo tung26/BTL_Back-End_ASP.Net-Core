@@ -30,7 +30,7 @@ namespace YourHouse.Application.Services
             await _repository.SaveChangeAsync();
         }
 
-        public async void DeleteImageArticleAsync(int id)
+        public async Task DeleteImageArticleAsync(int id)
         {
             var Image = await _repository.GetByIdAsync(id);
 
@@ -63,7 +63,7 @@ namespace YourHouse.Application.Services
             };
         }
 
-        public async void UpdateImageArticle(ImagesArticle ImageArticle)
+        public async Task UpdateImageArticle(ImagesArticle ImageArticle)
         {
             _repository.UpdateAsync(ImageArticle);
             await _repository.SaveChangeAsync();

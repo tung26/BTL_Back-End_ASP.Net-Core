@@ -1,10 +1,13 @@
 ﻿using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using YourHouse.Application.DTOs;
 using YourHouse.Application.Interfaces;
+using YourHouse.Application.Services;
+using YourHouse.Web.Infrastructure;
 using YourHouse.Web.Infrastructure.Data;
 using YourHouse.Web.Models;
 
@@ -14,13 +17,33 @@ namespace YourHouse.Web.Controllers
     public class MyArticleController : BaseController
     {
         private readonly IArticleService _articleService;
+        private readonly ITroService _troService;
+        private readonly IChungCuService _chungCuService;
+        private readonly IHouseService _houseService;
+        private readonly IOfficeService _officeService;
+        private readonly IImageArticleService _imageArticleService;
+
         private readonly ICityService _cityService;
         private readonly IDistrictService _districtService;
-        public MyArticleController(IArticleService articleService, IDistrictService districtService, ICityService cityService)
+
+        public MyArticleController(IArticleService articleService,
+            IDistrictService districtService,
+            ICityService cityService,
+            ITroService troService,
+            IChungCuService chungCuService,
+            IHouseService houseService,
+            IOfficeService officeService,
+            IImageArticleService imageArticleService
+            )
         {
             _articleService = articleService;
             _cityService = cityService;
             _districtService = districtService;
+            _troService = troService;
+            _chungCuService = chungCuService;
+            _houseService = houseService;
+            _officeService = officeService;
+            _imageArticleService = imageArticleService;
         }
 
         public async Task<IActionResult> Index()
@@ -122,7 +145,7 @@ namespace YourHouse.Web.Controllers
                 List<ImagesArticleDto> imagesArticleDtos = new() { imagesArticle };
                 ArticleDto article = new ArticleDto()
                 {
-                    AccountId = this.IdUser,
+                    AccountId = (int)this.IdUser,
                     Title = art.Title,
                     DescAr = art.Desc,
                     Addr = art.Address,
@@ -147,8 +170,6 @@ namespace YourHouse.Web.Controllers
                         ElectricPrice = (int)art.ElectricPrice,
                     };
                     article.ChungCu = chungCu;
-
-
                 }
                 else if (art.Type == "Office")
                 {
@@ -181,7 +202,7 @@ namespace YourHouse.Web.Controllers
                     article.House = house;
                 }
 
-                _articleService.AddArticleAsync(article);
+                await _articleService.AddArticleAsync(article);
 
                 return RedirectToAction("Index", "Home");
             }
@@ -202,7 +223,7 @@ namespace YourHouse.Web.Controllers
 
             ModelAddArticle modelArticle = new ModelAddArticle();
 
-            var art = (await _articleService.GetArticleByIdAsync(id));
+            var art = await _articleService.GetArticleByIdAsync(id);
 
             if (art == null || art.AccountId != this.IdUser)
             {
@@ -211,7 +232,11 @@ namespace YourHouse.Web.Controllers
 
             if(art.TypeAr == "Tro")
             {
-                var tro = art.Tro;
+                var tro = await _troService.GetTroByIdAsync(id);
+                if(tro == null)
+                {
+                    return RedirectToAction("Index");
+                }
                 modelArticle.Floor = tro.Floor;
                 modelArticle.MaxPerson = tro.MaxPerson;
                 modelArticle.WaterPrice = (double)tro.WaterPrice; 
@@ -219,7 +244,11 @@ namespace YourHouse.Web.Controllers
             }
             else if(art.TypeAr == "ChungCu")
             {
-                var chungCu = art.ChungCu;
+                var chungCu = await _chungCuService.GetChungCuByIdAsync(id);
+                if(chungCu == null)
+                {
+                    return RedirectToAction("Index");
+                }
                 modelArticle.BedRoom = chungCu.BedRoom; 
                 modelArticle.BathRoom = chungCu.BathRoom;
                 modelArticle.Floor = chungCu.Floor;
@@ -229,18 +258,27 @@ namespace YourHouse.Web.Controllers
             }
             else if (art.TypeAr == "House")
             {
-                
-                var house = art.House;
+                var house = await _houseService.GetHouseByIdAsync(id);
+                if(house == null)
+                {
+                    return RedirectToAction("Index");
+                }
                 modelArticle.BedRoom = house.BedRoom;
                 modelArticle.BathRoom = house.BathRoom;
                 modelArticle.Floors = house.Floors;
             }
             else if(art.TypeAr == "Office")
             {
-                var office = art.Office;
+                var office = await _officeService.GetOfficeByIdAsync(id);
+                if(office == null)
+                {
+                    return RedirectToAction("Index");
+                }
                 modelArticle.Floor = office.Floor;
                 modelArticle.DoorDrt = office.DoorDrt;
             }
+
+            
 
             modelArticle.Title = art.Title;
             modelArticle.Desc = art.DescAr;
@@ -308,17 +346,19 @@ namespace YourHouse.Web.Controllers
             switch (art.Type)
             {
                 case "Tro":
-                    var tro = article.Tro;
+                    var tro = await _troService.GetTroByIdAsync(id);
                     if (tro != null)
                     {
                         tro.Floor = (int)art.Floor;
                         tro.MaxPerson = (int)art.MaxPerson;
                         tro.WaterPrice = (decimal)art.WaterPrice;
                         tro.ElectricPrice = (decimal)art.ElectricPrice;
+
+                        await _troService.UpdateTro(tro);
                     }
                     break;
                 case "ChungCu":
-                    var cc = article.ChungCu;
+                    var cc = await _chungCuService.GetChungCuByIdAsync(id);
                     if (cc != null)
                     {
                         cc.Floor = (int)art.Floor;
@@ -327,28 +367,34 @@ namespace YourHouse.Web.Controllers
                         cc.ElectricPrice = (decimal)art.ElectricPrice;
                         cc.BedRoom = art.BedRoom ?? 0;
                         cc.BathRoom = art.BathRoom ?? 0;
+
+                        await _chungCuService.UpdateChungCu(cc);
                     }
                     break;
                 case "House":
-                    var house = article.House;
+                    var house = await _houseService.GetHouseByIdAsync(id);
                     if (house != null)
                     {
                         house.Floors = (int)art.Floors;
                         house.BedRoom = (int)art.BedRoom;
                         house.BathRoom = (int)art.BathRoom;
+
+                        await _houseService.UpdateHouse(house);
                     }
                     break;
                 case "Office":
-                    var office = article.Office;
+                    var office = await _officeService.GetOfficeByIdAsync(id);
                     if (office != null)
                     {
                         office.Floor = art.Floor ?? 0;
                         office.DoorDrt = (int)art.DoorDrt;
+
+                        await _officeService.UpdateOffice(office);
                     }
                     break;
             }
 
-            _articleService.UpdateArticle(article);
+            await _articleService.UpdateArticle(article);
 
             return RedirectToAction("Index");
         }
@@ -369,7 +415,32 @@ namespace YourHouse.Web.Controllers
 
             if (art != null)
             {
-                _articleService.DeleteArticleAsync(id);
+                switch (art.TypeAr)
+                {
+                    case "Tro":
+                        await _troService.DeleteTroAsync(id);
+                        break;
+                    case "ChungCu":
+                        await _chungCuService.DeleteChungCuAsync(id);
+                        break;
+                    case "House":
+                        await _houseService.DeleteHouseAsync(id);
+                        break;
+                    case "Office":
+                        await _officeService.DeleteOfficeAsync(id);
+                        break;
+                }
+
+                var images = await _imageArticleService.GetAllImageArticleAsync();
+                foreach(var image in images)
+                {
+                    if(image.ArticleId == id)
+                    {
+                        await _imageArticleService.DeleteImageArticleAsync(image.ImageId);
+                    }
+                }
+
+                await _articleService.DeleteArticleAsync(id);
             }
             else
             {

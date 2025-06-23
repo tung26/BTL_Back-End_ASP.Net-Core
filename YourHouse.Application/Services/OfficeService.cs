@@ -19,13 +19,15 @@ namespace YourHouse.Application.Services
             _repository = repository;
         }
 
-        //public Task AddOfficeAsync(OfficeDto OfficeDto)
-        //{
-        //    var office = new Office()
-        //    {
+        public async Task AddOfficeAsync(OfficeDto OfficeDto)
+        {
+            var office = new Office()
+            {
 
-        //    };
-        //}
+            };
+
+            await _repository.AddAsync(office);
+        }
 
         public async Task DeleteOfficeAsync(int id)
         {
@@ -62,8 +64,16 @@ namespace YourHouse.Application.Services
             };
         }
 
-        public async Task UpdateOffice(Office office)
+        public async Task UpdateOffice(OfficeDto officeDto)
         {
+            var office = await _repository.GetByIdAsync(officeDto.ArticleId);
+
+            if (office != null)
+            {
+                office.Floor = officeDto.Floor;
+                office.DoorDrt = officeDto.DoorDrt;
+            }
+
             _repository.UpdateAsync(office);
             await _repository.SaveChangeAsync();
         }

@@ -19,13 +19,15 @@ namespace YourHouse.Application.Services
             _repository = repository;
         }
 
-        //public Task AddChungCuAsync(ChungCuDto ChungCuDto)
-        //{
-        //    var chungCu = new ChungCu()
-        //    {
+        public async Task AddChungCuAsync(ChungCuDto ChungCuDto)
+        {
+            var chungCu = new ChungCu()
+            {
 
-        //    };
-        //}
+            };
+
+            await _repository.AddAsync(chungCu);
+        }
 
         public async Task DeleteChungCuAsync(int id)
         {
@@ -70,8 +72,20 @@ namespace YourHouse.Application.Services
             };
         }
 
-        public async Task UpdateChungCu(ChungCu chungCu)
+        public async Task UpdateChungCu(ChungCuDto chungCuDto)
         {
+            var chungCu = await _repository.GetByIdAsync(chungCuDto.ArticleId);
+
+            if (chungCu == null)
+            {
+                chungCu.Floor = chungCuDto.Floor;
+                chungCu.BathRoom = chungCuDto.BathRoom;
+                chungCu.BedRoom = chungCuDto.BedRoom;
+                chungCu.MaxPerson = chungCuDto.MaxPerson;
+                chungCu.WaterPrice = chungCuDto.WaterPrice;
+                chungCu.ElectricPrice = chungCuDto.ElectricPrice;
+            }
+
             _repository.UpdateAsync(chungCu);
             await _repository.SaveChangeAsync();
         }

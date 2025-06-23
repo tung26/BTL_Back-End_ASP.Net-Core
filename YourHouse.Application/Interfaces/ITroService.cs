@@ -12,8 +12,8 @@ namespace YourHouse.Application.Interfaces
     {
         Task<TroDto?> GetTroByIdAsync(int id);
         Task<IEnumerable<TroDto>> GetAllTroAsync();
-        //Task AddTroAsync(TroDto TroDto);
-        Task UpdateTro(Tro tro);
+        Task AddTroAsync(TroDto TroDto);
+        Task UpdateTro(TroDto troDto);
         Task DeleteTroAsync(int id);
     }
 }

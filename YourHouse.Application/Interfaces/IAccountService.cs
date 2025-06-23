@@ -14,7 +14,7 @@ namespace YourHouse.Application.Interfaces
         Task<AccountDto?> GetAccountByEmailAsync(string email);
         Task<IEnumerable<AccountDto>> GetAllAccountAsync();
         Task AddAccountAsync(AccountDto accountDto);
-        void UpdateAccount(AccountDto accountDto);
+        Task UpdateAccount(AccountDto accountDto);
         void DeleteAccountAsync(int id);
         Task<bool> IsValidAccount(string email, string password);
     }

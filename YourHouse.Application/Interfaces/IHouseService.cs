@@ -12,8 +12,8 @@ namespace YourHouse.Application.Interfaces
     {
         Task<HouseDto?> GetHouseByIdAsync(int id);
         Task<IEnumerable<HouseDto>> GetAllHouseAsync();
-        //Task AddHouseAsync(HouseDto HouseDto);
-        Task UpdateHouse(House house);
+        Task AddHouseAsync(HouseDto HouseDto);
+        Task UpdateHouse(HouseDto houseDto);
         Task DeleteHouseAsync(int id);
     }
 }

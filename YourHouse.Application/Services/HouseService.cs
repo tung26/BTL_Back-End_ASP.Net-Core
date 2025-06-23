@@ -19,13 +19,15 @@ namespace YourHouse.Application.Services
             _repository = repository;
         }
 
-        //public Task AddHouseAsync(HouseDto HouseDto)
-        //{
-        //    var house = new House()
-        //    {
+        public async Task AddHouseAsync(HouseDto HouseDto)
+        {
+            var house = new House()
+            {
 
-        //    };
-        //}
+            };
+
+            await _repository.AddAsync(house);
+        }
 
         public async Task DeleteHouseAsync(int id)
         {
@@ -64,8 +66,17 @@ namespace YourHouse.Application.Services
             };
         }
 
-        public async Task UpdateHouse(House house)
+        public async Task UpdateHouse(HouseDto houseDto)
         {
+            var house = await _repository.GetByIdAsync(houseDto.ArticleId);
+
+            if (house != null)
+            {
+                house.BedRoom = houseDto.BedRoom;
+                house.BathRoom = houseDto.BathRoom;
+                house.Floors = houseDto.Floors;
+            }
+
             _repository.UpdateAsync(house);
             await _repository.SaveChangeAsync();
         }
