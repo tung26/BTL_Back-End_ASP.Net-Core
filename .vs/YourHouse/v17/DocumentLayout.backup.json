@@ -29,6 +29,10 @@
           "SelectedChildIndex": 3,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Program.cs",
@@ -38,8 +42,7 @@
               "RelativeToolTip": "YourHouse\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T10:40:08.706Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-23T10:40:08.706Z"
             },
             {
               "$type": "Document",
@@ -51,12 +54,7 @@
               "RelativeToolTip": "YourHouse\\Views\\Home\\Index.cshtml",
               "ViewState": "AgIAAAQAAAAAAAAAAAAAAAQAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-23T10:15:42.479Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "WhenOpened": "2025-06-23T10:15:42.479Z"
             },
             {
               "$type": "Document",
@@ -66,7 +64,7 @@
               "RelativeDocumentMoniker": "YourHouse\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "YourHouse\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACcAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-23T09:57:51.486Z",
               "EditorCaption": ""
@@ -81,8 +79,7 @@
               "RelativeToolTip": "YourHouse.Application\\Services\\AccountService.cs",
               "ViewState": "AgIAACwAAAAAAAAAAAAgwFgAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T09:01:52.672Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-23T09:01:52.672Z"
             }
           ]
         }
