@@ -43,14 +43,14 @@ namespace YourHouse.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            //if (id != this.IdUser || this.IdUser == 0)
-            //{
-            //    if(this.IdUser != 0)
-            //    {
-            //        return RedirectToAction("Index");
-            //    }
-            //    return RedirectToAction("Login");
-            //}
+            if (id != this.IdUser || this.IdUser == null)
+            {
+                if (this.IdUser == null)
+                {
+                    return RedirectToAction("Login");
+                }
+                return RedirectToAction("Index", new { id = this.IdUser });
+            }
 
             var user = await _accountService.GetAccountByIdAsync(id);
 
@@ -116,6 +116,15 @@ namespace YourHouse.Web.Controllers
             //        Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
             //    }
             //}
+            if (id != this.IdUser || this.IdUser == null)
+            {
+                if (this.IdUser == null)
+                {
+                    return RedirectToAction("Login");
+                }
+                return RedirectToAction("Index", new { id = this.IdUser });
+            }
+
             var user = await _accountService.GetAccountByIdAsync(id);
 
             if (user == null)

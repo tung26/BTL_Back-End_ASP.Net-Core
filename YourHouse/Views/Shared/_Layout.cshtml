@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     bool isLogin = ViewBag.IsLogin != null ? ViewBag.IsLogin : false;
 }
 
@@ -13,7 +12,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/YourHouse.Web.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" /> *@
 </head>
 <body>
     <header class="position-fixed" style="z-index: 10; top: 0; width: 100%;">
@@ -21,7 +20,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">YourHouse.Web</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
@@ -77,7 +76,7 @@
             </div>
         </nav>
     </header>
-    
+
     <div class="container" style="margin-top: 64px;">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -96,21 +95,21 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
     <script>
-    //     $(document).ready(function() {
-    //         $.validator.setDefaults({
-    //             onkeyup: false,
-    //             onfocusout: false,
-    //             onchange: false
-    //         });
+        //     $(document).ready(function() {
+        //         $.validator.setDefaults({
+        //             onkeyup: false,
+        //             onfocusout: false,
+        //             onchange: false
+        //         });
 
-    //         Reset lại validator cho tất cả form
-    //         $('form').each(function() {
-    //             var form = $(this);
-    //             form.removeData('validator');
-    //             form.removeData('unobtrusiveValidation');
-    //             $.validator.unobtrusive.parse(form);
-    //         });
-    //     });
+        //         Reset lại validator cho tất cả form
+        //         $('form').each(function() {
+        //             var form = $(this);
+        //             form.removeData('validator');
+        //             form.removeData('unobtrusiveValidation');
+        //             $.validator.unobtrusive.parse(form);
+        //         });
+        //     });
     </script>
 </body>
 </html>

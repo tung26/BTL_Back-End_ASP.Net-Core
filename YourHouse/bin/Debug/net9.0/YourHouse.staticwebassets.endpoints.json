@@ -4,7 +4,7 @@
   "Endpoints": [
     {
       "Route": "YourHouse.8n6xrbrlh6.styles.css",
-      "AssetFile": "YourHouse.styles.css.gz",
+      "AssetFile": "YourHouse.Web.styles.css.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -61,13 +61,13 @@
         },
         {
           "Name": "label",
-          "Value": "YourHouse.styles.css"
+          "Value": "YourHouse.Web.styles.css"
         }
       ]
     },
     {
       "Route": "YourHouse.8n6xrbrlh6.styles.css",
-      "AssetFile": "YourHouse.styles.css",
+      "AssetFile": "YourHouse.Web.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -106,13 +106,13 @@
         },
         {
           "Name": "label",
-          "Value": "YourHouse.styles.css"
+          "Value": "YourHouse.Web.styles.css"
         }
       ]
     },
     {
       "Route": "YourHouse.8n6xrbrlh6.styles.css.gz",
-      "AssetFile": "YourHouse.styles.css.gz",
+      "AssetFile": "YourHouse.Web.styles.css.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -159,13 +159,13 @@
         },
         {
           "Name": "label",
-          "Value": "YourHouse.styles.css.gz"
+          "Value": "YourHouse.Web.styles.css.gz"
         }
       ]
     },
     {
-      "Route": "YourHouse.styles.css",
-      "AssetFile": "YourHouse.styles.css.gz",
+      "Route": "YourHouse.Web.styles.css",
+      "AssetFile": "YourHouse.Web.styles.css.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -219,8 +219,8 @@
       ]
     },
     {
-      "Route": "YourHouse.styles.css",
-      "AssetFile": "YourHouse.styles.css",
+      "Route": "YourHouse.Web.styles.css",
+      "AssetFile": "YourHouse.Web.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -256,8 +256,8 @@
       ]
     },
     {
-      "Route": "YourHouse.styles.css.gz",
-      "AssetFile": "YourHouse.styles.css.gz",
+      "Route": "YourHouse.Web.styles.css.gz",
+      "AssetFile": "YourHouse.Web.styles.css.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {

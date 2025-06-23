@@ -148,7 +148,7 @@ D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debu
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\YourHouse.RazorAssemblyInfo.cache
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\YourHouse.RazorAssemblyInfo.cs
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
-D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\scopedcss\bundle\YourHouse.styles.css
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\scopedcss\bundle\YourHouse.Web.styles.css
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\scopedcss\projectbundle\YourHouse.bundle.scp.css
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\z48325ojxs-b9sayid5wm.gz
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\cta98j3m2h-61n19gt1b8.gz

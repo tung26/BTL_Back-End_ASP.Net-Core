@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\controllers\\myarticlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|solutionrelative:yourhouse\\controllers\\myarticlecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|solutionrelative:yourhouse\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|solutionrelative:yourhouse\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|solutionrelative:yourhouse\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CA879C2-FBCB-43C0-AAEF-14477E207A0C}|YourHouse.Application\\YourHouse.Application.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse.application\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2CA879C2-FBCB-43C0-AAEF-14477E207A0C}|YourHouse.Application\\YourHouse.Application.csproj|solutionrelative:yourhouse.application\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|solutionrelative:yourhouse\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|d:\\workspaces\\learnit\\dnu\\parts\\park-6\\back-end\\btl\\yourhouse\\yourhouse\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EAF384C7-A36B-4D5C-8B85-E4E4272FD100}|YourHouse\\YourHouse.Web.csproj|solutionrelative:yourhouse\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,45 +26,49 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MyArticleController.cs",
-              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Controllers\\MyArticleController.cs",
-              "RelativeDocumentMoniker": "YourHouse\\Controllers\\MyArticleController.cs",
-              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Controllers\\MyArticleController.cs",
-              "RelativeToolTip": "YourHouse\\Controllers\\MyArticleController.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAADgv5MAAAAxAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Program.cs",
+              "RelativeDocumentMoniker": "YourHouse\\Program.cs",
+              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Program.cs",
+              "RelativeToolTip": "YourHouse\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T08:05:29.824Z",
+              "WhenOpened": "2025-06-23T10:40:08.706Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "BaseController.cs",
-              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Controllers\\BaseController.cs",
-              "RelativeDocumentMoniker": "YourHouse\\Controllers\\BaseController.cs",
-              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Controllers\\BaseController.cs",
-              "RelativeToolTip": "YourHouse\\Controllers\\BaseController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T08:02:27.482Z",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "YourHouse\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "YourHouse\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAAAQAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-23T10:15:42.479Z",
               "EditorCaption": ""
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "YourHouse\\Controllers\\AccountController.cs",
-              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "YourHouse\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwCMAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T08:00:20.836Z",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "YourHouse\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "YourHouse\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACcAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-23T09:57:51.486Z",
               "EditorCaption": ""
             },
             {
@@ -75,14 +79,10 @@
               "RelativeDocumentMoniker": "YourHouse.Application\\Services\\AccountService.cs",
               "ToolTip": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse.Application\\Services\\AccountService.cs",
               "RelativeToolTip": "YourHouse.Application\\Services\\AccountService.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAgwFgAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-23T07:59:59.153Z",
+              "WhenOpened": "2025-06-23T09:01:52.672Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             }
           ]
         }
