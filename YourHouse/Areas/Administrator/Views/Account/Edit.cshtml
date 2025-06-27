@@ -1,0 +1,39 @@
+﻿@model YourHouse.Application.DTOs.AccountDto
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    int idUser = ViewBag.IdUser;
+}
+
+<div class="row">
+    @* @Model.AccountId == @ViewBag.IdUser *@
+    <div class="col">
+        <form action="/Administrator/Account/Edit" method="post">
+            <input class="form-control mt-1" asp-for="AccountId" type="hidden" />
+            <div class="mt-3">
+                <label asp-for="FullName" class="text">Họ và tên</label>
+                <input class="form-control mt-1" asp-for="FullName" />
+                <span asp-validation-for="FullName" class="text-danger small"></span>
+            </div>
+            <div class="mt-3">
+                <label asp-for="Phone" class="text">Số điện thoại</label>
+                <input class="form-control mt-1" asp-for="Phone" />
+            </div>
+            <div class="mt-3">
+                <label asp-for="Email" class="text">Email</label>
+                <input class="form-control mt-1" asp-for="Email" />
+                <span asp-validation-for="Email" class="text-danger small"></span>
+            </div>
+            <div class="mt-3">
+                <label asp-for="ImageUser" class="text">Ảnh đại diện</label>
+                <input class="form-control mt-1" asp-for="ImageUser" />
+                <span asp-validation-for="ImageUser" class="text-danger small"></span>
+            </div>
+
+            <button type="submit" class="btn btn-outline-primary mt-3">Thay đổi</button>
+        </form>
+    </div>
+</div>

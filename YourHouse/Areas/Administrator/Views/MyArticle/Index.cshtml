@@ -1,0 +1,101 @@
+﻿
+@{
+	ViewData["Title"] = "Article";
+	var articleList = ViewData["articleList"] as IEnumerable<dynamic>;
+	articleList = articleList.Reverse();
+}
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+	<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="1500">
+		<div class="toast-header">
+			<strong class="me-auto">Thông báo</strong>
+			<small id="toastTime"></small>
+			<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+		</div>
+		<div class="toast-body" id="toastMessage">
+			
+		</div>
+	</div>
+</div>
+
+<div class="pagetitle">
+	<h1>Dashboard</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/">Home</a></li>
+			<li class="breadcrumb-item active">Dashboard</li>
+		</ol>
+	</nav>
+</div><!-- End Page Title -->
+
+<a class="btn btn-primary mb-3" asp-area="Administrator" asp-controller="MyArticle" asp-action="Add">Thêm mới</a>
+<div class="row" >
+	<div class="col">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Tiêu đề</th>
+					<th>Địa chỉ</th>
+					<th>Diện tích</th>
+					<th>Giá</th>
+					<th>UpdateAt</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in articleList)
+				{
+					<tr>
+						<td>@item.Title</td>
+						<td>@item.city - @item.district</td>
+						<td>@item.S</td>
+						<td>@item.Price</td>
+						<td>@item.CreateAt</td>
+						<td class="d-flex">
+							<a asp-area="Administrator" asp-controller="MyArticle" asp-action="Edit" asp-route-id="@item.ArticleId" class="btn btn-primary">Sửa</a>
+							<button type="button" class="btn btn-danger btn-delete ms-1" data-id="@item.ArticleId">Xóa</button>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		document.querySelectorAll('.btn-delete').forEach(function (btn) {
+			btn.addEventListener('click', function () {
+				if (!confirm('Bạn có chắc chắn muốn xóa bài đăng này?')) return;
+
+				const articleId = this.getAttribute('data-id');
+
+				fetch(`/Administrator/MyArticle/Delete/?id=${articleId}`, {
+					method: 'DELETE',
+					headers: {
+						"Content-Type": "application/json",
+					}
+				})
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						this.closest('tr').remove();
+
+						document.getElementById('toastMessage').textContent = data.message;
+						let toastEl = document.getElementById('liveToast');
+						let toast = new bootstrap.Toast(toastEl);
+						toast.show();
+					} else {
+						this.closest('tr').remove();
+
+						document.getElementById('toastMessage').textContent = data.message;
+						let toastEl = document.getElementById('liveToast');
+						let toast = new bootstrap.Toast(toastEl);
+						toast.show();
+					}
+				});
+			});
+		});
+	});
+</script>
+

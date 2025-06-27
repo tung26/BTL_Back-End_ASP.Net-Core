@@ -104,7 +104,8 @@ namespace YourHouse.Application.Services
                 PasswordHash = acc.PasswordHash,
                 Email = acc.Email,
                 Phone = acc.Phone,
-                RoleId = acc.RoleId
+                RoleId = acc.RoleId,
+                ImageUser = acc.ImageUser
             };
         }
 

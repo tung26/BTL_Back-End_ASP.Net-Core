@@ -20,158 +20,12 @@ namespace YourHouse.Web.Controllers
             _accountService = accountService;
         }
 
-        public async Task<IActionResult> Index(int id)
-        {
-            var user = await _accountService.GetAccountByIdAsync(id);
-
-            if (user == null)
-            {
-                if (this.IdUser != null)
-                {
-                    user = await _accountService.GetAccountByIdAsync((int)this.IdUser);
-                    return RedirectToAction("Login");
-                }
-                else
-                {
-                    return RedirectToAction("Login");
-                }
-            }
-
-            return View(user);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            if (id != this.IdUser || this.IdUser == null)
-            {
-                if (this.IdUser == null)
-                {
-                    return RedirectToAction("Login");
-                }
-                return RedirectToAction("Index", new { id = this.IdUser });
-            }
-
-            var user = await _accountService.GetAccountByIdAsync(id);
-
-            if (user == null)
-            {
-                return RedirectToAction("Login");
-            }
-
-            return View(user);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit([FromForm] AccountDto acc)
-        {
-            var accChange = await _accountService.GetAccountByIdAsync(acc.AccountId);
-            var accounts = await _accountService.GetAllAccountAsync();
-
-            foreach(var account in accounts)
-            {
-                if (account.AccountId == accChange.AccountId) continue;
-                if(account.Email == acc.Email)
-                {
-                    ModelState.AddModelError("Email", "Email đã được đăng kí ở tài khoản khác.");
-                }
-                if(account.Phone == acc.Phone)
-                {
-                    ModelState.AddModelError("Phone", "Số điện thoại đã được đăng kí ở tài khoản khác.");
-                }
-            }
-
-            //acc.Phone = accChange.Phone;
-            ModelState.Remove("Role");
-            ModelState.Remove("Phone");
-            ModelState.Remove("PasswordHash");
-            //foreach (var error in ModelState)
-            //{
-            //    foreach (var subError in error.Value.Errors)
-            //    {
-            //        Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
-            //    }
-            //}
-            if (ModelState.IsValid)
-            {
-                accChange.AccountId = acc.AccountId;
-                accChange.FullName = acc.FullName;
-                accChange.Email = acc.Email;
-                accChange.ImageUser = acc.ImageUser;
-                await _accountService.UpdateAccount(accChange);
-
-                return RedirectToAction("Index", new {id = this.IdUser});
-            }
-            
-            return View(acc);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> ChangePassword(int id)
-        {
-            //foreach (var error in ModelState)
-            //{
-            //    foreach (var subError in error.Value.Errors)
-            //    {
-            //        Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
-            //    }
-            //}
-            if (id != this.IdUser || this.IdUser == null)
-            {
-                if (this.IdUser == null)
-                {
-                    return RedirectToAction("Login");
-                }
-                return RedirectToAction("Index", new { id = this.IdUser });
-            }
-
-            var user = await _accountService.GetAccountByIdAsync(id);
-
-            if (user == null)
-            {
-                return RedirectToAction("Login");
-            }
-            else if (id != this.IdUser)
-            {
-                return RedirectToAction("Index", new { id = this.IdUser });
-            }
-
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ChangePassword([FromForm] ChangePassword cp)
-        {
-            if (this.IdUser == null)
-            {
-                return RedirectToAction("Login");
-            }
-
-            var acc = await _accountService.GetAccountByIdAsync(cp.Id);
-            if (ModelState.IsValid && acc != null)
-            {
-                if (cp.PastPass == cp.NewPass)
-                {
-                    ModelState.AddModelError("NewPass", "Yêu cầu nhập mật khẩu khác");
-                }
-                else if (cp.PastPass == acc.PasswordHash)
-                {
-                    acc.PasswordHash = cp.NewPass;
-                    await _accountService.UpdateAccount(acc);
-                    return RedirectToAction("Index", new {id = this.IdUser});
-                }
-
-                ModelState.AddModelError("PastPass", "Nhập sai mật khẩu cũ");
-            }
-            return View(cp);
-        }
-
         [HttpGet]
         public IActionResult Login()
         {
             if (IsLogin)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Account", new { area = "Administrator", id = (int)this.IdUser });
             }
             return View();
         }
@@ -188,6 +42,12 @@ namespace YourHouse.Web.Controllers
                     HttpContext.Session.SetInt32("id", user.AccountId);
                     HttpContext.Session.SetInt32("role", user.RoleId);
                     HttpContext.Session.SetString("fullName", user.FullName);
+                    Console.WriteLine(user.ImageUser);
+                    if(user.ImageUser != null)
+                    {
+                        HttpContext.Session.SetString("ImageUser", user.ImageUser);
+                        Console.WriteLine("ok");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -257,12 +117,6 @@ namespace YourHouse.Web.Controllers
             }
 
             return View(nAcc);
-        }
-
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Remove("id");
-            return RedirectToAction("Index", "Home");
         }
     }
 }

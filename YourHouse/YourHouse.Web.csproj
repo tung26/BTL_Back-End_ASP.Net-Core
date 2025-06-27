@@ -14,11 +14,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\YourHouse.Application\YourHouse.Application.csproj" />
     <ProjectReference Include="..\YourHouse.Infrastructure\YourHouse.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Administrator\Data\" />
   </ItemGroup>
 
 </Project>
