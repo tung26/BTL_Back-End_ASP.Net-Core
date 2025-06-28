@@ -6,6 +6,17 @@
 	var districtList = ViewData["District"] as List<YourHouse.Application.DTOs.DistrictDto>;
 }
 
+<div class="pagetitle">
+	<h1>Add Article</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/">Home</a></li>
+			<li class="breadcrumb-item"><a href="/Administrator/MyArticle">MyArticle</a></li>
+			<li class="breadcrumb-item active">Add</li>
+		</ol>
+	</nav>
+</div><!-- End Page Title -->
+
 <div class="container">
 	<form action="/Administrator/MyArticle/Add" enctype="multipart/form-data" method="post">
 		<div class="row">

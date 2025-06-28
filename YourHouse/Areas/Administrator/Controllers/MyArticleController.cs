@@ -62,6 +62,7 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
             var articleListUser = articleList.Where(a => a.AccountId == IdUser).Select(a => new
             {
                 a.ArticleId,
+                a.TypeAr,
                 a.Title,
                 city = cities.Where(e => e.CityId == a.CityAr).FirstOrDefault().CityName,
                 district = districtes.Where(e => e.DistrictId == a.DistrictAr).FirstOrDefault().DistrictName,
@@ -450,6 +451,24 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
             }
 
             return Json(new { success = true, message = "Xóa bài đăng thành công!" });
+        }
+
+        public async Task<IActionResult> DashBoard()
+        {
+            if (!IsLogin)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+
+            var articles = await _articleService.GetAllArticleAsync();
+            articles = articles.Where(x => x.AccountId == this.IdUser);
+            ViewBag.countArticle = articles.Count();
+            ViewBag.countArticleTro = articles.Count(x => x.TypeAr == "Tro");
+            ViewBag.countArticleChungCu = articles.Count(x => x.TypeAr == "ChungCu");
+            ViewBag.countArticleOffice = articles.Count(x => x.TypeAr == "Office");
+            ViewBag.countArticleHouse = articles.Count(x => x.TypeAr == "House");
+
+            return View();
         }
 
         public IActionResult Type(string t)

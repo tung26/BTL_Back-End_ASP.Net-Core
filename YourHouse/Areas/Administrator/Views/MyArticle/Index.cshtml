@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Text.Json
 @{
 	ViewData["Title"] = "Article";
 	var articleList = ViewData["articleList"] as IEnumerable<dynamic>;
@@ -19,21 +19,34 @@
 </div>
 
 <div class="pagetitle">
-	<h1>Dashboard</h1>
+	<h1>MyArticle</h1>
 	<nav>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="/">Home</a></li>
-			<li class="breadcrumb-item active">Dashboard</li>
+			<li class="breadcrumb-item active">MyArticle</li>
 		</ol>
 	</nav>
 </div><!-- End Page Title -->
-
-<a class="btn btn-primary mb-3" asp-area="Administrator" asp-controller="MyArticle" asp-action="Add">Thêm mới</a>
+<div class="row">
+	<div class="col">
+		<a class="btn btn-primary mb-3" asp-area="Administrator" asp-controller="MyArticle" asp-action="Add">Thêm mới</a>
+	</div>
+	<div class="col col-3">
+		<select class="form-select select_type">
+			<option selected value="All">Tất cả</option>
+			<option value="Tro">Trọ</option>
+			<option value="ChungCu">Chung cư</option>
+			<option value="Office">Văn phòng</option>
+			<option value="House">Nhà ở</option>
+		</select>
+	</div>
+</div>
 <div class="row" >
 	<div class="col">
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr>
+					<th>Loại</th>
 					<th>Tiêu đề</th>
 					<th>Địa chỉ</th>
 					<th>Diện tích</th>
@@ -42,10 +55,11 @@
 					<th>Action</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="body_table-article">
 				@foreach (var item in articleList)
 				{
 					<tr>
+						<td>@item.TypeAr</td>
 						<td>@item.Title</td>
 						<td>@item.city - @item.district</td>
 						<td>@item.S</td>
@@ -63,6 +77,36 @@
 </div>
 
 <script>
+	let articleList = @Html.Raw(JsonSerializer.Serialize(articleList));
+	const selectTypeElement = document.querySelector('.select_type');
+	const bodyTableElement = document.querySelector('.body_table-article');
+
+	selectTypeElement.onchange = () => {
+		let valueType = selectTypeElement.value;
+
+		let html = '';
+		articleList.forEach(article => {
+			if(article.TypeAr == valueType) {
+				html += `
+						<tr>
+							<td>${article.TypeAr}</td>
+							<td>${article.Title}</td>
+							<td>${article.city} - ${article.district}</td>
+							<td>${article.S}</td>
+							<td>${article.Price}</td>
+							<td>${article.CreateAt}</td>
+							<td class="d-flex">
+								<a asp-area="Administrator" asp-controller="MyArticle" asp-action="Edit" asp-route-id="${article.ArticleId}" class="btn btn-primary">Sửa</a>
+								<button type="button" class="btn btn-danger btn-delete ms-1" data-id="${article.ArticleId}">Xóa</button>
+							</td>
+						</tr>
+				`
+			}
+		});
+
+		bodyTableElement.innerHTML = html;
+	}
+
 	document.addEventListener('DOMContentLoaded', function () {
 		document.querySelectorAll('.btn-delete').forEach(function (btn) {
 			btn.addEventListener('click', function () {

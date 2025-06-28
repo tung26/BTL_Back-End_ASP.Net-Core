@@ -30,10 +30,7 @@
                     <h2>Kevin Anderson</h2>
                     <h3>Web Designer</h3>
                     <div class="social-links mt-2">
-                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                         <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
             </div>
@@ -59,8 +56,6 @@
                                 </li>
                             }
                         }
-
-
                     </ul>
                     <div class="tab-content pt-2">
 
@@ -82,6 +77,12 @@
                                 <div class="col-lg-9 col-md-8">@Model.Email</div>
                             </div>
 
+                            @{
+                                if (idUser != null && manageUser)
+                                {
+                                    <button class="btn btn-danger delete_account-btn" >DELETE ACCOUNT</button>
+                                }
+                            }
                         </div>
 
                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
@@ -107,41 +108,6 @@
                                         <span asp-validation-for="@Model.FullName" class="small text-danger"></span>
                                     </div>
                                 </div>
-
-                                @* <div class="row mb-3"> *@
-                                @*     <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label> *@
-                                @*     <div class="col-md-8 col-lg-9"> *@
-                                @*         <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea> *@
-                                @*     </div> *@
-                                @* </div> *@
-
-                                @* <div class="row mb-3"> *@
-                                @*     <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label> *@
-                                @*     <div class="col-md-8 col-lg-9"> *@
-                                @*         <input name="company" type="text" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke"> *@
-                                @*     </div> *@
-                                @* </div> *@
-
-                                @* <div class="row mb-3"> *@
-                                @*     <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label> *@
-                                @*     <div class="col-md-8 col-lg-9"> *@
-                                @*         <input name="job" type="text" class="form-control" id="Job" value="Web Designer"> *@
-                                @*     </div> *@
-                                @* </div> *@
-
-                                @* <div class="row mb-3"> *@
-                                @*     <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label> *@
-                                @*     <div class="col-md-8 col-lg-9"> *@
-                                @*         <input name="country" type="text" class="form-control" id="Country" value="USA"> *@
-                                @*     </div> *@
-                                @* </div> *@
-
-                                @* <div class="row mb-3"> *@
-                                @*     <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label> *@
-                                @*     <div class="col-md-8 col-lg-9"> *@
-                                @*         <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022"> *@
-                                @*     </div> *@
-                                @* </div> *@
 
                                 <div class="row mb-3">
                                     <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
@@ -174,3 +140,27 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.delete_account-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                if (!confirm('Bạn có chắc chắn muốn xóa tài khoản?')) return;
+
+                const idUserDelete = @idUser;
+
+                fetch(`/Administrator/Account/Delete/?id=${idUserDelete}`, {
+                    method: 'DELETE',
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                    })
+                    .then(response => response.json())
+                    .then(response => {
+                         window.location.href = response.redirectUrl;
+                })
+            });
+        });
+    });
+</script>
+

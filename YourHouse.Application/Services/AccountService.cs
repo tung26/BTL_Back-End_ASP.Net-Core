@@ -36,7 +36,7 @@ namespace YourHouse.Application.Services
             await _repository.SaveChangeAsync();
         }
 
-        public async void DeleteAccountAsync(int id)
+        public async Task DeleteAccountAsync(int id)
         {
             var account = await _repository.GetByIdAsync(id);
             if (account != null)

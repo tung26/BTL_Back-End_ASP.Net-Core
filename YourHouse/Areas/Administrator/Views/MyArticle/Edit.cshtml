@@ -7,6 +7,17 @@
 	var id = ViewData["id"];
 }
 
+<div class="pagetitle">
+	<h1>Edit Article</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="/">Home</a></li>
+			<li class="breadcrumb-item"><a href="/Administrator/MyArticle">MyArticle</a></li>
+			<li class="breadcrumb-item active">Edit</li>
+		</ol>
+	</nav>
+</div><!-- End Page Title -->
+
 <div class="container">
 	<form action="/Administrator/MyArticle/Edit" enctype="multipart/form-data" method="post">
 		<input name="id" value="@id" type="hidden" />

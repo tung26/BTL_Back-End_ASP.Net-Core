@@ -33,28 +33,6 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
             return View(user);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Edit(int id)
-        {
-            if (id != IdUser || IdUser == null)
-            {
-                if (IdUser == null)
-                {
-                    return RedirectToAction("Login", "Account", new { area = "" });
-                }
-                return RedirectToAction("Index", new { id = (int)IdUser });
-            }
-
-            var user = await _accountService.GetAccountByIdAsync(id);
-
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Account", new { area = "" });
-            }
-
-            return View(user);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Edit([FromForm] AccountDto acc)
         {
@@ -163,6 +141,18 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
         {
             HttpContext.Session.Remove("id");
             return RedirectToAction("Index", "Home", new { area = "" });
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            if(IsLogin && id == this.IdUser)
+            {
+                HttpContext.Session.Remove("id");
+                await _accountService.DeleteAccountAsync(id);
+                return Json(new { redirectUrl = Url.Action("Index", "Home", new { area = "" }) });
+            }
+
+            return Json(new { success = true, redirectUrl = Url.Action("Login", "Account", new { area = "" }) });
         }
     }
 }
