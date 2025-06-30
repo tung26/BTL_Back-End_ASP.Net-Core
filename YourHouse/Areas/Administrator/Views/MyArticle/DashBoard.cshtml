@@ -46,7 +46,7 @@
                                 <div class="ps-3">
                                     <h6>@ViewBag.countArticleTro/@ViewBag.countArticle</h6>
                                     @{
-                                        var percentTro = Convert.ToDouble(Convert.ToDouble(@ViewBag.countArticleTro) / Convert.ToDouble(@ViewBag.countArticle) * 100);
+                                        var percentTro = Convert.ToDouble(Convert.ToDouble(@ViewBag.countArticleTro) / (Convert.ToDouble(@ViewBag.countArticle) == 0 ? 1 : Convert.ToDouble(@ViewBag.countArticle)) * 100);
                                         <span class="text-success small pt-1 fw-bold">
                                             @percentTro%
                                         </span> <span class="text-muted small pt-2 ps-1"></span>
@@ -68,7 +68,7 @@
                                 <div class="ps-3">
                                     <h6>@ViewBag.countArticleChungCu/@ViewBag.countArticle</h6>
                                     @{
-                                        var percentChungCu = Convert.ToDouble(Convert.ToDouble(@ViewBag.countArticleChungCu) / Convert.ToDouble(@ViewBag.countArticle) * 100);
+                                        var percentChungCu = Convert.ToDouble(Convert.ToDouble(@ViewBag.countArticleChungCu) / (Convert.ToDouble(@ViewBag.countArticle) == 0 ? 1 : Convert.ToDouble(@ViewBag.countArticle)) * 100);
                                         <span class="text-success small pt-1 fw-bold">
                                             @percentChungCu%
                                         </span> <span class="text-muted small pt-2 ps-1"></span>
@@ -91,7 +91,7 @@
                                 <div class="ps-3">
                                     <h6>@ViewBag.countArticleOffice/@ViewBag.countArticle</h6>
                                     @{
-                                        var percentOffice = Convert.ToDouble(Convert.ToDouble(@ViewBag.countArticleOffice) / Convert.ToDouble(@ViewBag.countArticle) * 100);
+                                        var percentOffice = Convert.ToDouble(Convert.ToDouble(@ViewBag.countArticleOffice) / (Convert.ToDouble(@ViewBag.countArticle) == 0 ? 1 : Convert.ToDouble(@ViewBag.countArticle)) * 100);
                                         <span class="text-success small pt-1 fw-bold">
                                             @percentOffice%
                                         </span> <span class="text-muted small pt-2 ps-1"></span>
@@ -115,7 +115,7 @@
 
                                     <h6>@ViewBag.countArticleHouse/@ViewBag.countArticle</h6>
                                     @{
-                                        var percentHouse = Convert.ToDouble(Convert.ToDouble(@ViewBag.countArticleHouse) / Convert.ToDouble(@ViewBag.countArticle) * 100);
+                                        var percentHouse = Convert.ToDouble(Convert.ToDouble(@ViewBag.countArticleHouse) / (Convert.ToDouble(@ViewBag.countArticle) == 0 ? 1 : Convert.ToDouble(@ViewBag.countArticle)) * 100);
                                         <span class="text-success small pt-1 fw-bold">
                                             @percentHouse%
                                         </span> <span class="text-muted small pt-2 ps-1"></span>

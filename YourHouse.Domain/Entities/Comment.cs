@@ -15,6 +15,8 @@ public partial class Comment
 
     public string Content { get; set; } = null!;
 
+    public bool IsDelete { get; set; }
+
     public DateOnly CreateAt { get; set; }
 
     public virtual Account Account { get; set; } = null!;

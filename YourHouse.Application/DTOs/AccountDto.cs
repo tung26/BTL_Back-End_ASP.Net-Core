@@ -9,6 +9,7 @@ namespace YourHouse.Application.DTOs
 {
     public class AccountDto
     {
+        public string? Facebook { get; set; }
         public int AccountId { get; set; }
         [Required(ErrorMessage = "Yêu cầu nhập họ tên.")]
         public string FullName { get; set; } = null!;
@@ -19,8 +20,9 @@ namespace YourHouse.Application.DTOs
         [Required(ErrorMessage = "Yêu cầu nhập email.")]
         [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Email không hợp lệ.")]
         public string Email { get; set; } = null!;
-        [Required(ErrorMessage = "Yêu cầu nhập số điện thoại.")]
-        [RegularExpression(@"^(?! )[^\s]+(?:[-. ]?[0-9]+)*$", ErrorMessage = "Số điện thoại không hợp lệ.")]
+        [Required(ErrorMessage = "Số điện thoại là bắt buộc.")]
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ.")]
+        [RegularExpression(@"^\d{10,11}$", ErrorMessage = "Số điện thoại phải chứa 10-11 chữ số.")]
         public string Phone { get; set; } = null!;
 
         public int RoleId { get; set; }

@@ -15,12 +15,23 @@ namespace YourHouse.Application.Services
     {
 
         private readonly IRepository<Article> _repository;
+        private readonly ITroService _troService;
+        private readonly IChungCuService _chungCuService;
+        private readonly IHouseService _houseService;
+        private readonly IOfficeService _officeService;
+        private readonly IImageArticleService _imageArticleService;
+        private readonly ICommentService _commentService;
 
-        public ArticleService(
-            IRepository<Article> repository
-            )
+
+        public ArticleService(IRepository<Article> repository, ITroService troService, IChungCuService chungCuService, IHouseService houseService, IOfficeService officeService, IImageArticleService imageArticleService, ICommentService commentService)
         {
             _repository = repository;
+            _troService = troService;
+            _chungCuService = chungCuService;
+            _houseService = houseService;
+            _officeService = officeService;
+            _imageArticleService = imageArticleService;
+            _commentService = commentService;
         }
 
         public async Task AddArticleAsync(ArticleDto articleDto)
@@ -119,6 +130,39 @@ namespace YourHouse.Application.Services
 
             if (article != null)
             {
+                switch (article.TypeAr)
+                {
+                    case "Tro":
+                        await _troService.DeleteTroAsync(article.ArticleId);
+                        break;
+                    case "ChungCu":
+                        await _chungCuService.DeleteChungCuAsync(article.ArticleId);
+                        break;
+                    case "House":
+                        await _houseService.DeleteHouseAsync(article.ArticleId);
+                        break;
+                    case "Office":
+                        await _officeService.DeleteOfficeAsync(article.ArticleId);
+                        break;
+                }
+
+                var comments = await _commentService.GetAllCommentAsync();
+                foreach (var comment in comments)
+                {
+                    if(comment != null && comment.ArticleId == id)
+                    {
+                        await _commentService.DeleteCommentAsync(comment.CommentId, true);
+                    }
+                }
+
+                var images = await _imageArticleService.GetAllImageArticleAsync();
+                foreach (var image in images)
+                {
+                    if (image.ArticleId == article.ArticleId)
+                    {
+                        await _imageArticleService.DeleteImageArticleAsync(image.ImageId);
+                    }
+                }
                 _repository.DeleteAsync(article);
                 await _repository.SaveChangeAsync();
             }

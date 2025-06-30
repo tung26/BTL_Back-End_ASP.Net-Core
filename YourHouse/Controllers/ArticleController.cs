@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YourHouse.Application.DTOs;
@@ -19,6 +20,7 @@ namespace YourHouse.Web.Controllers
         private readonly IHouseService _houseService;
         private readonly IOfficeService _officeService;
         private readonly IImageArticleService _imageArticleService;
+        private readonly ICommentService _commentService;
 
         private readonly ICityService _cityService;
         private readonly IDistrictService _districtService;
@@ -32,7 +34,8 @@ namespace YourHouse.Web.Controllers
             IChungCuService chungCuService, 
             IHouseService houseService, 
             IOfficeService officeService,
-            IImageArticleService imageArticleService
+            IImageArticleService imageArticleService,
+            ICommentService commentService
             )
         {
             _articleService = articleService;
@@ -44,6 +47,7 @@ namespace YourHouse.Web.Controllers
             _houseService = houseService;
             _officeService = officeService;
             _imageArticleService = imageArticleService;
+            _commentService = commentService;
         }
 
         public async Task<IActionResult> Index()
@@ -101,7 +105,19 @@ namespace YourHouse.Web.Controllers
             var acc = await _accountService.GetAccountByIdAsync(article.AccountId);
             var city = (await _cityService.GetCityByIdAsync(article.CityAr)).CityName;
             var district = (await _districtService.GetDistrictByIdAsync(article.DistrictAr)).DistrictName;
+            var comments = (await _commentService.GetAllCommentAsync()).Where(x => x.ArticleId == id).OrderBy(x => x.CreateAt).ToList();
 
+            var accounts = await _accountService.GetAllAccountAsync();
+
+            foreach (var comment in comments)
+            {
+                var account = accounts.Where(x => x.AccountId == comment.AccountId).FirstOrDefault();
+
+                comment.ImageUser = account.ImageUser;
+                comment.UserName = account.FullName;
+            }
+
+            ViewBag.comments = comments;
             ViewBag.Acc = acc;
             ViewBag.City = city;
             ViewBag.District = district;

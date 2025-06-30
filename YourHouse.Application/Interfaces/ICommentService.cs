@@ -11,10 +11,10 @@ namespace YourHouse.Application.Interfaces
 {
     public interface ICommentService
     {
-        Task<Comment?> GetCommentByIdAsync(int id);
+        Task<CommentDto?> GetCommentByIdAsync(int id);
         Task<IEnumerable<CommentDto>> GetAllCommentAsync();
-        Task AddCommentAsync(CommentDto commentDto);
-        void UpdateComment(Comment comment);
-        void DeleteCommentAsync(int id);
+        Task<int> AddCommentAsync(CommentDto commentDto);
+        Task UpdateComment(CommentDto commentDto);
+        Task DeleteCommentAsync(int id, bool articleDelete = false);
     }
 }

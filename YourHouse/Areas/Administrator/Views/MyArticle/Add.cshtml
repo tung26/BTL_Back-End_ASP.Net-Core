@@ -18,7 +18,7 @@
 </div><!-- End Page Title -->
 
 <div class="container">
-	<form action="/Administrator/MyArticle/Add" enctype="multipart/form-data" method="post">
+	<form id="mainForm" action="/Administrator/MyArticle/Add" enctype="multipart/form-data" method="post">
 		<div class="row">
 			<div class="col-4">
 				<input class="form-control" asp-for="Images" type="file" multiple accept="image/*" />
@@ -106,12 +106,22 @@
 	</form>
 </div>
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		const optionTypeElement = document.querySelector('.select_type');
 		const renderPartial = document.querySelector('.partial-view');
 		const selectCityElement = document.querySelector('.select_city');
 		let districts = @Html.Raw(JsonSerializer.Serialize(districtList));
+
+		$.validator.setDefaults({
+					onkeyup: false,
+					onfocusout: false,
+					onsubmit: true
+				});
 
 		function selectCity() {
 			const value = selectCityElement.value;
@@ -131,23 +141,12 @@
 				.then(response => response.text())
 				.then(partial => {
 					renderPartial.innerHTML = partial;
-					// initValidation();
+					var form = $('#mainForm');
+					form.removeData('validator');
+					form.removeData('unobtrusiveValidation');
+					$.validator.unobtrusive.parse(form);
 				});
 		}
-
-		// function initValidation() {
-
-		// 	$.validator.setDefaults({
-		// 		onkeyup: false,
-		// 		onfocusout: false,
-		// 		onchange: false
-		// 	});
-
-		// 	var form = $('form');
-		// 	form.removeData('validator');
-		// 	form.removeData('unobtrusiveValidation');
-		// 	$.validator.unobtrusive.parse(form);
-		// }
 
 		selectCity();
 		loadPartialView(optionTypeElement.value);
@@ -159,7 +158,3 @@
 		selectCityElement.addEventListener('change', selectCity);
 	});
 </script>
-
-@* @section Scripts { *@
-@* 	<script src="~/js/articleadd.js"></script> *@
-@* } *@

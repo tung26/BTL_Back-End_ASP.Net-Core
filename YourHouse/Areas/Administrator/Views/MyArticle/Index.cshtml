@@ -68,6 +68,7 @@
 						<td class="d-flex">
 							<a asp-area="Administrator" asp-controller="MyArticle" asp-action="Edit" asp-route-id="@item.ArticleId" class="btn btn-primary">Sửa</a>
 							<button type="button" class="btn btn-danger btn-delete ms-1" data-id="@item.ArticleId">Xóa</button>
+							<a asp-area="" asp-controller="Article" asp-action="Details" asp-route-id="@item.ArticleId" class="btn btn-success ms-1">Xem</a>
 						</td>
 					</tr>
 				}
@@ -86,7 +87,7 @@
 
 		let html = '';
 		articleList.forEach(article => {
-			if(article.TypeAr == valueType) {
+			if(article.TypeAr == valueType || valueType == "All") {
 				html += `
 						<tr>
 							<td>${article.TypeAr}</td>

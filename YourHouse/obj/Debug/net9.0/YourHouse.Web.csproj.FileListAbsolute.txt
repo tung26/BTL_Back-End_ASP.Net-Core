@@ -146,7 +146,6 @@ D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debu
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\scopedcss\projectbundle\YourHouse.Web.bundle.scp.css
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\glrkguyvc3-b9sayid5wm.gz
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\gkkm6oi0hq-61n19gt1b8.gz
-D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\vve8dzrkys-3r8b2a0bt1.gz
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\fkq1ynlp3d-xtxxf3hu2r.gz
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\i1ebjhe9bj-bqjiyaj88i.gz
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\sbortdp0f0-c2jlpeoesf.gz
@@ -718,3 +717,4 @@ D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debu
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\d5hspmaltk-6xwnpk9m82.gz
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\zbycnrcjmq-iz0difnb5h.gz
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\42i1ljrltt-mcutdg6q2s.gz
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\obj\Debug\net9.0\compressed\iu1gqsi920-iwml99zq9c.gz

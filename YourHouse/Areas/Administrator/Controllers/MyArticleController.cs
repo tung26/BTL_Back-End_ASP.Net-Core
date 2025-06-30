@@ -418,31 +418,6 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
 
             if (art != null)
             {
-                switch (art.TypeAr)
-                {
-                    case "Tro":
-                        await _troService.DeleteTroAsync(id);
-                        break;
-                    case "ChungCu":
-                        await _chungCuService.DeleteChungCuAsync(id);
-                        break;
-                    case "House":
-                        await _houseService.DeleteHouseAsync(id);
-                        break;
-                    case "Office":
-                        await _officeService.DeleteOfficeAsync(id);
-                        break;
-                }
-
-                var images = await _imageArticleService.GetAllImageArticleAsync();
-                foreach(var image in images)
-                {
-                    if(image.ArticleId == id)
-                    {
-                        await _imageArticleService.DeleteImageArticleAsync(image.ImageId);
-                    }
-                }
-
                 await _articleService.DeleteArticleAsync(id);
             }
             else

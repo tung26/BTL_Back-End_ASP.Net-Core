@@ -20,6 +20,7 @@ public partial class Account
     public DateOnly CreateAt { get; set; }
 
     public string ImageUser { get; set; } = null!;
+    public string? Facebook {  get; set; }
 
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 

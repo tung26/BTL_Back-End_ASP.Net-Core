@@ -42,11 +42,11 @@ namespace YourHouse.Web.Controllers
                     HttpContext.Session.SetInt32("id", user.AccountId);
                     HttpContext.Session.SetInt32("role", user.RoleId);
                     HttpContext.Session.SetString("fullName", user.FullName);
-                    Console.WriteLine(user.ImageUser);
+
                     if(user.ImageUser != null)
                     {
                         HttpContext.Session.SetString("ImageUser", user.ImageUser);
-                        Console.WriteLine("ok");
+
                     }
                     return RedirectToAction("Index", "Home");
                 }

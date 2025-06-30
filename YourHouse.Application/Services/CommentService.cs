@@ -19,27 +19,44 @@ namespace YourHouse.Application.Services
             _repository = repository;
         }
 
-        public async Task AddCommentAsync(CommentDto commentDto)
+        public async Task<int> AddCommentAsync(CommentDto commentDto)
         {
             var comment = new Comment()
             {
                 AccountId = commentDto.AccountId,
                 ArticleId = commentDto.ArticleId,
                 Content = commentDto.Content,
-                CreateAt = commentDto.CreateAt,
-                CommentId = commentDto.CommentId,
                 ParentCommentId = commentDto.ParentCommentId,
             };
 
-            _repository.AddAsync(comment);
+            Console.WriteLine("ok here");
+
+            await _repository.AddAsync(comment);
             await _repository.SaveChangeAsync();
+
+            return comment.CommentId;
         }
 
-        public async void DeleteCommentAsync(int id)
+        public async Task DeleteCommentAsync(int id, bool articleDelete = false)
         {
+            var comments = await _repository.GetAllAsync();
             var comment = await _repository.GetByIdAsync(id);
-            _repository.DeleteAsync(comment);
-            await _repository.SaveChangeAsync();
+
+            if (comment != null)
+            {
+                if (comment.InverseParentComment.Count() != 0 && articleDelete == false)
+                {
+                    comment.IsDelete = true;
+                    _repository.UpdateAsync(comment);
+                    await _repository.SaveChangeAsync();
+                }
+                else
+                {
+                    _repository.DeleteAsync(comment);
+                    await _repository.SaveChangeAsync();
+                }
+            }
+
         }
 
         public async Task<IEnumerable<CommentDto>> GetAllCommentAsync()
@@ -52,19 +69,29 @@ namespace YourHouse.Application.Services
                 ArticleId = comment.ArticleId,
                 Content = comment.Content,
                 CreateAt = comment.CreateAt,
+                IsDelete = comment.IsDelete,
                 ParentCommentId = comment.ParentCommentId,
             });
         }
 
-        public async Task<Comment?> GetCommentByIdAsync(int id)
+        public async Task<CommentDto?> GetCommentByIdAsync(int id)
         {
             var comment = await _repository.GetByIdAsync(id);
-            return comment == null ? null : comment;
+            return comment == null ? null : new CommentDto()
+            {
+                AccountId = comment.AccountId,
+                CommentId = comment.CommentId,
+                ArticleId = comment.ArticleId,
+                Content = comment.Content,
+                CreateAt = comment.CreateAt,
+                IsDelete = comment.IsDelete,
+                ParentCommentId = comment.ParentCommentId,
+            };
         }
 
-        public async void UpdateComment(Comment comment)
+        public async Task UpdateComment(CommentDto commentDto)
         {
-            _repository.UpdateAsync(comment);
+            //_repository.UpdateAsync(comment);
             await _repository.SaveChangeAsync();
         }
     }

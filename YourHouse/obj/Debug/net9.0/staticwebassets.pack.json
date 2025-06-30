@@ -1993,16 +1993,16 @@
       "PackagePath": "staticwebassets\\assets\\vendor\\tinymce\\tinymce.min.js"
     },
     {
+      "Id": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\wwwroot\\css\\Article\\Detail.css",
+      "PackagePath": "staticwebassets\\css\\Article\\Detail.css"
+    },
+    {
       "Id": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
-    },
-    {
-      "Id": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\wwwroot\\js\\ArticleAdd.js",
-      "PackagePath": "staticwebassets\\js\\ArticleAdd.js"
     },
     {
       "Id": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\wwwroot\\js\\site.js",

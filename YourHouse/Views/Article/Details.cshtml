@@ -1,10 +1,14 @@
 ﻿@model YourHouse.Application.DTOs.ArticleDto;
+@using System.Text.Json
 
 @{
 	ViewData["Title"] = "Details";
+	var commentsArticle = ViewBag.comments;
+	ViewBag.IdUser = ViewBag.IdUser == null ? -1 : ViewBag.IdUser;
 	var accAuthor = ViewBag.Acc;
-	// var comments = Model.Comments.ToList();
 }
+
+<link href="~/css/article/detail.css" rel="stylesheet" />
 
 <div class="row">
 	<div class="col-8">
@@ -100,26 +104,345 @@
 				<button class="btn btn-primary" style="height: 50px; cursor: default;">@accAuthor.Phone</button>
 				<p>@accAuthor.Email</p>
 			</div>
-			<div class="row">
-				<div class="comments" style="height: 200px; border: 1px solid #ccc; border-radius: 20px;">
-
-				</div>
-				<div class="mt-2">
-					<div class="input-group">
-						<input class="form-control" id="input_comment" />
-						<button class="btn btn-success" id="btn-send-comment">send</button>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
 
+<div class="row">
+	<div class="header-comments alert alert-info" style="border: 1px solid #ccc;">
+		<span>Bình luận</span>
+	</div>
+	<div class="body-comments">
+		<div class="comment" data-id="1">
+			<div class="user-comment">
+				<img class="rounded-circle user-comment" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" />
+			</div>
+			<div class="container-comment">
+				<div class="name-usercomment">Quang Tùng Master</div>
+				<div class="content-comment">
+					Cho anh trai C2 Cho anh trai C2 Cho anh trai C2 Cho anh trai C2 Cho anh trai C2 Cho anh trai C2 Cho anh trai C2 Cho anh trai C2
+				</div>
+				<div class="more">
+					<p class="time-comment">2025-6-25</p>
+					@if(ViewBag.IsLogin)
+					{
+						<button class="btn-repon-comment">trả lời</button>
+					}
+				</div>
+
+				<div class="comment-childrent">
+					@* <div class="comment">
+						<div class="user-comment">
+							<img class="rounded-circle user-comment" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" />
+						</div>
+						<div class="container-comment">
+							<div class="name-usercomment">Quang Tùng Master</div>
+							<div class="content-comment">
+								Cho anh trai C2
+							</div>
+							<div class="more">
+								<p class="time-comment">2025-6-25</p>
+								<button class="btn-repon-comment">trả lời</button>
+							</div>
+
+							<div class="comment-childrent">
+
+							</div>
+
+							<div class="respon_comment">
+								<div class="user-comment">
+									<img class="rounded-circle user-comment" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" />
+								</div>
+								<div class="input-group">
+									<input class="form-control" />
+									<button class="btn btn-outline-primary btn-send-comment">Send</button>
+								</div>
+							</div>
+						</div>
+					</div> *@
+				</div>
+
+				<div class="respon_comment">
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mt-2">
+		<div class="input-group">
+			@if(ViewBag.IsLogin)
+			{
+				<input class="form-control" />
+				 <button class="btn btn-outline-primary btn-send-comment">Send</button>
+			}
+ 		</div> 
+ 	</div> 
+ </div> 
+
 <script>
-	const btnSendComment = document.querySelector("#btn-send-comment");
-	const inputSendComment = document.querySelector("#input_comment");
+	let comments = @Html.Raw(JsonSerializer.Serialize(commentsArticle));
+	let btnSendComments = document.querySelectorAll(".btn-send-comment");
+	let btnDeleteComments = document.querySelectorAll(".btn-delete-comment");
+	const containerComment = document.querySelector(".body-comments");
 
-	btnSendComment.onclick = () => {
 
-	};
+	function reloadBtnInputResponComments() {
+		const btnInputResponComments = document.querySelectorAll(".btn-repon-comment");
+		btnInputResponComments.forEach(btnInputResponComment => {
+			btnInputResponComment.onclick = () => {
+				let responComment = btnInputResponComment.parentElement.parentElement.querySelectorAll(".respon_comment");
+				lastResponComment = responComment[responComment.length - 1];
+
+				let allResponComment = document.querySelectorAll(".respon_comment");
+				let responCommentLen = allResponComment.length;
+
+				for(let i = 0; i < responCommentLen; i++) {
+					if(allResponComment[i] == lastResponComment) continue;
+					allResponComment[i].innerHTML = "";
+				}
+
+				lastResponComment.innerHTML = `
+					<div class="user-comment">
+						<img class="rounded-circle user-comment" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" />
+					</div>
+					<div class="input-group">
+						<input class="form-control input_comment" />
+						<button class="btn btn-outline-primary btn-send-comment">Send</button>
+					</div>
+				`
+				btnSendComments = document.querySelectorAll(".btn-send-comment");
+
+				btnSendComments.forEach(btnSendComment => {
+					btnSendComment.onclick = () => {
+						let inputCommentElement = btnSendComment.parentElement.querySelector('input');
+						let ParentComment = btnSendComment.parentElement.parentElement.parentElement.parentElement;
+						let value = inputCommentElement.value.trim();
+
+						if(value != "") {
+							if(ParentComment.getAttribute("data-id")) {
+								postComment(content = value, ParentComment);
+							}else {
+								postComment(content = value, null);
+							}
+						}
+
+						inputCommentElement.value = "";
+					}
+				});
+			}
+		});
+	}
+
+	function loadBtnResultCommentChild() {
+		const btnResultCommentChilds = document.querySelectorAll(".result-response");
+
+		btnResultCommentChilds.forEach(btnResultCommentChild => {
+			btnResultCommentChild.onclick = () => {
+				let commentParent = btnResultCommentChild.parentElement.parentElement.parentElement;
+				let idParent = commentParent.getAttribute("data-id");
+				let commentChild = commentParent.querySelector(".comment-childrent");
+				let html = "";
+				for(let i = 0; i < comments.length; i++) {
+					let comment = comments[i];
+					if(comment.ParentCommentId != idParent) continue;
+					html += `
+						<div class="comment" data-id="${comment.CommentId}">
+							<div class="user-comment">
+								<img class="rounded-circle user-comment" src="${comment.ImageUser}" />
+							</div>
+							<div class="container-comment">
+								<div class="name-usercomment">${comment.UserName}</div>
+								<div class="content-comment ${comment.IsDelete ? "comment_deleted" : ""}">
+									${comment.IsDelete ? "Bình luận đã bị xóa !!!" : comment.Content}
+								</div>
+								<div class="more">
+									<p class="time-comment">${comment.CreateAt}</p>
+									<button class="result-response">Phản hồi</button>
+										@if (ViewBag.IsLogin)
+										{
+												<button class="btn-repon-comment">trả lời</button>
+										}
+										${comment.AccountId == @ViewBag.IdUser ? '<button class="btn-delete-comment">xóa</button>' : ""}
+								</div>
+
+								<div class="comment-childrent">
+
+								</div>
+
+								<div class="respon_comment">
+
+								</div>
+							</div>
+						</div>
+					`
+				}
+				
+				commentChild.innerHTML = html;
+				reloadBtnInputResponComments();
+				loadBtnResultCommentChild();
+				loadBtnDeleteComment()
+			}
+		});
+	}
+
+	function loadComments() {
+		let html = "";
+
+		for(let i = 0; i < comments.length; i++) {
+			let comment = comments[i];
+			if(comment.ParentCommentId != null) continue;
+			html += `
+						<div class="comment" data-id="${comment.CommentId}">
+							<div class="user-comment">
+								<img class="rounded-circle user-comment" src="${comment.ImageUser}" />
+							</div>
+							<div class="container-comment">
+								<div class="name-usercomment">${comment.UserName}</div>
+								<div class="content-comment ${comment.IsDelete ? "comment_deleted" : ""}">
+									${comment.IsDelete ? "Bình luận đã bị xóa !!!" : comment.Content}
+								</div>
+								<div class="more">
+									<p class="time-comment">${comment.CreateAt}</p>
+									<button class="result-response">Phản hồi</button>
+										@if (ViewBag.IsLogin)
+										{
+											<button class="btn-repon-comment">trả lời</button>
+										}
+										${comment.AccountId == @ViewBag.IdUser ? '<button class="btn-delete-comment">xóa</button>' : ""}
+								</div>
+
+								<div class="comment-childrent">
+
+								</div>
+
+								<div class="respon_comment">
+
+								</div>
+							</div>
+						</div>
+					`
+
+		}
+		containerComment.innerHTML = html;
+
+		loadBtnResultCommentChild();
+
+		reloadBtnInputResponComments();
+		loadBtnDeleteComment()
+	}
+
+	loadComments();
+
+	reloadBtnInputResponComments()
+
+	function loadBtnDeleteComment() {
+		btnDeleteComments = document.querySelectorAll(".btn-delete-comment");
+		btnDeleteComments.forEach(btnDeleteComment => {
+			btnDeleteComment.onclick = () => {
+				let id = btnDeleteComment.closest('.comment').getAttribute("data-id");
+				handlerDeleteComment(id);
+			}
+		});
+	}
+
+	function handlerDeleteComment(id) {
+		fetch(`/Comment/Delete?id=${id}`, {
+			method: "DELETE"
+		}).then(response => response.json())
+		.then(data => {
+			if(data.success) {
+				let commentCur = document.querySelector(`.comment[data-id="${id}"]`);
+				console.log(commentCur);
+				if(data.isvalid) {
+					contentComment = commentCur.querySelector(".content-comment");
+					contentComment.classList.add("comment_deleted");
+
+
+				}
+				else if (!data.isvalid) {
+					const index = comments.findIndex(comment => comment.CommentId == id);
+					if(index != -1) {
+						comments.splice(index, 1);
+					}
+					commentCur.remove();
+				}
+			}
+		})
+	}
+
+	function postComment(content, parentComment) {
+		fetch("/Comment/Add", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					ParentCommentId: parentComment != null ? parentComment.getAttribute("data-id") : null,
+					AccountId: @{
+						var idUser = ViewBag.IdUser != null ? ViewBag.IdUser : -1;
+
+						@idUser
+					},
+					ArticleId: @Model.ArticleId,
+					Content: content
+				})
+			})
+			.then(respon => respon.json())
+			.then(data => {
+				if(data.success) {
+					let htmlComment = `
+						<div class="comment" data-id="${data.idComment}">
+							<div class="user-comment">
+								<img class="rounded-circle user-comment" src="@ViewBag.ImageUser" />
+							</div>
+							<div class="container-comment">
+								<div class="name-usercomment">@ViewBag.UserName</div>
+								<div class="content-comment">
+									${content}
+								</div>
+								<div class="more">
+									<p class="time-comment">${data.createAt}</p>
+									@if (ViewBag.IsLogin)
+									{
+										<button class="btn-repon-comment">trả lời</button>
+									}
+									<button class="btn-delete-comment">xóa</button>
+								</div>
+
+								<div class="comment-childrent">
+
+								</div>
+
+								<div class="respon_comment">
+
+								</div>
+							</div>
+						</div>
+					`
+
+					if(parentComment) {
+						parentComment.querySelector(".comment-childrent").innerHTML = parentComment.querySelector(".comment-childrent").innerHTML + htmlComment;
+					}
+					else {
+						containerComment.innerHTML = containerComment.innerHTML + htmlComment;
+					}
+
+					reloadBtnInputResponComments();
+					loadBtnDeleteComment();
+				}
+			})
+	}
+
+	btnSendComments.forEach(btnSendComment => {
+		btnSendComment.onclick = () => {
+			let inputCommentElement = btnSendComment.parentElement.querySelector('input');
+			let value = inputCommentElement.value.trim();
+
+			if(value != "") {
+				postComment(content = value);
+			}
+
+			inputCommentElement.value = "";
+		}
+	});
 </script>

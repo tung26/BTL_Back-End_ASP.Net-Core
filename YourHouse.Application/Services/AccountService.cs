@@ -15,10 +15,17 @@ namespace YourHouse.Application.Services
     {
 
         private readonly IRepository<Account> _repository;
+        private readonly IArticleService _articleService;
+        private readonly ICommentService _commentService;
 
-        public AccountService(IRepository<Account> repository)
+        public AccountService(IRepository<Account> repository, 
+            ICommentService commentService,
+            IArticleService articleService
+            )
         {
             _repository = repository;
+            _commentService = commentService;
+            _articleService = articleService;
         }
 
         public async Task AddAccountAsync(AccountDto accountDto)
@@ -39,6 +46,37 @@ namespace YourHouse.Application.Services
         public async Task DeleteAccountAsync(int id)
         {
             var account = await _repository.GetByIdAsync(id);
+            var articles = await _articleService.GetAllArticleAsync();
+            var comments = await _commentService.GetAllCommentAsync();
+
+            if (comments != null)
+            {
+                foreach (var comment in comments)
+                {
+                    if (comment == null) continue;
+                    if (comment.AccountId == account.AccountId)
+                    {
+                        await _commentService.DeleteCommentAsync(comment.CommentId, true);
+                    }
+                }
+            }
+
+            if(articles != null)
+            {
+                foreach (var article in articles)
+                {
+                    if(article == null) continue;
+                    foreach (var comment in comments)
+                    {
+                        if (comment == null) continue;
+                        if (comment.ArticleId == article.ArticleId)
+                        {
+                            await _commentService.DeleteCommentAsync(comment.CommentId, true);
+                        }
+                    }
+                    await _articleService.DeleteArticleAsync(article.ArticleId);
+                }
+            }
             if (account != null)
             {
                 _repository.DeleteAsync(account);
@@ -59,7 +97,8 @@ namespace YourHouse.Application.Services
                     Email = account.Email,
                     Phone = account.Phone,
                     RoleId = account.RoleId,
-                    ImageUser = account.ImageUser
+                    ImageUser = account.ImageUser,
+                    Facebook = account.Facebook,
                 };
             //}
         }
@@ -74,7 +113,9 @@ namespace YourHouse.Application.Services
                 PasswordHash = account.PasswordHash,
                 Email = account.Email,
                 Phone = account.Phone,
-                RoleId = account.RoleId
+                RoleId = account.RoleId,
+                ImageUser = account.ImageUser,
+                Facebook = account.Facebook,
             });
         }
 
@@ -88,6 +129,7 @@ namespace YourHouse.Application.Services
             account.Phone = accountDto.Phone;
             account.RoleId = accountDto.RoleId;
             account.ImageUser = accountDto.ImageUser;
+            account.Facebook = accountDto.Facebook;
 
             _repository.UpdateAsync(account);
             await _repository.SaveChangeAsync();
@@ -105,7 +147,8 @@ namespace YourHouse.Application.Services
                 Email = acc.Email,
                 Phone = acc.Phone,
                 RoleId = acc.RoleId,
-                ImageUser = acc.ImageUser
+                ImageUser = acc.ImageUser,
+                Facebook = acc.Facebook,
             };
         }
 

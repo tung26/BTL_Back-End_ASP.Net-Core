@@ -44,13 +44,6 @@
             </nav>
         </div><!-- End Logo -->
 
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-            </form>
-        </div><!-- End Search Bar -->
-
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
@@ -207,7 +200,7 @@
                                 </ul><!-- End Messages Dropdown Items -->
 
                             </li><!-- End Messages Nav -->
-                            
+
                             if (ViewBag.ImageUser != null)
                             {
                                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -254,7 +247,7 @@
                                 </li>
 
                                 <li>
-                                <a class="dropdown-item d-flex align-items-center" href="/Administrator/Account/ChangePassword/@ViewBag.IdUser">
+                                    <a class="dropdown-item d-flex align-items-center" href="/Administrator/Account/ChangePassword/@ViewBag.IdUser">
                                         <span>Change Password</span>
                                     </a>
                                 </li>
@@ -329,6 +322,21 @@
                     <span>Change Password</span>
                 </a>
             </li>
+            @if(ViewBag.RoleId == 1)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="/Administrator/Article">
+                        <i class="bi bi-grid"></i>
+                        <span>Articles</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Administrator/Account/Manager">
+                        <i class="bi bi-grid"></i>
+                        <span>Accounts</span>
+                    </a>
+                </li>
+            }
             <!-- End Dashboard Nav -->
 
         </ul>
@@ -363,6 +371,5 @@
 
     <!-- Template Main JS File -->
     <script src="~/assets/js/main.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </body>
 </html>

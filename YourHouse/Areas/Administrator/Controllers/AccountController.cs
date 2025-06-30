@@ -69,8 +69,9 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
                 accChange.Phone = acc.Phone;
                 accChange.Email = acc.Email;
                 accChange.ImageUser = acc.ImageUser;
+                accChange.Facebook = acc.Facebook;
+                accChange.RoleId = acc.RoleId;
                 await _accountService.UpdateAccount(accChange);
-
                 return RedirectToAction("Index", new {id = (int)IdUser});
             }
             
@@ -145,14 +146,38 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            if(IsLogin && id == this.IdUser)
+            if((IsLogin && id == this.IdUser) || this.Role == 1)
             {
-                HttpContext.Session.Remove("id");
                 await _accountService.DeleteAccountAsync(id);
-                return Json(new { redirectUrl = Url.Action("Index", "Home", new { area = "" }) });
+                
+                if(id == this.IdUser)
+                {
+                    HttpContext.Session.Remove("id");
+                    return Json(new { redirectUrl = Url.Action("Index", "Home", new { area = "" }) });
+                } else
+                {
+                    return Json(new { redirectUrl = Url.Action("Manager", "Account", new { area = "Administrator" }) });
+                }
             }
 
             return Json(new { success = true, redirectUrl = Url.Action("Login", "Account", new { area = "" }) });
+        }
+
+        public async Task<IActionResult> Manager()
+        {
+            if(IsLogin && this.Role == 1)
+            {
+                var accounts = await _accountService.GetAllAccountAsync();
+                accounts = accounts.Where(x => x.RoleId != 1);
+
+                return View(accounts.ToList());
+            }
+
+            if (IsLogin)
+            {
+                return RedirectToAction("Index", "MyArticle", new { area = "Administrator" });
+            }
+            return RedirectToAction("Login", "Account", new { area = "" });
         }
     }
 }
