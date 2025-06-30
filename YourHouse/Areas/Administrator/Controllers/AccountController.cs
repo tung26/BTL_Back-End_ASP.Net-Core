@@ -70,7 +70,6 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
                 accChange.Email = acc.Email;
                 accChange.ImageUser = acc.ImageUser;
                 accChange.Facebook = acc.Facebook;
-                accChange.RoleId = acc.RoleId;
                 await _accountService.UpdateAccount(accChange);
                 return RedirectToAction("Index", new {id = (int)IdUser});
             }

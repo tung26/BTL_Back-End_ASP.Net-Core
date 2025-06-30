@@ -131,6 +131,8 @@ namespace YourHouse.Application.Services
             account.ImageUser = accountDto.ImageUser;
             account.Facebook = accountDto.Facebook;
 
+            Console.WriteLine(account.RoleId);
+
             _repository.UpdateAsync(account);
             await _repository.SaveChangeAsync();
         }

@@ -109,64 +109,11 @@
 </div>
 
 <div class="row">
-	<div class="header-comments alert alert-info" style="border: 1px solid #ccc;">
+	<div class="header-comments alert alert-success" style="border: 1px solid #ccc;">
 		<span>Bình luận</span>
 	</div>
 	<div class="body-comments">
-		<div class="comment" data-id="1">
-			<div class="user-comment">
-				<img class="rounded-circle user-comment" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" />
-			</div>
-			<div class="container-comment">
-				<div class="name-usercomment">Quang Tùng Master</div>
-				<div class="content-comment">
-					Cho anh trai C2 Cho anh trai C2 Cho anh trai C2 Cho anh trai C2 Cho anh trai C2 Cho anh trai C2 Cho anh trai C2 Cho anh trai C2
-				</div>
-				<div class="more">
-					<p class="time-comment">2025-6-25</p>
-					@if(ViewBag.IsLogin)
-					{
-						<button class="btn-repon-comment">trả lời</button>
-					}
-				</div>
-
-				<div class="comment-childrent">
-					@* <div class="comment">
-						<div class="user-comment">
-							<img class="rounded-circle user-comment" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" />
-						</div>
-						<div class="container-comment">
-							<div class="name-usercomment">Quang Tùng Master</div>
-							<div class="content-comment">
-								Cho anh trai C2
-							</div>
-							<div class="more">
-								<p class="time-comment">2025-6-25</p>
-								<button class="btn-repon-comment">trả lời</button>
-							</div>
-
-							<div class="comment-childrent">
-
-							</div>
-
-							<div class="respon_comment">
-								<div class="user-comment">
-									<img class="rounded-circle user-comment" src="https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png" />
-								</div>
-								<div class="input-group">
-									<input class="form-control" />
-									<button class="btn btn-outline-primary btn-send-comment">Send</button>
-								</div>
-							</div>
-						</div>
-					</div> *@
-				</div>
-
-				<div class="respon_comment">
-
-				</div>
-			</div>
-		</div>
+		
 	</div>
 	<div class="mt-2">
 		<div class="input-group">
@@ -352,12 +299,11 @@
 		.then(data => {
 			if(data.success) {
 				let commentCur = document.querySelector(`.comment[data-id="${id}"]`);
-				console.log(commentCur);
+
 				if(data.isvalid) {
 					contentComment = commentCur.querySelector(".content-comment");
 					contentComment.classList.add("comment_deleted");
-
-
+					contentComment.innerHTML = "Bình luận đã bị xóa !!!"
 				}
 				else if (!data.isvalid) {
 					const index = comments.findIndex(comment => comment.CommentId == id);
