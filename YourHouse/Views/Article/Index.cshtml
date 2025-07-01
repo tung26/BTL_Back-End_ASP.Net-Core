@@ -89,7 +89,6 @@
                 </div>
                 <div class="mt-3">
                     <input type="number" min="0.0" step="0.01" class="form-control" placeholder="Min" id="min" />
-                    @* <span class="input-group-text">-></span> *@
                     <input type="number" min="0.0" step="0.01" class="form-control mt-2" placeholder="Max" id="max"  />
                 </div>
                 <div class="btn-group mt-2">
@@ -159,8 +158,6 @@
                 let html = '';
                 articles = articles.reverse();
                 articles.forEach(article => {
-                    // <img src="${article.imagesArticles[0].imageArticle}" class="img-fluid rounded-start" alt="...">
-                    // console.log(article)
                     html += `
                         <a href="/Article/Details/${article.articleId}" class="text-dark nav-link">
                             <div class="card mb-3 d-flex" style="min-width: 863px;">

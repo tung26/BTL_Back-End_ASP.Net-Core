@@ -52,16 +52,8 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
                 }
             }
 
-            //acc.Phone = accChange.Phone;
             ModelState.Remove("Role");
             ModelState.Remove("PasswordHash");
-            //foreach (var error in ModelState)
-            //{
-            //    foreach (var subError in error.Value.Errors)
-            //    {
-            //        Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
-            //    }
-            //}
             if (ModelState.IsValid)
             {
                 accChange.AccountId = acc.AccountId;
@@ -80,13 +72,6 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
         [HttpGet]
         public async Task<IActionResult> ChangePassword(int id)
         {
-            //foreach (var error in ModelState)
-            //{
-            //    foreach (var subError in error.Value.Errors)
-            //    {
-            //        Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
-            //    }
-            //}
             if (id != IdUser || IdUser == null)
             {
                 if (IdUser == null)

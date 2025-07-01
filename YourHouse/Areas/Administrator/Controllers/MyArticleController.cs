@@ -345,7 +345,7 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
             article.Price = (decimal)art.Price;
             article.TienCoc = (decimal)art.TienCoc;
             article.TypeAr = art.Type;
-
+            
             switch (art.Type)
             {
                 case "Tro":
@@ -356,7 +356,7 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
                         tro.MaxPerson = (int)art.MaxPerson;
                         tro.WaterPrice = (decimal)art.WaterPrice;
                         tro.ElectricPrice = (decimal)art.ElectricPrice;
-
+                        
                         await _troService.UpdateTro(tro);
                     }
                     break;
@@ -396,7 +396,7 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
                     }
                     break;
             }
-
+            
             await _articleService.UpdateArticle(article);
 
             return RedirectToAction("Index");

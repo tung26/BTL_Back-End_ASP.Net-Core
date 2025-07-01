@@ -75,13 +75,6 @@ namespace YourHouse.Web.Controllers
             nAcc.RoleId = 3;
             ModelState.Remove("Role");
             ModelState.Remove("ImageUser");
-            //foreach (var error in ModelState)
-            //{
-            //    foreach (var subError in error.Value.Errors)
-            //    {
-            //        Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
-            //    }
-            //}
             if (ModelState.IsValid)
             {
                 var accounts = await _accountService.GetAllAccountAsync();
