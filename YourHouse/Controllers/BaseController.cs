@@ -36,6 +36,7 @@ namespace YourHouse.Web.Controllers
             }
             else
             {
+                ViewBag.RoleId = this.Role;
                 ViewBag.IsLogin = IsLogin;
             }
 

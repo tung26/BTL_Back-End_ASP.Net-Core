@@ -80,7 +80,7 @@
                             </div>
 
                             @{
-                                if ((idUser != null && manageUser) || ViewBag.RoleId == 1)
+                                if ((idUser != null && manageUser && ViewBag.RoleId != 1))
                                 {
                                     <button class="btn btn-danger delete_account-btn" >DELETE ACCOUNT</button>
                                 }

@@ -49,14 +49,13 @@ namespace YourHouse.Application.Services
                     comment.IsDelete = true;
                     _repository.UpdateAsync(comment);
                     await _repository.SaveChangeAsync();
+                }
+                else
+                {
+                    _repository.DeleteAsync(comment);
+                    await _repository.SaveChangeAsync();
+                }
             }
-            else
-            {
-                _repository.DeleteAsync(comment);
-                await _repository.SaveChangeAsync();
-            }
-        }
-
         }
 
         public async Task<IEnumerable<CommentDto>> GetAllCommentAsync()

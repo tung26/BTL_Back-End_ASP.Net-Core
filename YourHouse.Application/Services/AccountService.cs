@@ -66,15 +66,19 @@ namespace YourHouse.Application.Services
                 foreach (var article in articles)
                 {
                     if(article == null) continue;
-                    foreach (var comment in comments)
+                    
+                    if(article.AccountId == account.AccountId)
                     {
-                        if (comment == null) continue;
-                        if (comment.ArticleId == article.ArticleId)
+                        foreach (var comment in comments)
                         {
-                            await _commentService.DeleteCommentAsync(comment.CommentId, true);
+                            if (comment == null) continue;
+                            if (comment.ArticleId == article.ArticleId)
+                            {
+                                await _commentService.DeleteCommentAsync(comment.CommentId, true);
+                            }
                         }
+                        await _articleService.DeleteArticleAsync(article.ArticleId);
                     }
-                    await _articleService.DeleteArticleAsync(article.ArticleId);
                 }
             }
             if (account != null)
