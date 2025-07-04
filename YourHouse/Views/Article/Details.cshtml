@@ -6,12 +6,15 @@
 	var commentsArticle = ViewBag.comments;
 	ViewBag.IdUser = ViewBag.IdUser == null ? -1 : ViewBag.IdUser;
 	var accAuthor = ViewBag.Acc;
+	var like = !ViewBag.isLike ? "" : "liked";
 }
 
 <link href="~/css/article/detail.css" rel="stylesheet" />
+<link href="~/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
+<link href="~/fontawesome-free-6.7.2-web/css/all.min.css" rel="stylesheet" />
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
-	<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="1500">
+	<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="2500">
 		<div class="toast-header">
 			<strong class="me-auto">Thông báo</strong>
 			<small id="toastTime"></small>
@@ -26,13 +29,18 @@
 	<div class="col-8">
 		<div class="container-fluid info_article">
 			<div class="col">
-				<button class="btn btn-outline-warning mb-2 btn-report-article">Bài viết có vấn đề</button>
 				<img style="width: 100%;" src="@Model.ImagesArticles.ToList()[0].ImageArticle" />
 			</div>
 			<div class="col">
 
 			</div>
 			<div class="col">
+				@if(ViewBag.IsLogin)
+				{
+					<button class="btn-likearticle mt-2 @like">
+						<i class="fa-solid fa-heart"></i>
+					</button>
+				}
 				<p>@Model.TypeAr</p>
 				<p>Thời gian: @Model.CreateAt</p>
 				<p>Tiêu đề: @Model.Title</p>
@@ -113,9 +121,22 @@
 	<div class="col-4">
 		<div class="container-fluid acc_author">
 			<div class="row">
-				<p>@accAuthor.FullName</p>
+				<button class="btn btn-outline-warning mb-2 btn-report-article">Bài viết có vấn đề</button>
+				<p class="d-flex align-center justify-content-center" style="font-size: 18px">
+					<a href="/Account/Index/@accAuthor.AccountId" class="nav me-1" style="">
+						<img src="@accAuthor.ImageUser" style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid #cecece;" />
+					</a>
+					@accAuthor.FullName
+				</p>
 				<button class="btn btn-primary" style="height: 50px; cursor: default;">@accAuthor.Phone</button>
 				<p>@accAuthor.Email</p>
+				@if (accAuthor.Facebook != null)
+				{
+					<a target="_blank" class="d-flex nav-item" style="text-decoration: none;" href="@accAuthor.Facebook">
+						<i class="fa-brands fa-facebook" style="font-size: 30px;"></i>
+						<p class="ms-1" style="font-size: 18px;">Liện hệ Facebook</p>
+					</a>
+				}
 			</div>
 		</div>
 	</div>
@@ -146,6 +167,41 @@
 	const containerComment = document.querySelector(".body-comments");
 
 	const btnReportArticle = document.querySelector(".btn-report-article");
+	const btnToggleLikeArticle = document.querySelector(".btn-likearticle");
+
+	btnToggleLikeArticle.onclick = () => {
+		const isLike = btnToggleLikeArticle.classList.value.includes("liked");
+		console.log(btnToggleLikeArticle.classList.value.includes("liked"))
+		console.log(btnToggleLikeArticle.classList.value)
+		if(!isLike) {
+			fetch(`/Administrator/LikeArticle/Add/@Model.ArticleId`)
+				.then(repon => repon.json())
+				.then(data => {
+					if(data.success) {
+						document.getElementById('toastMessage').textContent = data.message;
+						let toastEl = document.getElementById('liveToast');
+						let toast = new bootstrap.Toast(toastEl);
+						toast.show();
+						btnToggleLikeArticle.classList.add('liked');
+					}
+				});
+		}
+		else {
+			fetch(`/Administrator/LikeArticle/Delete/@Model.ArticleId`, {
+				method: "DELETE"
+			})
+				.then(repon => repon.json())
+				.then(data => {
+					if(data.success) {
+						document.getElementById('toastMessage').textContent = data.message;
+						let toastEl = document.getElementById('liveToast');
+						let toast = new bootstrap.Toast(toastEl);
+						toast.show();
+						btnToggleLikeArticle.classList.remove('liked');
+					}
+				});
+		}
+	};
 
 	btnReportArticle.onclick = () => {
 		fetch("/Article/ReportArticle/@Model.ArticleId")

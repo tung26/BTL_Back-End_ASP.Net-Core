@@ -14,6 +14,11 @@ namespace YourHouse.Application.Services
     {
         private readonly IRepository<LikeArticle> _repository;
 
+        public LikeArticleService(IRepository<LikeArticle> repository)
+        {
+            _repository = repository;
+        }
+
         public async Task AddLikeArticleAsync(LikeArticleDto likeArticleDto)
         {
             var likeArticle = new LikeArticle()

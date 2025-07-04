@@ -1,0 +1,59 @@
+﻿@model YourHouse.Application.DTOs.AccountDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutFooterNone.cshtml";
+    var articles = ViewBag.Articles;
+}
+
+<link href="~/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
+<link href="~/fontawesome-free-6.7.2-web/css/all.min.css" rel="stylesheet" />
+
+<div class="row mt-5">
+    <div class="col-3" style="border-right: 1px solid #eee; box-shadow: 0px 2px 3px #ddd; height: 100vh;">
+        <div>
+            <img alt="avatar" src="@Model.ImageUser" style="width: 100%; border-radius: 50%" />
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; height: 40px;">
+            @if(Model.Facebook != null)
+            {
+                <a target="_blank" href="@Model.Facebook">
+                    <i class="fa-brands fa-facebook" style="font-size: 30px;"></i>
+                </a>
+            }
+        </div>
+        <div>
+            Họ tên: @Model.FullName
+        </div>
+        <hr />
+        <div>
+            SDT: @Model.Phone
+        </div>
+        <hr />
+        <div>
+            Email: @Model.Email
+        </div>
+        <hr />
+    </div>
+    <div class="col-9">
+        <div class="row">
+            @foreach (var article in articles)
+            {
+                <a href="/Article/Details/@article.ArticleId" class="text-dark nav-link">
+                    <div class="card mb-3 d-flex" style="min-width: 863px;">
+                        <div class="row">
+                            <div class="col d-flex">
+                                <img src="@article.ImagesArticles[0].ImageArticle" class="img-fluid rounded-start" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">@article.Title</h5>
+                                    <p class="card-text">@article.DescAr</p>
+                                    <p class="card-text"><small class="text-body-secondary">@article.Price vnđ</small></p>
+                                    <p class="card-text"><small class="text-body-secondary">@article.CreateAt</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</div>

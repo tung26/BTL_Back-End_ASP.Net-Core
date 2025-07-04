@@ -22,6 +22,7 @@ namespace YourHouse.Web.Controllers
         private readonly IOfficeService _officeService;
         private readonly IImageArticleService _imageArticleService;
         private readonly ICommentService _commentService;
+        private readonly ILikeArticleService _likeArticleService;
 
         private readonly ICityService _cityService;
         private readonly IDistrictService _districtService;
@@ -36,7 +37,8 @@ namespace YourHouse.Web.Controllers
             IHouseService houseService, 
             IOfficeService officeService,
             IImageArticleService imageArticleService,
-            ICommentService commentService
+            ICommentService commentService,
+            ILikeArticleService likeArticleService
             )
         {
             _articleService = articleService;
@@ -49,6 +51,7 @@ namespace YourHouse.Web.Controllers
             _officeService = officeService;
             _imageArticleService = imageArticleService;
             _commentService = commentService;
+            _likeArticleService = likeArticleService;
         }
 
         public async Task<IActionResult> Index()
@@ -62,6 +65,8 @@ namespace YourHouse.Web.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var article = await _articleService.GetArticleByIdAsync(id);
+
+            var likeArticle = (await _likeArticleService.GetAllLikeArticleAsync()).Where(l => l.ArticleId == id && l.AccountId == this.IdUser).FirstOrDefault();
             
             switch(article.TypeAr)
             {
@@ -122,6 +127,12 @@ namespace YourHouse.Web.Controllers
             ViewBag.Acc = acc;
             ViewBag.City = city;
             ViewBag.District = district;
+            ViewBag.isLike = false;
+
+            if (likeArticle != null)
+            {
+                ViewBag.isLike = true;
+            }
 
             return View(article);
         }

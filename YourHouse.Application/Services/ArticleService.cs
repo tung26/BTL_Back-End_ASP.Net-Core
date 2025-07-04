@@ -21,9 +21,16 @@ namespace YourHouse.Application.Services
         private readonly IOfficeService _officeService;
         private readonly IImageArticleService _imageArticleService;
         private readonly ICommentService _commentService;
+        private readonly ILikeArticleService _likeArticleService;
 
-
-        public ArticleService(IRepository<Article> repository, ITroService troService, IChungCuService chungCuService, IHouseService houseService, IOfficeService officeService, IImageArticleService imageArticleService, ICommentService commentService)
+        public ArticleService(IRepository<Article> repository,
+            ITroService troService,
+            IChungCuService chungCuService,
+            IHouseService houseService,
+            IOfficeService officeService,
+            IImageArticleService imageArticleService,
+            ICommentService commentService,
+            ILikeArticleService likeArticleService)
         {
             _repository = repository;
             _troService = troService;
@@ -32,6 +39,8 @@ namespace YourHouse.Application.Services
             _officeService = officeService;
             _imageArticleService = imageArticleService;
             _commentService = commentService;
+            _likeArticleService = likeArticleService;
+
         }
 
         public async Task AddArticleAsync(ArticleDto articleDto)
@@ -146,6 +155,20 @@ namespace YourHouse.Application.Services
                         break;
                 }
 
+                var likeArticles = await _likeArticleService.GetAllLikeArticleAsync();
+
+                if (likeArticles != null)
+                {
+                    foreach (var likeArticle in likeArticles)
+                    {
+                        if (likeArticle == null) continue;
+                        if (likeArticle.ArticleId == article.ArticleId)
+                        {
+                            await _likeArticleService.DeleteLikeArticleAsync(likeArticle.LikeArticleId);
+                        }
+                    }
+                }
+
                 var comments = await _commentService.GetAllCommentAsync();
                 foreach (var comment in comments)
                 {
@@ -186,7 +209,8 @@ namespace YourHouse.Application.Services
                 TienCoc = article.TienCoc,
                 TypeAr = article.TypeAr,
                 StatusAr = article.StatusAr,
-                CreateAt = article.CreateAt
+                CreateAt = article.CreateAt,
+                ImagesArticles = new List<ImagesArticleDto>()
             });
         }
 

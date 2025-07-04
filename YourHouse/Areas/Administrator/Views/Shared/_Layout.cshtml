@@ -299,16 +299,26 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/Administrator/MyArticle/">
-                    <i class="bi bi-grid"></i>
-                    <span>Article</span>
+                <a class="nav-link collapsed" data-bs-target="#components-nav-article" data-bs-toggle="collapse" href="/Administrator/Article">
+                    <i class="bi bi-menu-button-wide"></i><span>Articles</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Administrator/MyArticle/Add">
-                    <i class="bi bi-grid"></i>
-                    <span>Add Article</span>
-                </a>
+                <ul id="components-nav-article" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/Administrator/MyArticle">
+                            <i class="bi bi-circle"></i><span>My Articles</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Administrator/MyArticle/Add">
+                            <i class="bi bi-circle"></i><span>Add Articles</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Administrator/LikeArticle">
+                            <i class="bi bi-circle"></i><span>Like Articles</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/Administrator/Account/Index/@ViewBag.IdUser">
@@ -322,6 +332,7 @@
                     <span>Change Password</span>
                 </a>
             </li>
+
             @if(ViewBag.RoleId == 1)
             {
                 <li class="nav-item">

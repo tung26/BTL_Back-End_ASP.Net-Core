@@ -17,74 +17,105 @@ namespace YourHouse.Application.Services
         private readonly IRepository<Account> _repository;
         private readonly IArticleService _articleService;
         private readonly ICommentService _commentService;
+        private readonly ILikeArticleService _likeArticleService;
 
         public AccountService(IRepository<Account> repository, 
             ICommentService commentService,
-            IArticleService articleService
+            IArticleService articleService,
+            ILikeArticleService likeArticleService 
             )
         {
             _repository = repository;
             _commentService = commentService;
             _articleService = articleService;
+            _likeArticleService = likeArticleService;
         }
 
         public async Task AddAccountAsync(AccountDto accountDto)
         {
-            var account = new Account()
+            try
             {
-                FullName = accountDto.FullName,
-                PasswordHash = accountDto.PasswordHash,
-                Email = accountDto.Email,
-                Phone = accountDto.Phone,
-                RoleId = accountDto.RoleId
-            };
+                var account = new Account()
+                {
+                    FullName = accountDto.FullName,
+                    PasswordHash = accountDto.PasswordHash,
+                    Email = accountDto.Email,
+                    Phone = accountDto.Phone,
+                    RoleId = accountDto.RoleId
+                };
 
-            await _repository.AddAsync(account);
-            await _repository.SaveChangeAsync();
+                await _repository.AddAsync(account);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
         public async Task DeleteAccountAsync(int id)
         {
-            var account = await _repository.GetByIdAsync(id);
-            var articles = await _articleService.GetAllArticleAsync();
-            var comments = await _commentService.GetAllCommentAsync();
-
-            if (comments != null)
+            try
             {
-                foreach (var comment in comments)
-                {
-                    if (comment == null) continue;
-                    if (comment.AccountId == account.AccountId)
-                    {
-                        await _commentService.DeleteCommentAsync(comment.CommentId, true);
-                    }
-                }
-            }
+                var account = await _repository.GetByIdAsync(id);
+                var articles = await _articleService.GetAllArticleAsync();
+                var comments = await _commentService.GetAllCommentAsync();
+                var likeArticles = await _likeArticleService.GetAllLikeArticleAsync();
 
-            if(articles != null)
-            {
-                foreach (var article in articles)
+                if (likeArticles != null)
                 {
-                    if(article == null) continue;
-                    
-                    if(article.AccountId == account.AccountId)
+                    foreach (var likeArticle in likeArticles)
                     {
-                        foreach (var comment in comments)
+                        if (likeArticle == null) continue;
+                        if (likeArticle.AccountId == account.AccountId)
                         {
-                            if (comment == null) continue;
-                            if (comment.ArticleId == article.ArticleId)
-                            {
-                                await _commentService.DeleteCommentAsync(comment.CommentId, true);
-                            }
+                            await _likeArticleService.DeleteLikeArticleAsync(likeArticle.LikeArticleId);
                         }
-                        await _articleService.DeleteArticleAsync(article.ArticleId);
                     }
                 }
+
+                if (comments != null)
+                {
+                    foreach (var comment in comments)
+                    {
+                        if (comment == null) continue;
+                        if (comment.AccountId == account.AccountId)
+                        {
+                            await _commentService.DeleteCommentAsync(comment.CommentId, true);
+                        }
+                    }
+                }
+
+                if (articles != null)
+                {
+                    foreach (var article in articles)
+                    {
+                        if (article == null) continue;
+
+                        if (article.AccountId == account.AccountId)
+                        {
+                            foreach (var comment in comments)
+                            {
+                                if (comment == null) continue;
+                                if (comment.ArticleId == article.ArticleId)
+                                {
+                                    await _commentService.DeleteCommentAsync(comment.CommentId, true);
+                                }
+                            }
+                            await _articleService.DeleteArticleAsync(article.ArticleId);
+                        }
+                    }
+                }
+                if (account != null)
+                {
+                    _repository.DeleteAsync(account);
+                    await _repository.SaveChangeAsync();
+                }
             }
-            if (account != null)
+            catch (Exception)
             {
-                _repository.DeleteAsync(account);
-                await _repository.SaveChangeAsync();
+                throw;
             }
         }
 

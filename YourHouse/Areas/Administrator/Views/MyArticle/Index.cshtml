@@ -23,6 +23,7 @@
 	<nav>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="/">Home</a></li>
+			<li class="breadcrumb-item active">Article</li>
 			<li class="breadcrumb-item active">MyArticle</li>
 		</ol>
 	</nav>
@@ -99,6 +100,7 @@
 							<td class="d-flex">
 								<a asp-area="Administrator" asp-controller="MyArticle" asp-action="Edit" asp-route-id="${article.ArticleId}" class="btn btn-primary">Sửa</a>
 								<button type="button" class="btn btn-danger btn-delete ms-1" data-id="${article.ArticleId}">Xóa</button>
+							<a asp-area="" asp-controller="Article" asp-action="Details" asp-route-id="${article.ArticleId}" class="btn btn-success ms-1">Xem</a>
 							</td>
 						</tr>
 				`

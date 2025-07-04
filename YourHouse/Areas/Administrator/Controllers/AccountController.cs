@@ -24,8 +24,11 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
         public async Task<IActionResult> Index(int id)
         {
             var user = await _accountService.GetAccountByIdAsync(id);
-
-            if (user == null)
+            if(id != this.IdUser && user != null)
+            {
+                return RedirectToAction("Index", "Account", new { area = "", id = id });
+            }
+            if (user == null || !this.IsLogin)
             {
                 return RedirectToAction("Login", "Account", new { area = "" });
             }

@@ -7,6 +7,8 @@ using YourHouse.Application.Interfaces;
 using System.Threading.Tasks;
 using YourHouse.Application.DTOs;
 using YourHouse.Infrastructure;
+using Microsoft.AspNetCore.Http.HttpResults;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace YourHouse.Web.Controllers
 {
@@ -14,10 +16,43 @@ namespace YourHouse.Web.Controllers
     public class AccountController : BaseController
     {
         private readonly IAccountService _accountService;
+        private readonly IArticleService _articleService;
+        private readonly IImageArticleService _imageArticleService;
 
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IArticleService articleService, IImageArticleService imageArticleService)
         {
             _accountService = accountService;
+            _articleService = articleService;
+            _imageArticleService = imageArticleService;
+        }
+
+        public async Task<IActionResult> Index(int id)
+        {
+            var user = await _accountService.GetAccountByIdAsync(id);
+
+            if(user == null)
+            {
+                return NotFound();
+            }
+            var articles = await _articleService.GetAllArticleAsync();
+            articles = articles.Where(x => x.AccountId == id).ToList();
+
+            var images = await _imageArticleService.GetAllImageArticleAsync();
+            foreach (var r in articles)
+            {
+                var imgs = images.Where(i => r.ArticleId == i.ArticleId).Select(e => e).ToList();
+                foreach (var img in imgs)
+                {
+                    r.ImagesArticles.Add(img);
+                }
+            }
+
+            if (articles != null)
+            {
+                ViewBag.Articles = articles;
+            }
+
+            return View(user);
         }
 
         [HttpGet]
