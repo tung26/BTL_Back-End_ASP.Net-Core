@@ -20,53 +20,88 @@ namespace YourHouse.Application.Services
 
         public async Task AddImageArticleAsync(ImagesArticleDto ImageArticleDto)
         {
-            var imageArticle = new ImagesArticle() 
+            try
             {
-                ArticleId = ImageArticleDto.ArticleId,
-                ImageArticle = ImageArticleDto.ImageArticle
-            };
+                var imageArticle = new ImagesArticle()
+                {
+                    ArticleId = ImageArticleDto.ArticleId,
+                    ImageArticle = ImageArticleDto.ImageArticle
+                };
 
-            await _repository.AddAsync(imageArticle);
-            await _repository.SaveChangeAsync();
+                await _repository.AddAsync(imageArticle);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task DeleteImageArticleAsync(int id)
         {
-            var Image = await _repository.GetByIdAsync(id);
-
-            if (Image != null)
+            try
             {
-                _repository.DeleteAsync(Image);
-                await _repository.SaveChangeAsync();
+                var Image = await _repository.GetByIdAsync(id);
+
+                if (Image != null)
+                {
+                    _repository.DeleteAsync(Image);
+                    await _repository.SaveChangeAsync();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
         public async Task<IEnumerable<ImagesArticleDto>> GetAllImageArticleAsync()
         {
-            var imageArticles = await _repository.GetAllAsync();
-            return imageArticles.Select(x => new ImagesArticleDto()
+            try
             {
-                ArticleId = x.ArticleId,
-                ImageArticle = x.ImageArticle,
-                ImageId = x.ImageId
-            });
+                var imageArticles = await _repository.GetAllAsync();
+                return imageArticles.Select(x => new ImagesArticleDto()
+                {
+                    ArticleId = x.ArticleId,
+                    ImageArticle = x.ImageArticle,
+                    ImageId = x.ImageId
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<ImagesArticle?> GetImageArticleByIdAsync(int id)
         {
-            var imageArticle = await _repository.GetByIdAsync(id);
-            return imageArticle == null ? null : new ImagesArticle()
+            try
             {
-                ArticleId = imageArticle.ArticleId,
-                ImageArticle = imageArticle.ImageArticle,
-                ImageId = imageArticle.ImageId
-            };
+                var imageArticle = await _repository.GetByIdAsync(id);
+                return imageArticle == null ? null : new ImagesArticle()
+                {
+                    ArticleId = imageArticle.ArticleId,
+                    ImageArticle = imageArticle.ImageArticle,
+                    ImageId = imageArticle.ImageId
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task UpdateImageArticle(ImagesArticle ImageArticle)
         {
-            _repository.UpdateAsync(ImageArticle);
-            await _repository.SaveChangeAsync();
+            try
+            {
+                _repository.UpdateAsync(ImageArticle);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

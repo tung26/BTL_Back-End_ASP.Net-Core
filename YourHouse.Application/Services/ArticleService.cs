@@ -45,224 +45,259 @@ namespace YourHouse.Application.Services
 
         public async Task AddArticleAsync(ArticleDto articleDto)
         {
-            var images = new List<ImagesArticle>();
-            var imagesDto = articleDto.ImagesArticles;
-
-            foreach ( var image in imagesDto )
+            try
             {
-                images.Add(new ImagesArticle()
+                var images = new List<ImagesArticle>();
+                var imagesDto = articleDto.ImagesArticles;
+
+                foreach (var image in imagesDto)
                 {
-                    ArticleId = image.ArticleId,
-                    ImageArticle = image.ImageArticle,
-                });
-            }
+                    images.Add(new ImagesArticle()
+                    {
+                        ArticleId = image.ArticleId,
+                        ImageArticle = image.ImageArticle,
+                    });
+                }
 
-            var article = new Article()
-            {
-                AccountId = articleDto.AccountId,
-                Title = articleDto.Title,
-                DescAr = articleDto.DescAr,
-                Addr = articleDto.Addr,
-                CityAr = articleDto.CityAr,
-                DistrictAr = articleDto.DistrictAr,
-                S = articleDto.S,
-                Price = articleDto.Price,
-                TienCoc = articleDto.TienCoc,
-                TypeAr = articleDto.TypeAr,
-                StatusAr = articleDto.StatusAr,
-                ImagesArticles = images,
-            };
-
-            if (articleDto.TypeAr == "ChungCu")
-            {
-                ChungCuDto ccDto = articleDto.ChungCu;
-                ChungCu chungCu = new ChungCu()
+                var article = new Article()
                 {
-                    Floor = ccDto.Floor,
-                    BedRoom = ccDto.BedRoom,
-                    BathRoom = ccDto.BedRoom,
-                    MaxPerson = ccDto.MaxPerson,
-                    WaterPrice = ccDto.WaterPrice,
-                    ElectricPrice = ccDto.ElectricPrice,
+                    AccountId = articleDto.AccountId,
+                    Title = articleDto.Title,
+                    DescAr = articleDto.DescAr,
+                    Addr = articleDto.Addr,
+                    CityAr = articleDto.CityAr,
+                    DistrictAr = articleDto.DistrictAr,
+                    S = articleDto.S,
+                    Price = articleDto.Price,
+                    TienCoc = articleDto.TienCoc,
+                    TypeAr = articleDto.TypeAr,
+                    StatusAr = articleDto.StatusAr,
+                    ImagesArticles = images,
                 };
 
-                article.ChungCu = chungCu;
-            }
-            else if (articleDto.TypeAr == "Office")
-            {
-                OfficeDto officeDto = articleDto.Office;
-                Office office = new Office()
+                if (articleDto.TypeAr == "ChungCu")
                 {
-                    Floor = officeDto.Floor,
-                    DoorDrt = officeDto.DoorDrt,
-                };
+                    ChungCuDto ccDto = articleDto.ChungCu;
+                    ChungCu chungCu = new ChungCu()
+                    {
+                        Floor = ccDto.Floor,
+                        BedRoom = ccDto.BedRoom,
+                        BathRoom = ccDto.BedRoom,
+                        MaxPerson = ccDto.MaxPerson,
+                        WaterPrice = ccDto.WaterPrice,
+                        ElectricPrice = ccDto.ElectricPrice,
+                    };
 
-                article.Office = office;
-            }
-            else if (articleDto.TypeAr == "House")
-            {
-                HouseDto houseDto = articleDto.House;
-                House house = new House()
+                    article.ChungCu = chungCu;
+                }
+                else if (articleDto.TypeAr == "Office")
                 {
-                    Floors = houseDto.Floors,
-                    BedRoom = houseDto.BedRoom,
-                    BathRoom= houseDto.BedRoom,
-                };
+                    OfficeDto officeDto = articleDto.Office;
+                    Office office = new Office()
+                    {
+                        Floor = officeDto.Floor,
+                        DoorDrt = officeDto.DoorDrt,
+                    };
 
-                article.House = house;
-            }
-            else if (articleDto.TypeAr == "Tro")
-            {
-                TroDto troDto = articleDto.Tro;
-                Tro tro = new Tro()
+                    article.Office = office;
+                }
+                else if (articleDto.TypeAr == "House")
                 {
-                    Floor = troDto.Floor,
-                    MaxPerson = troDto.MaxPerson,
-                    WaterPrice = troDto.WaterPrice,
-                    ElectricPrice= troDto.ElectricPrice,
-                };
+                    HouseDto houseDto = articleDto.House;
+                    House house = new House()
+                    {
+                        Floors = houseDto.Floors,
+                        BedRoom = houseDto.BedRoom,
+                        BathRoom = houseDto.BedRoom,
+                    };
 
-                article.Tro = tro;
+                    article.House = house;
+                }
+                else if (articleDto.TypeAr == "Tro")
+                {
+                    TroDto troDto = articleDto.Tro;
+                    Tro tro = new Tro()
+                    {
+                        Floor = troDto.Floor,
+                        MaxPerson = troDto.MaxPerson,
+                        WaterPrice = troDto.WaterPrice,
+                        ElectricPrice = troDto.ElectricPrice,
+                    };
+
+                    article.Tro = tro;
+                }
+                else
+                {
+                    throw new Exception();
+                }
+
+                await _repository.AddAsync(article);
+                await _repository.SaveChangeAsync();
             }
-            else
+            catch (Exception)
             {
-                throw new Exception();
+                throw;
             }
-
-            await _repository.AddAsync(article);
-            await _repository.SaveChangeAsync();
         }
 
         public async Task DeleteArticleAsync(int id)
         {
-            var article = await _repository.GetByIdAsync(id);
-
-            if (article != null)
+            try
             {
-                switch (article.TypeAr)
-                {
-                    case "Tro":
-                        await _troService.DeleteTroAsync(article.ArticleId);
-                        break;
-                    case "ChungCu":
-                        await _chungCuService.DeleteChungCuAsync(article.ArticleId);
-                        break;
-                    case "House":
-                        await _houseService.DeleteHouseAsync(article.ArticleId);
-                        break;
-                    case "Office":
-                        await _officeService.DeleteOfficeAsync(article.ArticleId);
-                        break;
-                }
+                var article = await _repository.GetByIdAsync(id);
 
-                var likeArticles = await _likeArticleService.GetAllLikeArticleAsync();
-
-                if (likeArticles != null)
+                if (article != null)
                 {
-                    foreach (var likeArticle in likeArticles)
+                    switch (article.TypeAr)
                     {
-                        if (likeArticle == null) continue;
-                        if (likeArticle.ArticleId == article.ArticleId)
+                        case "Tro":
+                            await _troService.DeleteTroAsync(article.ArticleId);
+                            break;
+                        case "ChungCu":
+                            await _chungCuService.DeleteChungCuAsync(article.ArticleId);
+                            break;
+                        case "House":
+                            await _houseService.DeleteHouseAsync(article.ArticleId);
+                            break;
+                        case "Office":
+                            await _officeService.DeleteOfficeAsync(article.ArticleId);
+                            break;
+                    }
+
+                    var likeArticles = await _likeArticleService.GetAllLikeArticleAsync();
+
+                    if (likeArticles != null)
+                    {
+                        foreach (var likeArticle in likeArticles)
                         {
-                            await _likeArticleService.DeleteLikeArticleAsync(likeArticle.LikeArticleId);
+                            if (likeArticle == null) continue;
+                            if (likeArticle.ArticleId == article.ArticleId)
+                            {
+                                await _likeArticleService.DeleteLikeArticleAsync(likeArticle.LikeArticleId);
+                            }
                         }
                     }
-                }
 
-                var comments = await _commentService.GetAllCommentAsync();
-                foreach (var comment in comments)
-                {
-                    if(comment != null && comment.ArticleId == id)
+                    var comments = await _commentService.GetAllCommentAsync();
+                    foreach (var comment in comments)
                     {
-                        await _commentService.DeleteCommentAsync(comment.CommentId, true);
+                        if (comment != null && comment.ArticleId == id)
+                        {
+                            await _commentService.DeleteCommentAsync(comment.CommentId, true);
+                        }
                     }
-                }
 
-                var images = await _imageArticleService.GetAllImageArticleAsync();
-                foreach (var image in images)
-                {
-                    if (image.ArticleId == article.ArticleId)
+                    var images = await _imageArticleService.GetAllImageArticleAsync();
+                    foreach (var image in images)
                     {
-                        await _imageArticleService.DeleteImageArticleAsync(image.ImageId);
+                        if (image.ArticleId == article.ArticleId)
+                        {
+                            await _imageArticleService.DeleteImageArticleAsync(image.ImageId);
+                        }
                     }
+                    _repository.DeleteAsync(article);
+                    await _repository.SaveChangeAsync();
                 }
-                _repository.DeleteAsync(article);
-                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }   
 
         public async Task<IEnumerable<ArticleDto>> GetAllArticleAsync()
         {
-            var articles = await _repository.GetAllAsync();
-
-            return articles.Select(article => new ArticleDto()
+            try
             {
-                AccountId = article.AccountId,
-                ArticleId = article.ArticleId,
-                Title = article.Title,
-                DescAr = article.DescAr,
-                Addr = article.Addr,
-                CityAr = article.CityAr,
-                DistrictAr = article.DistrictAr,
-                S = article.S,
-                Price = article.Price,
-                TienCoc = article.TienCoc,
-                TypeAr = article.TypeAr,
-                StatusAr = article.StatusAr,
-                CreateAt = article.CreateAt,
-                ImagesArticles = new List<ImagesArticleDto>()
-            });
+                var articles = await _repository.GetAllAsync();
+
+                return articles.Select(article => new ArticleDto()
+                {
+                    AccountId = article.AccountId,
+                    ArticleId = article.ArticleId,
+                    Title = article.Title,
+                    DescAr = article.DescAr,
+                    Addr = article.Addr,
+                    CityAr = article.CityAr,
+                    DistrictAr = article.DistrictAr,
+                    S = article.S,
+                    Price = article.Price,
+                    TienCoc = article.TienCoc,
+                    TypeAr = article.TypeAr,
+                    StatusAr = article.StatusAr,
+                    CreateAt = article.CreateAt,
+                    ImagesArticles = new List<ImagesArticleDto>()
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<ArticleDto?> GetArticleByIdAsync(int id)
         {
-            var article = await _repository.GetByIdAsync(id);
-
-            var articleDto = article == null ? null : new ArticleDto()
+            try
             {
-                AccountId = article.AccountId,
-                ArticleId = article.ArticleId,
-                Title = article.Title,
-                DescAr = article.DescAr,
-                Addr = article.Addr,
-                CityAr = article.CityAr,
-                DistrictAr = article.DistrictAr,
-                S = article.S,
-                Price = article.Price,
-                TienCoc = article.TienCoc,
-                TypeAr = article.TypeAr,
-                StatusAr = article.StatusAr,
-                CreateAt = article.CreateAt,
-                ImagesArticles = new List<ImagesArticleDto>()
-            };
+                var article = await _repository.GetByIdAsync(id);
 
-            if (articleDto == null )
-            {
-                return null;
+                var articleDto = article == null ? null : new ArticleDto()
+                {
+                    AccountId = article.AccountId,
+                    ArticleId = article.ArticleId,
+                    Title = article.Title,
+                    DescAr = article.DescAr,
+                    Addr = article.Addr,
+                    CityAr = article.CityAr,
+                    DistrictAr = article.DistrictAr,
+                    S = article.S,
+                    Price = article.Price,
+                    TienCoc = article.TienCoc,
+                    TypeAr = article.TypeAr,
+                    StatusAr = article.StatusAr,
+                    CreateAt = article.CreateAt,
+                    ImagesArticles = new List<ImagesArticleDto>()
+                };
+
+                if (articleDto == null)
+                {
+                    return null;
+                }
+
+                return articleDto;
             }
-
-            return articleDto;
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task UpdateArticle(ArticleDto articleDto)
         {
-            var article = await _repository.GetByIdAsync(articleDto.ArticleId);
-
-            if (article != null)
+            try
             {
-                article.Title = articleDto.Title;
-                article.DescAr = articleDto.DescAr;
-                article.Addr = articleDto.Addr;
-                article.CityAr = (int)articleDto.CityAr;
-                article.DistrictAr = (int)articleDto.DistrictAr;
-                article.StatusAr = (int)articleDto.StatusAr;
-                article.S = (decimal)articleDto.S;
-                article.Price = (decimal)articleDto.Price;
-                article.TienCoc = (decimal)articleDto.TienCoc;
-                article.TypeAr = articleDto.TypeAr;
+                var article = await _repository.GetByIdAsync(articleDto.ArticleId);
 
-                _repository.UpdateAsync(article);
-                await _repository.SaveChangeAsync();
+                if (article != null)
+                {
+                    article.Title = articleDto.Title;
+                    article.DescAr = articleDto.DescAr;
+                    article.Addr = articleDto.Addr;
+                    article.CityAr = (int)articleDto.CityAr;
+                    article.DistrictAr = (int)articleDto.DistrictAr;
+                    article.StatusAr = (int)articleDto.StatusAr;
+                    article.S = (decimal)articleDto.S;
+                    article.Price = (decimal)articleDto.Price;
+                    article.TienCoc = (decimal)articleDto.TienCoc;
+                    article.TypeAr = articleDto.TypeAr;
+
+                    _repository.UpdateAsync(article);
+                    await _repository.SaveChangeAsync();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

@@ -22,52 +22,87 @@ namespace YourHouse.Application.Services
 
         public async Task AddDistrictAsync(DistrictDto cistrictDto)
         {
-            var district = new District()
+            try
             {
-                DistrictName = cistrictDto.DistrictName,
-                CityId = cistrictDto.CityId,
-            };
+                var district = new District()
+                {
+                    DistrictName = cistrictDto.DistrictName,
+                    CityId = cistrictDto.CityId,
+                };
 
-            await _repository.AddAsync(district);
-            await _repository.SaveChangeAsync();
+                await _repository.AddAsync(district);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async void DeleteDistrictAsync(int id)
         {
-            var district = await _repository.GetByIdAsync(id);
-            if( district != null )
+            try
             {
-                _repository.DeleteAsync(district);
-                await _repository.SaveChangeAsync();
+                var district = await _repository.GetByIdAsync(id);
+                if (district != null)
+                {
+                    _repository.DeleteAsync(district);
+                    await _repository.SaveChangeAsync();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
         public async Task<IEnumerable<DistrictDto>> GetAllDistrictAsync()
         {
-            var districtes = await _repository.GetAllAsync();
-            return districtes.Select(x => new DistrictDto()
+            try
             {
-                DistrictName = x.DistrictName,
-                CityId = x.CityId,
-                DistrictId = x.DistrictId,
-            });
+                var districtes = await _repository.GetAllAsync();
+                return districtes.Select(x => new DistrictDto()
+                {
+                    DistrictName = x.DistrictName,
+                    CityId = x.CityId,
+                    DistrictId = x.DistrictId,
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<DistrictDto?> GetDistrictByIdAsync(int id)
         {
-            var district = await _repository.GetByIdAsync(id);
-            return district == null ? null : new DistrictDto()
+            try
             {
-                DistrictId = district.DistrictId,
-                CityId = district.CityId,
-                DistrictName = district.DistrictName,
-            };
+                var district = await _repository.GetByIdAsync(id);
+                return district == null ? null : new DistrictDto()
+                {
+                    DistrictId = district.DistrictId,
+                    CityId = district.CityId,
+                    DistrictName = district.DistrictName,
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async void UpdateDistrict(District cistrict)
         {
-            _repository.UpdateAsync(cistrict);
-            await _repository.SaveChangeAsync();
+            try
+            {
+                _repository.UpdateAsync(cistrict);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

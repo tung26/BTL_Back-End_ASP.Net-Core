@@ -21,61 +21,96 @@ namespace YourHouse.Application.Services
 
         public async Task AddOfficeAsync(OfficeDto OfficeDto)
         {
-            var office = new Office()
+            try
             {
+                var office = new Office()
+                {
 
-            };
+                };
 
-            await _repository.AddAsync(office);
+                await _repository.AddAsync(office);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task DeleteOfficeAsync(int id)
         {
-            var office = await _repository.GetByIdAsync(id);
-
-            if (office != null)
+            try
             {
-                _repository.DeleteAsync(office);
-                await _repository.SaveChangeAsync();
+                var office = await _repository.GetByIdAsync(id);
+
+                if (office != null)
+                {
+                    _repository.DeleteAsync(office);
+                    await _repository.SaveChangeAsync();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
         public async Task<IEnumerable<OfficeDto>> GetAllOfficeAsync()
         {
-            var offices = await _repository.GetAllAsync();
-
-            return offices.Select(x => new OfficeDto()
+            try
             {
-                ArticleId = x.ArticleId,
-                Floor = x.Floor,
-                DoorDrt = x.DoorDrt,
-            });
+                var offices = await _repository.GetAllAsync();
+
+                return offices.Select(x => new OfficeDto()
+                {
+                    ArticleId = x.ArticleId,
+                    Floor = x.Floor,
+                    DoorDrt = x.DoorDrt,
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<OfficeDto?> GetOfficeByIdAsync(int id)
         {
-            var office = await _repository.GetByIdAsync(id);
-
-            return office == null ? null : new OfficeDto()
+            try
             {
-                ArticleId = id,
-                Floor = office.Floor,
-                DoorDrt = office.DoorDrt,
-            };
+                var office = await _repository.GetByIdAsync(id);
+
+                return office == null ? null : new OfficeDto()
+                {
+                    ArticleId = id,
+                    Floor = office.Floor,
+                    DoorDrt = office.DoorDrt,
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task UpdateOffice(OfficeDto officeDto)
         {
-            var office = await _repository.GetByIdAsync(officeDto.ArticleId);
-
-            if (office != null)
+            try
             {
-                office.Floor = officeDto.Floor;
-                office.DoorDrt = officeDto.DoorDrt;
-            }
+                var office = await _repository.GetByIdAsync(officeDto.ArticleId);
 
-            _repository.UpdateAsync(office);
-            await _repository.SaveChangeAsync();
+                if (office != null)
+                {
+                    office.Floor = officeDto.Floor;
+                    office.DoorDrt = officeDto.DoorDrt;
+                }
+
+                _repository.UpdateAsync(office);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

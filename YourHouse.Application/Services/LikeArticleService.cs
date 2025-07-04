@@ -21,56 +21,91 @@ namespace YourHouse.Application.Services
 
         public async Task AddLikeArticleAsync(LikeArticleDto likeArticleDto)
         {
-            var likeArticle = new LikeArticle()
+            try
             {
-                ArticleId = likeArticleDto.ArticleId,
-                AccountId = likeArticleDto.AccountId,
-            };
+                var likeArticle = new LikeArticle()
+                {
+                    ArticleId = likeArticleDto.ArticleId,
+                    AccountId = likeArticleDto.AccountId,
+                };
 
-            await _repository.AddAsync(likeArticle);
-            await _repository.SaveChangeAsync();
+                await _repository.AddAsync(likeArticle);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task DeleteLikeArticleAsync(int id)
         {
-            var likeArticle = await _repository.GetByIdAsync(id);
-            _repository.DeleteAsync(likeArticle);
-            await _repository.SaveChangeAsync();
+            try
+            {
+                var likeArticle = await _repository.GetByIdAsync(id);
+                _repository.DeleteAsync(likeArticle);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<IEnumerable<LikeArticleDto>> GetAllLikeArticleAsync()
         {
-            var likeArtiles = await _repository.GetAllAsync();
-
-            return likeArtiles.Select(x => new LikeArticleDto()
+            try
             {
-                LikeArticleId = x.LikeArticleId,
-                ArticleId = x.ArticleId,
-                AccountId = x.AccountId,
-            });
+                var likeArtiles = await _repository.GetAllAsync();
+
+                return likeArtiles.Select(x => new LikeArticleDto()
+                {
+                    LikeArticleId = x.LikeArticleId,
+                    ArticleId = x.ArticleId,
+                    AccountId = x.AccountId,
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<LikeArticleDto?> GetLikeArticleByIdAsync(int id)
         {
-            var likeArticle = await _repository.GetByIdAsync(id);
-
-            return likeArticle == null ? null : new LikeArticleDto()
+            try
             {
-                LikeArticleId = likeArticle.LikeArticleId,
-                ArticleId = likeArticle.ArticleId,
-                AccountId = likeArticle.AccountId,
-            };
+                var likeArticle = await _repository.GetByIdAsync(id);
+
+                return likeArticle == null ? null : new LikeArticleDto()
+                {
+                    LikeArticleId = likeArticle.LikeArticleId,
+                    ArticleId = likeArticle.ArticleId,
+                    AccountId = likeArticle.AccountId,
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task UpdateLikeArticle(LikeArticleDto likeArticleDto)
         {
-            var likeArticle = await _repository.GetByIdAsync(likeArticleDto.LikeArticleId);
+            try
+            {
+                var likeArticle = await _repository.GetByIdAsync(likeArticleDto.LikeArticleId);
 
-            likeArticle.ArticleId = likeArticleDto.ArticleId;
-            likeArticle.AccountId = likeArticleDto.AccountId;
+                likeArticle.ArticleId = likeArticleDto.ArticleId;
+                likeArticle.AccountId = likeArticleDto.AccountId;
 
-            _repository.UpdateAsync(likeArticle);
-            await _repository.SaveChangeAsync();
+                _repository.UpdateAsync(likeArticle);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

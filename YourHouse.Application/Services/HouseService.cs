@@ -21,64 +21,99 @@ namespace YourHouse.Application.Services
 
         public async Task AddHouseAsync(HouseDto HouseDto)
         {
-            var house = new House()
+            try
             {
+                var house = new House()
+                {
 
-            };
+                };
 
-            await _repository.AddAsync(house);
+                await _repository.AddAsync(house);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task DeleteHouseAsync(int id)
         {
-            var house = await _repository.GetByIdAsync(id);
-
-            if (house != null)
+            try
             {
-                _repository.DeleteAsync(house);
-                await _repository.SaveChangeAsync();
+                var house = await _repository.GetByIdAsync(id);
+
+                if (house != null)
+                {
+                    _repository.DeleteAsync(house);
+                    await _repository.SaveChangeAsync();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
         public async Task<IEnumerable<HouseDto>> GetAllHouseAsync()
         {
-            var houses = await _repository.GetAllAsync();
-
-            return houses.Select(x => new HouseDto()
+            try
             {
-                ArticleId = x.ArticleId,
-                BedRoom = x.BedRoom,
-                BathRoom = x.BedRoom,
-                Floors = x.Floors,
-            });
+                var houses = await _repository.GetAllAsync();
+
+                return houses.Select(x => new HouseDto()
+                {
+                    ArticleId = x.ArticleId,
+                    BedRoom = x.BedRoom,
+                    BathRoom = x.BedRoom,
+                    Floors = x.Floors,
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<HouseDto?> GetHouseByIdAsync(int id)
         {
-            var house = await _repository.GetByIdAsync(id);
-
-            return house == null ? null : new HouseDto()
+            try
             {
-                ArticleId = id,
-                BedRoom = house.BedRoom,
-                BathRoom = house.BathRoom,
-                Floors = house.Floors
-            };
+                var house = await _repository.GetByIdAsync(id);
+
+                return house == null ? null : new HouseDto()
+                {
+                    ArticleId = id,
+                    BedRoom = house.BedRoom,
+                    BathRoom = house.BathRoom,
+                    Floors = house.Floors
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task UpdateHouse(HouseDto houseDto)
         {
-            var house = await _repository.GetByIdAsync(houseDto.ArticleId);
-
-            if (house != null)
+            try
             {
-                house.BedRoom = houseDto.BedRoom;
-                house.BathRoom = houseDto.BathRoom;
-                house.Floors = houseDto.Floors;
-            }
+                var house = await _repository.GetByIdAsync(houseDto.ArticleId);
 
-            _repository.UpdateAsync(house);
-            await _repository.SaveChangeAsync();
+                if (house != null)
+                {
+                    house.BedRoom = houseDto.BedRoom;
+                    house.BathRoom = houseDto.BathRoom;
+                    house.Floors = houseDto.Floors;
+                }
+
+                _repository.UpdateAsync(house);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

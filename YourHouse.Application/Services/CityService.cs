@@ -20,53 +20,86 @@ namespace YourHouse.Application.Services
 
         public async Task AddCityAsync(CityDto cityDto)
         {
-            var city = new City()
+            try
             {
-                CityId = cityDto.CityId,
-                CityName = cityDto.CityName,
-            };
+                var city = new City()
+                {
+                    CityId = cityDto.CityId,
+                    CityName = cityDto.CityName,
+                };
 
-            await _repository.AddAsync(city);
-            await _repository.SaveChangeAsync();
+                await _repository.AddAsync(city);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async void DeleteCityAsync(int id)
         {
-            var city = await _repository.GetByIdAsync(id);
-            if(city != null)
+            try
             {
-                _repository.DeleteAsync(city);
-                await _repository.SaveChangeAsync();
+                var city = await _repository.GetByIdAsync(id);
+                if (city != null)
+                {
+                    _repository.DeleteAsync(city);
+                    await _repository.SaveChangeAsync();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
         public async Task<IEnumerable<CityDto>> GetAllCityAsync()
         {
-            var cities = await _repository.GetAllAsync();
-            return cities.Select(c => new CityDto()
+            try
             {
-                CityId = c.CityId,
-                CityName = c.CityName,
-            });
+                var cities = await _repository.GetAllAsync();
+                return cities.Select(c => new CityDto()
+                {
+                    CityId = c.CityId,
+                    CityName = c.CityName,
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<CityDto?> GetCityByIdAsync(int id)
         {
-            var city = await _repository.GetByIdAsync(id);
-            //if (city != null)
-            //{
+            try
+            {
+                var city = await _repository.GetByIdAsync(id);
+
                 return city == null ? null : new CityDto()
                 {
                     CityId = city.CityId,
                     CityName = city.CityName,
                 };
-            //}
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async void UpdateCity(City city)
         {
-            _repository.UpdateAsync(city);
-            await _repository.SaveChangeAsync();
+            try
+            {
+                _repository.UpdateAsync(city);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

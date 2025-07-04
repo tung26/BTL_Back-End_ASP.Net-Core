@@ -131,13 +131,7 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
                 ModelState.Remove("Floor");
                 ModelState.Remove("ElectricPrice");
             }
-            //foreach (var error in ModelState)
-            //{
-            //    foreach (var subError in error.Value.Errors)
-            //    {
-            //        Console.WriteLine($"Lỗi tại {error.Key}: {subError.ErrorMessage}");
-            //    }
-            //}
+
             if (ModelState.IsValid)
             {
                 ImagesArticleDto imagesArticle = new ImagesArticleDto()

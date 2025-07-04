@@ -21,73 +21,108 @@ namespace YourHouse.Application.Services
 
         public async Task AddChungCuAsync(ChungCuDto ChungCuDto)
         {
-            var chungCu = new ChungCu()
+            try
             {
+                var chungCu = new ChungCu()
+                {
 
-            };
+                };
 
-            await _repository.AddAsync(chungCu);
+                await _repository.AddAsync(chungCu);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task DeleteChungCuAsync(int id)
         {
-            var chungCu = await _repository.GetByIdAsync(id);
-
-            if (chungCu != null)
+            try
             {
-                _repository.DeleteAsync(chungCu);
-                await _repository.SaveChangeAsync();
+                var chungCu = await _repository.GetByIdAsync(id);
+
+                if (chungCu != null)
+                {
+                    _repository.DeleteAsync(chungCu);
+                    await _repository.SaveChangeAsync();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
         public async Task<IEnumerable<ChungCuDto>> GetAllChungCuAsync()
         {
-            var chungCus = await _repository.GetAllAsync();
-
-            return chungCus.Select(x => new ChungCuDto()
+            try
             {
-                ArticleId = x.ArticleId,
-                Floor = x.Floor,
-                BathRoom = x.BathRoom,
-                BedRoom = x.BedRoom,
-                MaxPerson = x.MaxPerson,
-                WaterPrice = x.WaterPrice,
-                ElectricPrice = x.ElectricPrice,
-            });
+                var chungCus = await _repository.GetAllAsync();
+
+                return chungCus.Select(x => new ChungCuDto()
+                {
+                    ArticleId = x.ArticleId,
+                    Floor = x.Floor,
+                    BathRoom = x.BathRoom,
+                    BedRoom = x.BedRoom,
+                    MaxPerson = x.MaxPerson,
+                    WaterPrice = x.WaterPrice,
+                    ElectricPrice = x.ElectricPrice,
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<ChungCuDto?> GetChungCuByIdAsync(int id)
         {
-            var chungCu = await _repository.GetByIdAsync(id);
-
-            return chungCu == null ? null : new ChungCuDto()
+            try
             {
-                ArticleId = chungCu.ArticleId,
-                Floor = chungCu.Floor,
-                MaxPerson = chungCu.MaxPerson,
-                WaterPrice = chungCu.WaterPrice,
-                ElectricPrice = chungCu.ElectricPrice,
-                BathRoom = chungCu.BathRoom,
-                BedRoom = chungCu.BedRoom
-            };
+                var chungCu = await _repository.GetByIdAsync(id);
+
+                return chungCu == null ? null : new ChungCuDto()
+                {
+                    ArticleId = chungCu.ArticleId,
+                    Floor = chungCu.Floor,
+                    MaxPerson = chungCu.MaxPerson,
+                    WaterPrice = chungCu.WaterPrice,
+                    ElectricPrice = chungCu.ElectricPrice,
+                    BathRoom = chungCu.BathRoom,
+                    BedRoom = chungCu.BedRoom
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task UpdateChungCu(ChungCuDto chungCuDto)
         {
-            var chungCu = await _repository.GetByIdAsync(chungCuDto.ArticleId);
-
-            if (chungCu == null)
+            try
             {
-                chungCu.Floor = chungCuDto.Floor;
-                chungCu.BathRoom = chungCuDto.BathRoom;
-                chungCu.BedRoom = chungCuDto.BedRoom;
-                chungCu.MaxPerson = chungCuDto.MaxPerson;
-                chungCu.WaterPrice = chungCuDto.WaterPrice;
-                chungCu.ElectricPrice = chungCuDto.ElectricPrice;
-            }
+                var chungCu = await _repository.GetByIdAsync(chungCuDto.ArticleId);
 
-            _repository.UpdateAsync(chungCu);
-            await _repository.SaveChangeAsync();
+                if (chungCu == null)
+                {
+                    chungCu.Floor = chungCuDto.Floor;
+                    chungCu.BathRoom = chungCuDto.BathRoom;
+                    chungCu.BedRoom = chungCuDto.BedRoom;
+                    chungCu.MaxPerson = chungCuDto.MaxPerson;
+                    chungCu.WaterPrice = chungCuDto.WaterPrice;
+                    chungCu.ElectricPrice = chungCuDto.ElectricPrice;
+                }
+
+                _repository.UpdateAsync(chungCu);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

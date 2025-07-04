@@ -121,9 +121,10 @@ namespace YourHouse.Application.Services
 
         public async Task<AccountDto?> GetAccountByIdAsync(int id)
         {
-            var account = await _repository.GetByIdAsync(id);
-            //if (account != null)
-            //{
+            try
+            {
+                var account = await _repository.GetByIdAsync(id);
+
                 return account == null ? null : new AccountDto()
                 {
                     AccountId = account.AccountId,
@@ -135,65 +136,97 @@ namespace YourHouse.Application.Services
                     ImageUser = account.ImageUser,
                     Facebook = account.Facebook,
                 };
-            //}
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<IEnumerable<AccountDto>> GetAllAccountAsync()
         {
-            var accounts = await _repository.GetAllAsync();
-            return accounts.Select(account => new AccountDto()
+            try
             {
-                AccountId = account.AccountId,
-                FullName = account.FullName,
-                PasswordHash = account.PasswordHash,
-                Email = account.Email,
-                Phone = account.Phone,
-                RoleId = account.RoleId,
-                ImageUser = account.ImageUser,
-                Facebook = account.Facebook,
-            });
+                var accounts = await _repository.GetAllAsync();
+                return accounts.Select(account => new AccountDto()
+                {
+                    AccountId = account.AccountId,
+                    FullName = account.FullName,
+                    PasswordHash = account.PasswordHash,
+                    Email = account.Email,
+                    Phone = account.Phone,
+                    RoleId = account.RoleId,
+                    ImageUser = account.ImageUser,
+                    Facebook = account.Facebook,
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task UpdateAccount(AccountDto accountDto)
         {
-            var account = await _repository.GetByIdAsync(accountDto.AccountId);
+            try
+            {
+                var account = await _repository.GetByIdAsync(accountDto.AccountId);
 
-            account.FullName = accountDto.FullName;
-            account.PasswordHash = accountDto.PasswordHash;
-            account.Email = accountDto.Email;
-            account.Phone = accountDto.Phone;
-            account.RoleId = accountDto.RoleId;
-            account.ImageUser = accountDto.ImageUser;
-            account.Facebook = accountDto.Facebook;
+                account.FullName = accountDto.FullName;
+                account.PasswordHash = accountDto.PasswordHash;
+                account.Email = accountDto.Email;
+                account.Phone = accountDto.Phone;
+                account.RoleId = accountDto.RoleId;
+                account.ImageUser = accountDto.ImageUser;
+                account.Facebook = accountDto.Facebook;
 
-            Console.WriteLine(account.RoleId);
+                Console.WriteLine(account.RoleId);
 
-            _repository.UpdateAsync(account);
-            await _repository.SaveChangeAsync();
+                _repository.UpdateAsync(account);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<AccountDto?> GetAccountByEmailAsync(string email)
         {
-            var accounts = await _repository.GetAllAsync();
-            var acc = accounts.Where(b => b.Email == email).FirstOrDefault();
-            return acc == null ? null : new AccountDto()
+            try
             {
-                AccountId = acc.AccountId,
-                FullName = acc.FullName,
-                PasswordHash = acc.PasswordHash,
-                Email = acc.Email,
-                Phone = acc.Phone,
-                RoleId = acc.RoleId,
-                ImageUser = acc.ImageUser,
-                Facebook = acc.Facebook,
-            };
+                var accounts = await _repository.GetAllAsync();
+                var acc = accounts.Where(b => b.Email == email).FirstOrDefault();
+                return acc == null ? null : new AccountDto()
+                {
+                    AccountId = acc.AccountId,
+                    FullName = acc.FullName,
+                    PasswordHash = acc.PasswordHash,
+                    Email = acc.Email,
+                    Phone = acc.Phone,
+                    RoleId = acc.RoleId,
+                    ImageUser = acc.ImageUser,
+                    Facebook = acc.Facebook,
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<bool> IsValidAccount(string email, string password)
         {
-            var account = await _repository.GetAllAsync();
-            bool isSuccess = account.Any(b => b.Email == email && b.PasswordHash == password);
-            return isSuccess;
+            try
+            {
+                var account = await _repository.GetAllAsync();
+                bool isSuccess = account.Any(b => b.Email == email && b.PasswordHash == password);
+                return isSuccess;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

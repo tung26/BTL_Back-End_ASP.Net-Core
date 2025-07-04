@@ -21,68 +21,103 @@ namespace YourHouse.Application.Services
 
         public async Task AddTroAsync(TroDto TroDto)
         {
-            var tro = new Tro()
+            try
             {
+                var tro = new Tro()
+                {
 
-            };
+                };
 
-            await _repository.AddAsync(tro);
-            await _repository.SaveChangeAsync();
+                await _repository.AddAsync(tro);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task DeleteTroAsync(int id)
         {
-            var tro = await _repository.GetByIdAsync(id);
-
-            if (tro != null)
+            try
             {
-                _repository.DeleteAsync(tro);
-                await _repository.SaveChangeAsync();
+                var tro = await _repository.GetByIdAsync(id);
+
+                if (tro != null)
+                {
+                    _repository.DeleteAsync(tro);
+                    await _repository.SaveChangeAsync();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
         public async Task<IEnumerable<TroDto>> GetAllTroAsync()
         {
-            var tros = await _repository.GetAllAsync();
-
-            return tros.Select(x => new TroDto()
+            try
             {
-                ArticleId = x.ArticleId,
-                Floor = x.Floor,
-                MaxPerson = x.MaxPerson,
-                WaterPrice = x.WaterPrice,
-                ElectricPrice = x.ElectricPrice,
-            });
+                var tros = await _repository.GetAllAsync();
+
+                return tros.Select(x => new TroDto()
+                {
+                    ArticleId = x.ArticleId,
+                    Floor = x.Floor,
+                    MaxPerson = x.MaxPerson,
+                    WaterPrice = x.WaterPrice,
+                    ElectricPrice = x.ElectricPrice,
+                });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<TroDto?> GetTroByIdAsync(int id)
         {
-            var tro = await _repository.GetByIdAsync(id);
-
-            return tro == null ? null : new TroDto()
+            try
             {
-                ArticleId = tro.ArticleId,
-                Floor = tro.Floor,
-                MaxPerson = tro.MaxPerson,
-                WaterPrice = tro.WaterPrice,
-                ElectricPrice = tro.ElectricPrice,
-            };
+                var tro = await _repository.GetByIdAsync(id);
+
+                return tro == null ? null : new TroDto()
+                {
+                    ArticleId = tro.ArticleId,
+                    Floor = tro.Floor,
+                    MaxPerson = tro.MaxPerson,
+                    WaterPrice = tro.WaterPrice,
+                    ElectricPrice = tro.ElectricPrice,
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task UpdateTro(TroDto troDto)
         {
-            var tro = await _repository.GetByIdAsync(troDto.ArticleId);
-
-            if (tro != null)
+            try
             {
-                tro.Floor = troDto.Floor;
-                tro.MaxPerson = troDto.MaxPerson;
-                tro.WaterPrice = troDto.WaterPrice;
-                tro.ElectricPrice = troDto.ElectricPrice;
-            }
+                var tro = await _repository.GetByIdAsync(troDto.ArticleId);
 
-            _repository.UpdateAsync(tro);
-            await _repository.SaveChangeAsync();
+                if (tro != null)
+                {
+                    tro.Floor = troDto.Floor;
+                    tro.MaxPerson = troDto.MaxPerson;
+                    tro.WaterPrice = troDto.WaterPrice;
+                    tro.ElectricPrice = troDto.ElectricPrice;
+                }
+
+                _repository.UpdateAsync(tro);
+                await _repository.SaveChangeAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
