@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using YourHouse.Web.Infrastructure.Data;
+using YourHouse.Infrastructure.Data;
 
 
 namespace YourHouse.Web.Controllers

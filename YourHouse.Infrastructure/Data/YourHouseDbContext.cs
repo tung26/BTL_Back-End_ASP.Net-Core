@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using YourHouse.Web.Infrastructure;
+using YourHouse.Infrastructure;
 
-namespace YourHouse.Web.Infrastructure.Data;
+namespace YourHouse.Infrastructure.Data;
 
-public partial class YourHousebContext : DbContext
+public partial class YourHouseDbContext : DbContext
 {
-    public YourHousebContext(DbContextOptions<YourHousebContext> options)
+    public YourHouseDbContext(DbContextOptions<YourHouseDbContext> options)
         : base(options)
     {
     }
@@ -27,6 +27,8 @@ public partial class YourHousebContext : DbContext
     public virtual DbSet<House> Houses { get; set; }
 
     public virtual DbSet<ImagesArticle> ImagesArticles { get; set; }
+
+    public virtual DbSet<LikeArticle> LikeArticles { get; set; }
 
     public virtual DbSet<Office> Offices { get; set; }
 
@@ -120,7 +122,7 @@ public partial class YourHousebContext : DbContext
         {
             entity.HasKey(e => e.CommentId).HasName("PK_Comment");
 
-            entity.HasIndex(e => e.CommentId, "UQ__Comments__C3B4DFCB1A8B707B").IsUnique();
+            entity.HasIndex(e => e.CommentId, "UQ__Comments__C3B4DFCB2BF910D7").IsUnique();
 
             entity.Property(e => e.CreateAt).HasDefaultValueSql("(CONVERT([date],getdate()))");
 
@@ -179,6 +181,25 @@ public partial class YourHousebContext : DbContext
                 .HasForeignKey(d => d.ArticleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ImagesArticle_Article");
+        });
+
+        modelBuilder.Entity<LikeArticle>(entity =>
+        {
+            entity.ToTable("LikeArticle");
+
+            entity.HasIndex(e => new { e.ArticleId, e.AccountId }, "UQ_LikeArticle_ArticleAccount").IsUnique();
+
+            entity.HasIndex(e => e.LikeArticleId, "UQ__LikeArti__C977E6D21089F311").IsUnique();
+
+            entity.HasOne(d => d.Account).WithMany(p => p.LikeArticles)
+                .HasForeignKey(d => d.AccountId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_LikeArticle_Account");
+
+            entity.HasOne(d => d.Article).WithMany(p => p.LikeArticles)
+                .HasForeignKey(d => d.ArticleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_LikeArticle_Article");
         });
 
         modelBuilder.Entity<Office>(entity =>

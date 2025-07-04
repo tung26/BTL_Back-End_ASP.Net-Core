@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace YourHouse.Web.Infrastructure;
+namespace YourHouse.Infrastructure;
 
 public partial class Comment
 {
@@ -15,9 +15,9 @@ public partial class Comment
 
     public string Content { get; set; } = null!;
 
-    public bool IsDelete { get; set; }
-
     public DateOnly CreateAt { get; set; }
+
+    public bool IsDelete { get; set; }
 
     public virtual Account Account { get; set; } = null!;
 

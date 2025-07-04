@@ -40,8 +40,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRvclxWaWV3c1xBY2NvdW50XE1hbmFnZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/WorkSpaces/LearnIT/DNU/Parts/park-6/Back-end/BTL/YourHouse/YourHouse/Areas/Administrator/Views/Article/ArticleReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRvclxWaWV3c1xBcnRpY2xlXEFydGljbGVSZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/WorkSpaces/LearnIT/DNU/Parts/park-6/Back-end/BTL/YourHouse/YourHouse/Areas/Administrator/Views/Article/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRvclxWaWV3c1xBcnRpY2xlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/WorkSpaces/LearnIT/DNU/Parts/park-6/Back-end/BTL/YourHouse/YourHouse/Areas/Administrator/Views/LikeArticle/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5pc3RyYXRvclxWaWV3c1xMaWtlQXJ0aWNsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/WorkSpaces/LearnIT/DNU/Parts/park-6/Back-end/BTL/YourHouse/YourHouse/Areas/Administrator/Views/MyArticle/Add.cshtml]

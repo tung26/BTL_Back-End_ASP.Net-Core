@@ -1,12 +1,13 @@
 ﻿using System.Linq;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YourHouse.Application.DTOs;
 using YourHouse.Application.Interfaces;
 using YourHouse.Application.Services;
-using YourHouse.Web.Infrastructure;
-using YourHouse.Web.Infrastructure.Data;
+using YourHouse.Infrastructure;
+using YourHouse.Infrastructure.Data;
 using YourHouse.Web.Models;
 
 
@@ -123,6 +124,21 @@ namespace YourHouse.Web.Controllers
             ViewBag.District = district;
 
             return View(article);
+        }
+
+        public async Task<IActionResult> ReportArticle(int id)
+        {
+            try
+            {
+                var article = await _articleService.GetArticleByIdAsync(id);
+                article.StatusAr = 0;
+                await _articleService.UpdateArticle(article);
+                return Json(new { success = true });
+            }
+            catch (Exception)
+            {
+                return Json(new { success = false });
+            }
         }
 
         public async Task<IActionResult> Filters(string type, int city, int district, decimal? min, decimal? max)

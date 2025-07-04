@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace YourHouse.Web.Infrastructure;
+namespace YourHouse.Infrastructure;
 
 public partial class Role
 {

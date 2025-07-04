@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YourHouse.Application.DTOs;
 using YourHouse.Domain.Interfaces;
-using YourHouse.Web.Infrastructure;
+using YourHouse.Infrastructure;
 
 namespace YourHouse.Application.Interfaces
 {

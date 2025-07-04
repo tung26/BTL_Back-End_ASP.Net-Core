@@ -3573,7 +3573,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
-          "YourHouse.Domain": "1.0.0"
+          "YourHouse.Domain": "1.0.0",
+          "YourHouse.Infrastructure": "1.0.0"
         },
         "compile": {
           "bin/placeholder/YourHouse.Application.dll": {}

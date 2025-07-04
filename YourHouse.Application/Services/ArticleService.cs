@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using YourHouse.Application.DTOs;
 using YourHouse.Application.Interfaces;
 using YourHouse.Domain.Interfaces;
-using YourHouse.Web.Infrastructure;
+using YourHouse.Infrastructure;
 
 namespace YourHouse.Application.Services
 {
@@ -231,6 +231,7 @@ namespace YourHouse.Application.Services
                 article.Addr = articleDto.Addr;
                 article.CityAr = (int)articleDto.CityAr;
                 article.DistrictAr = (int)articleDto.DistrictAr;
+                article.StatusAr = (int)articleDto.StatusAr;
                 article.S = (decimal)articleDto.S;
                 article.Price = (decimal)articleDto.Price;
                 article.TienCoc = (decimal)articleDto.TienCoc;

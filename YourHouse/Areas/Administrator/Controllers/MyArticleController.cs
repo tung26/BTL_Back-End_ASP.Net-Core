@@ -8,8 +8,8 @@ using YourHouse.Application.DTOs;
 using YourHouse.Application.Interfaces;
 using YourHouse.Application.Services;
 using YourHouse.Web.Controllers;
-using YourHouse.Web.Infrastructure;
-using YourHouse.Web.Infrastructure.Data;
+using YourHouse.Infrastructure;
+using YourHouse.Infrastructure.Data;
 using YourHouse.Web.Models;
 
 
@@ -157,6 +157,7 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
                     S = (decimal)art.S,
                     Price = (decimal)art.Price,
                     TienCoc = (decimal)art.TienCoc,
+                    StatusAr = (int)art.Status,
                     TypeAr = art.Type,
                     ImagesArticles = imagesArticleDtos
                 };

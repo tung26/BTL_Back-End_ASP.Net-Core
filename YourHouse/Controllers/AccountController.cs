@@ -1,12 +1,12 @@
 ﻿using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using YourHouse.Web.Infrastructure.Data;
+using YourHouse.Infrastructure.Data;
 using YourHouse.Web.Models;
 using YourHouse.Application.Interfaces;
 using System.Threading.Tasks;
 using YourHouse.Application.DTOs;
-using YourHouse.Web.Infrastructure;
+using YourHouse.Infrastructure;
 
 namespace YourHouse.Web.Controllers
 {

@@ -10,10 +10,23 @@
 
 <link href="~/css/article/detail.css" rel="stylesheet" />
 
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+	<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="1500">
+		<div class="toast-header">
+			<strong class="me-auto">Thông báo</strong>
+			<small id="toastTime"></small>
+			<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+		</div>
+		<div class="toast-body" id="toastMessage">
+		</div>
+	</div>
+</div>
+
 <div class="row">
 	<div class="col-8">
 		<div class="container-fluid info_article">
 			<div class="col">
+				<button class="btn btn-outline-warning mb-2 btn-report-article">Bài viết có vấn đề</button>
 				<img style="width: 100%;" src="@Model.ImagesArticles.ToList()[0].ImageArticle" />
 			</div>
 			<div class="col">
@@ -132,6 +145,26 @@
 	let btnDeleteComments = document.querySelectorAll(".btn-delete-comment");
 	const containerComment = document.querySelector(".body-comments");
 
+	const btnReportArticle = document.querySelector(".btn-report-article");
+
+	btnReportArticle.onclick = () => {
+		fetch("/Article/ReportArticle/@Model.ArticleId")
+			.then(response => response.json())
+			.then(data => {
+				if(data.success) {
+					document.getElementById('toastMessage').textContent = "Báo cáo đã được gửi";
+					let toastEl = document.getElementById('liveToast');
+					let toast = new bootstrap.Toast(toastEl);
+					toast.show();
+				}
+				else {
+					document.getElementById('toastMessage').textContent = "Báo cáo thất bại";
+					let toastEl = document.getElementById('liveToast');
+					let toast = new bootstrap.Toast(toastEl);
+					toast.show();
+				}
+			});
+	}
 
 	function reloadBtnInputResponComments() {
 		const btnInputResponComments = document.querySelectorAll(".btn-repon-comment");
@@ -255,7 +288,7 @@
 										{
 											<button class="btn-repon-comment">trả lời</button>
 										}
-										${comment.AccountId == @ViewBag.IdUser ? '<button class="btn-delete-comment">xóa</button>' : ""}
+										${comment.AccountId == @ViewBag.IdUser || @ViewBag.RoleId ? '<button class="btn-delete-comment">xóa</button>' : ""}
 								</div>
 
 								<div class="comment-childrent">

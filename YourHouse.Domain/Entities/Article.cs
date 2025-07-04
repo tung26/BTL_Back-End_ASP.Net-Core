@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace YourHouse.Web.Infrastructure;
+namespace YourHouse.Infrastructure;
 
 public partial class Article
 {
@@ -44,6 +44,8 @@ public partial class Article
     public virtual House? House { get; set; }
 
     public virtual ICollection<ImagesArticle> ImagesArticles { get; set; } = new List<ImagesArticle>();
+
+    public virtual ICollection<LikeArticle> LikeArticles { get; set; } = new List<LikeArticle>();
 
     public virtual Office? Office { get; set; }
 

@@ -131,8 +131,6 @@
 						let toast = new bootstrap.Toast(toastEl);
 						toast.show();
 					} else {
-						this.closest('tr').remove();
-
 						document.getElementById('toastMessage').textContent = data.message;
 						let toastEl = document.getElementById('liveToast');
 						let toast = new bootstrap.Toast(toastEl);

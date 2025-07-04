@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YourHouse.Web.Infrastructure;
+using YourHouse.Infrastructure;
 
 namespace YourHouse.Application.DTOs
 {

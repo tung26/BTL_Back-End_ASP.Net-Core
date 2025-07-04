@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using YourHouse.Application.Interfaces;
 using YourHouse.Application.Services;
 using YourHouse.Web.Controllers;
-using YourHouse.Web.Infrastructure;
+using YourHouse.Infrastructure;
 
 namespace YourHouse.Web.Areas.Administrator.Controllers
 {
@@ -76,6 +76,55 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
             }
 
             return RedirectToAction("Index", "Account", new { area = "Adminnistrator" });
+        }
+
+        public async Task<IActionResult> ArticleReport()
+        {
+            if (this.Role == 1 && IsLogin)
+            {
+                var articleList = await _articleService.GetAllArticleAsync();
+                var cities = await _cityService.GetAllCityAsync();
+                var districtes = await _districtService.GetAllDistrictAsync();
+
+                var articleListUser = articleList.Select(a => new
+                {
+                    a.ArticleId,
+                    a.TypeAr,
+                    a.Title,
+                    city = cities.Where(e => e.CityId == a.CityAr).FirstOrDefault().CityName,
+                    district = districtes.Where(e => e.DistrictId == a.DistrictAr).FirstOrDefault().DistrictName,
+                    a.S,
+                    a.Price,
+                    a.StatusAr,
+                    a.CreateAt
+                });
+
+                ViewData["articleList"] = articleListUser.Where(a => a.StatusAr == 0).OrderByDescending(a => a.CreateAt).ToList();
+
+                return View();
+            }
+            if (IsLogin)
+            {
+                return RedirectToAction("Index", "MyArticle", new { area = "Administrator" });
+            }
+            return RedirectToAction("Login", "Account", new { area = "" });
+        }
+
+        public async Task<IActionResult> UnReport(int id)
+        {
+            if (this.Role == 1 && IsLogin)
+            {
+                var article = await _articleService.GetArticleByIdAsync(id);
+                article.StatusAr = 1;
+                await _articleService.UpdateArticle(article);
+
+                return Json(new { success = true, message = "Cập nhật thành công" });
+            }
+            if (IsLogin)
+            {
+                return RedirectToAction("Index", "MyArticle", new { area = "Administrator" });
+            }
+            return RedirectToAction("Login", "Account", new { area = "" });
         }
     }
 }

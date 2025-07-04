@@ -63,7 +63,7 @@
                         <td>@item.CreateAt</td>
                         <td class="d-flex">
                             <button type="button" class="btn btn-danger btn-delete ms-1" data-id="@item.ArticleId">Xóa</button>
-                                <a asp-area="" asp-controller="Article" asp-action="Details" asp-route-id="@item.ArticleId" class="btn btn-success ms-1">Xem</a>
+                            <a asp-area="" asp-controller="Article" asp-action="Details" asp-route-id="@item.ArticleId" class="btn btn-success ms-1">Xem</a>
                         </td>
                     </tr>
                 }
@@ -93,8 +93,8 @@
                             <td>${article.Price}</td>
                             <td>${article.CreateAt}</td>
                             <td class="d-flex">
-                                <a asp-area="Administrator" asp-controller="MyArticle" asp-action="Edit" asp-route-id="${article.ArticleId}" class="btn btn-primary">Sửa</a>
                                 <button type="button" class="btn btn-danger btn-delete ms-1" data-id="${article.ArticleId}">Xóa</button>
+                                <a asp-area="" asp-controller="Article" asp-action="Details" asp-route-id="${article.ArticleId}" class="btn btn-success ms-1">Xem</a>
                             </td>
                         </tr>
                 `
@@ -127,8 +127,6 @@
                         let toast = new bootstrap.Toast(toastEl);
                         toast.show();
                     } else {
-                        this.closest('tr').remove();
-
                         document.getElementById('toastMessage').textContent = data.message;
                         let toastEl = document.getElementById('liveToast');
                         let toast = new bootstrap.Toast(toastEl);

@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using YourHouse.Domain.Interfaces;
-using YourHouse.Web.Infrastructure.Data;
+using YourHouse.Infrastructure.Data;
 
 namespace YourHouse.Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
 
-        public readonly YourHousebContext _context;
+        public readonly YourHouseDbContext _context;
         private readonly DbSet<T> _dbSet;
 
-        public Repository(YourHousebContext context)
+        public Repository(YourHouseDbContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();

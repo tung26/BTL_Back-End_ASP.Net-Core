@@ -45,19 +45,20 @@ namespace YourHouse.Web.Controllers
             try
             {
                 var comment = await _commentService.GetCommentByIdAsync(id);
-                if(comment.AccountId != this.IdUser)
-                {
-                    return Json(new { success = false });
-                }
-                else
+                if(comment.AccountId == this.IdUser || this.Role == 1)
                 {
                     await _commentService.DeleteCommentAsync(id);
                     comment = await _commentService.GetCommentByIdAsync(id);
-                    if(comment != null && comment.IsDelete == true)
+                    if (comment != null && comment.IsDelete == true)
                     {
                         return Json(new { success = true, isvalid = true });
                     }
                     return Json(new { success = true, isvalid = false });
+
+                }
+                else
+                {
+                    return Json(new { success = false });
                 }
             }
             catch (Exception)

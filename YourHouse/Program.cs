@@ -3,14 +3,14 @@ using YourHouse.Application.Interfaces;
 using YourHouse.Application.Services;
 using YourHouse.Domain.Interfaces;
 using YourHouse.Infrastructure.Repositories;
-using YourHouse.Web.Infrastructure.Data;
+using YourHouse.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
-builder.Services.AddDbContext<YourHousebContext>(options =>
+builder.Services.AddDbContext<YourHouseDbContext>(options =>
 {
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("cntr")
@@ -27,6 +27,7 @@ builder.Services.AddScoped<IOfficeService, OfficeService>();
 builder.Services.AddScoped<ITroService, TroService>();
 builder.Services.AddScoped<IImageArticleService, ImageArticleService>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
+builder.Services.AddScoped<ILikeArticleService, LikeArticleService>();
 //builder.Services.AddScoped<IArticleService, ArticleService>();
 
 var app = builder.Build();
