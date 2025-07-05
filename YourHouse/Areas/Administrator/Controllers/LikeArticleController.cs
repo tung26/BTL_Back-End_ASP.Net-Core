@@ -56,7 +56,6 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
 
         public async Task<IActionResult> Add(int id)
         {
-            Console.WriteLine(id);
             if(this.IsLogin)
             {
                 var likeArticleDto = new LikeArticleDto()

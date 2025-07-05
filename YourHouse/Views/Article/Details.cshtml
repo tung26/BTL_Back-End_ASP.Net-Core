@@ -171,8 +171,7 @@
 
 	btnToggleLikeArticle.onclick = () => {
 		const isLike = btnToggleLikeArticle.classList.value.includes("liked");
-		console.log(btnToggleLikeArticle.classList.value.includes("liked"))
-		console.log(btnToggleLikeArticle.classList.value)
+
 		if(!isLike) {
 			fetch(`/Administrator/LikeArticle/Add/@Model.ArticleId`)
 				.then(repon => repon.json())

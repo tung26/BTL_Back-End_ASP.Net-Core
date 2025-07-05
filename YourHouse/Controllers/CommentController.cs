@@ -22,7 +22,6 @@ namespace YourHouse.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CommentDto commentDto)
         {
-            Console.WriteLine(commentDto.Content);
             if(!IsLogin)
             {
                 return RedirectToAction("Login", "Account");
