@@ -128,6 +128,9 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Remove("id");
+            HttpContext.Session.Remove("role");
+            HttpContext.Session.Remove("fullName");
+            HttpContext.Session.Remove("ImageUser");
             return RedirectToAction("Index", "Home", new { area = "" });
         }
 

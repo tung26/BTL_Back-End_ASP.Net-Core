@@ -13,18 +13,6 @@
 <link href="~/fontawesome-free-6.7.2-web/css/all.css" rel="stylesheet" />
 <link href="~/fontawesome-free-6.7.2-web/css/all.min.css" rel="stylesheet" />
 
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-	<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="2500">
-		<div class="toast-header">
-			<strong class="me-auto">Thông báo</strong>
-			<small id="toastTime"></small>
-			<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-		</div>
-		<div class="toast-body" id="toastMessage">
-		</div>
-	</div>
-</div>
-
 <div class="row">
 	<div class="col-8">
 		<div class="container-fluid info_article">
@@ -463,6 +451,12 @@
 
 					reloadBtnInputResponComments();
 					loadBtnDeleteComment();
+				}
+				else {
+					document.getElementById('toastMessage').textContent = "Bình luận thất bại!";
+					let toastEl = document.getElementById('liveToast');
+					let toast = new bootstrap.Toast(toastEl);
+					toast.show();
 				}
 			})
 	}

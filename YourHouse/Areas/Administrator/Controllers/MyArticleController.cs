@@ -406,11 +406,6 @@ namespace YourHouse.Web.Areas.Administrator.Controllers
 
             var art = await _articleService.GetArticleByIdAsync(id);
 
-            if (art == null)
-            {
-                return RedirectToAction("Index");
-            }
-
             if (art != null)
             {
                 await _articleService.DeleteArticleAsync(id);
