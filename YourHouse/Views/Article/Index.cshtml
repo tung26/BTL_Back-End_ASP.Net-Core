@@ -6,6 +6,8 @@
     var districts = ViewData["District"] as List<YourHouse.Application.DTOs.DistrictDto>;
 }
 
+<link href="~/css/article/index.css" rel="stylesheet" />
+
 <div class="container">
     <div class="row">
         <div class="col-2">
@@ -97,8 +99,19 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="col-10 list-article">
+        </div>
+        <div class="col-10 offset-2 nav-page-article">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary">Left</button>
+                @* @for (int i = 1; i <= ViewData["TotalPage"]; i++) *@
+                @* { *@
+                @*     @i *@
+                @*     <button type="button" class="btn btn-primary">@i</button> *@
+                @* } *@
+                <button type="button" class="btn btn-primary">Right</button>
+            </div>
         </div>
     </div>
 </div>
@@ -114,6 +127,19 @@
     let cityFiler;
     let min = null;
     let max = null;
+
+    function handlerClickNavPageItem() {
+        console.log("ok")
+        const itemNavPageList = document.querySelectorAll(".nav_page-item");
+
+        itemNavPageList.forEach(itemNavPage => {
+            itemNavPage.onclick = () => {
+                const pageClick = itemNavPage.getAttribute("data-page");
+
+                handerFilter({ type: typeFilter, city: cityFiler, district: districtFilter, min: min, max: max, page: pageClick });
+            }
+        })
+    }
 
     function selectCity() {
             const value = selectCityElement.value;
@@ -153,11 +179,11 @@
             .then((response) => {
                 return response.json();
             })
-            .then(articles => {
+            .then(data => {
                 const listArticle = document.querySelector('.list-article');
                 let html = '';
-                articles = articles.reverse();
-                articles.forEach(article => {
+
+                data.articles.forEach(article => {
                     html += `
                         <a href="/Article/Details/${article.articleId}" class="text-dark nav-link">
                             <div class="card mb-3 d-flex" style="min-width: 863px;">
@@ -175,9 +201,26 @@
                             </div>
                         </a>
                     `
-                })
+                });
+
+                const navPageArticle = document.querySelector(".nav-page-article");
+
+                let htmlNavPage = '';
+                for(var i = 1; i <= data.total; i++) {
+                    htmlNavPage += `
+                        <button type="button" class="btn btn-primary nav_page-item ${data.curPage == i ? 'activePgae' : ''}" data-page="${i}">${i}</button>
+                    `;
+                }
+
+                navPageArticle.innerHTML = `
+                    ${htmlNavPage}
+                `;
 
                 listArticle.innerHTML = html;
+
+                handlerClickNavPageItem();
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
     }
 

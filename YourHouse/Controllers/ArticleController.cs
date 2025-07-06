@@ -152,7 +152,7 @@ namespace YourHouse.Web.Controllers
             }
         }
 
-        public async Task<IActionResult> Filters(string type, int city, int district, decimal? min, decimal? max)
+        public async Task<IActionResult> Filters(string type, int city, int district, decimal? min, decimal? max, int page = 1)
         {
             var result = await _articleService.GetAllArticleAsync();
             result = result.ToList();
@@ -185,7 +185,13 @@ namespace YourHouse.Web.Controllers
                 result = result.Where(a => a.Price >= min && a.Price <= max).Select(a => a);
             }
 
-            return Ok(result.ToList());
+            int totalArticles = result.Count();
+            int totalPage = (int)Math.Ceiling(totalArticles / (double)10);
+
+            result = result.Reverse().Skip((page - 1) * 10)
+                .Take(10);
+
+            return Json(new { articles = result.ToList(), curPage = page, total = totalPage });
         }
     }
 }
