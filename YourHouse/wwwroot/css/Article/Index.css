@@ -2,3 +2,22 @@
     color: #0026ff;
     background-color: #eee;
 }
+
+.card-title-article {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    font-weight: 600;
+}
+
+.card-text-article {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    height: 3.6rem;
+    line-height: 1.8rem;
+}
