@@ -1,6 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Home";
+    var commentTops = ViewBag.commentTops;
+    var likeTops = ViewBag.likeTops;
+    var outstandings = ViewBag.outstandings;
 }
+
+<link href="~/css/home/index.css" rel="stylesheet" />
 
 <div class="container">
     <div class="row">
@@ -37,5 +42,78 @@
             </button>
         </div>
     </div>
+
+    <div class="row">
+        <div class="heading">
+            Bài viết nổi bật
+        </div>
+        @for (int i = 0; i < outstandings.Count && i < 8; i++)
+        {
+            if (outstandings[i] != null)
+            {
+                var outstanding = outstandings[i];
+                <div class="col-xxl-3 col-xl-4 col-md-6 col-sm-6 col-6">
+                    <div class="card" style="width: 18rem;">
+                        <img src="@outstanding.Images[0].ImageArticle" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class=" card-title-article">@outstanding.Article.Title</h5>
+                            <p class="card-text card-desc-article">@outstanding.Article.DescAr.</p>
+                            <a href="/Article/Details/@outstanding.Article.ArticleId" class="btn btn-primary">Xem chi tiêt</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    @if (commentTops.Count != 0)
+    {
+        <div class="row">
+            <div class="heading">
+                Bài viết nhiểu tương tác
+            </div>
+            @for (int i = 0; i < commentTops.Count && i < 8; i++)
+            {
+                if (commentTops[i] != null && commentTops[i].CommentCount != 0)
+                {
+                    var commentTop = commentTops[i];
+                    <div class="col-xxl-3 col-xl-4 col-md-6 col-sm-6 col-6">
+                        <div class="card" style="width: 18rem;">
+                            <img src="@commentTop.Images[0].ImageArticle" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class=" card-title-article">@commentTop.Article.Title</h5>
+                                <p class="card-text card-desc-article">@commentTop.Article.DescAr.</p>
+                                <a href="/Article/Details/@commentTop.Article.ArticleId" class="btn btn-primary">Xem chi tiêt</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+    @if(likeTops.Count != 0)
+    {
+        <div class="row">
+            <div class="heading">
+                Bài viết nhiều like
+            </div>
+            @for (int i = 0; i < likeTops.Count && i < 8; i++)
+            {
+                if (likeTops[i] != null && likeTops[i].LikeCount != 0)
+                {
+                    var likeTop = likeTops[i];
+                    <div class="col-xxl-3 col-xl-4 col-md-6 col-sm-6 col-6">
+                        <div class="card" style="width: 18rem;">
+                            <img src="@likeTop.Images[0].ImageArticle" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class=" card-title-article">@likeTop.Article.Title</h5>
+                                <p class="card-text card-desc-article">@likeTop.Article.DescAr.</p>
+                                <a href="/Article/Details/@likeTop.Article.ArticleId" class="btn btn-primary">Xem chi tiêt</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
 </div>
 

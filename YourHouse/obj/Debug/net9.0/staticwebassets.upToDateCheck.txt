@@ -1157,6 +1157,7 @@ D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\fontawesome-free-6.7.2-web\svgs\solid\circle-xmark.svg
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\assets\vendor\tinymce\skins\ui\oxide-dark\content.min.css
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\fontawesome-free-6.7.2-web\svgs\regular\file-excel.svg
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\css\Home\Index.css
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\fontawesome-free-6.7.2-web\svgs\solid\umbrella.svg
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\fontawesome-free-6.7.2-web\svgs\solid\section.svg
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\fontawesome-free-6.7.2-web\svgs\regular\building.svg
@@ -2299,6 +2300,7 @@ D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\fontawesome-free-6.7.2-web\svgs\solid\copy.svg
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\fontawesome-free-6.7.2-web\svgs\solid\square-check.svg
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\fontawesome-free-6.7.2-web\svgs\solid\backward.svg
+D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\css\Article\Index.css
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\fontawesome-free-6.7.2-web\svgs\solid\rectangle-list.svg
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\fontawesome-free-6.7.2-web\svgs\solid\circle-right.svg
 D:\WorkSpaces\LearnIT\DNU\Parts\park-6\Back-end\BTL\YourHouse\YourHouse\wwwroot\fontawesome-free-6.7.2-web\svgs\regular\image.svg
@@ -3031,6 +3033,8 @@ wwwroot\assets\vendor\tinymce\tinymce.js
 wwwroot\assets\vendor\tinymce\tinymce.min.js
 wwwroot\css\Administrator\LikeArticle\Index.css
 wwwroot\css\Article\Detail.css
+wwwroot\css\Article\Index.css
+wwwroot\css\Home\Index.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\fontawesome-free-6.7.2-web\css\all.css

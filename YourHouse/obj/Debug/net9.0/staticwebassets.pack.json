@@ -2001,6 +2001,14 @@
       "PackagePath": "staticwebassets\\css\\Article\\Detail.css"
     },
     {
+      "Id": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\wwwroot\\css\\Article\\Index.css",
+      "PackagePath": "staticwebassets\\css\\Article\\Index.css"
+    },
+    {
+      "Id": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\wwwroot\\css\\Home\\Index.css",
+      "PackagePath": "staticwebassets\\css\\Home\\Index.css"
+    },
+    {
       "Id": "D:\\WorkSpaces\\LearnIT\\DNU\\Parts\\park-6\\Back-end\\BTL\\YourHouse\\YourHouse\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

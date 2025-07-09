@@ -136,7 +136,9 @@
             itemNavPage.onclick = () => {
                 const pageClick = itemNavPage.getAttribute("data-page");
 
-                handerFilter({ type: typeFilter, city: cityFiler, district: districtFilter, min: min, max: max, page: pageClick });
+                if(!itemNavPage.classList.contains("activePgae")) {
+                    handerFilter({ type: typeFilter, city: cityFiler, district: districtFilter, min: min, max: max, page: pageClick });
+                }
             }
         })
     }
@@ -206,7 +208,11 @@
                 const navPageArticle = document.querySelector(".nav-page-article");
 
                 let htmlNavPage = '';
-                for(var i = 1; i <= data.total; i++) {
+
+                let i = data.curPage - 3 > 0 ? data.curPage - 3 : 1;
+                let maxI = data.total > (i + 6) ? (i + 6) : data.total;
+                console.log(i, maxI)
+                for(; i <= maxI; i++) {
                     htmlNavPage += `
                         <button type="button" class="btn btn-primary nav_page-item ${data.curPage == i ? 'activePgae' : ''}" data-page="${i}">${i}</button>
                     `;
